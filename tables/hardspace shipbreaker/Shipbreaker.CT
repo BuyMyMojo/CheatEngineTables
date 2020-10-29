@@ -1,0 +1,2340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"enable"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <LastState Activated="1"/>
+      <Color>808000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">[ENABLE]
+
+{$LUA}
+
+if not syntaxcheck then
+
+   if not monopipe
+   then
+      LaunchMonoDataCollector()
+   end
+
+   -- thanks to mgr.inz.Player for the compact mode function
+
+   function cycleFullCompact( sender, force )
+    local state = not( compactmenuitem.Caption == 'Compact View Mode' )
+    if force ~= nil then
+      state = not force
+    end
+    compactmenuitem.Caption = state and 'Compact View Mode' or 'Full View Mode'
+    getMainForm().Splitter1.Visible = state
+    getMainForm().Panel4.Visible = state
+    getMainForm().Panel5.Visible = state
+  end
+
+  function addCompactMenu()
+    if compactmenualreadyexists then return end
+    local parent = getMainForm().Menu.Items
+    compactmenuitem = createMenuItem( parent )
+    parent.add( compactmenuitem )
+    compactmenuitem.Caption = 'Compact View Mode'
+    compactmenuitem.OnClick = cycleFullCompact
+    compactmenualreadyexists = 'yes'
+  end
+
+  addCompactMenu()
+  cycleFullCompact( nil, true )
+
+  Sleep(300)
+
+end
+
+{$ASM}
+
+[DISABLE]
+
+{$ASM}
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2137</ID>
+          <Description>"ReadMe"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>2138</ID>
+              <Description>"Before you enable any of these scripts."</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2139</ID>
+              <Description>"Check if Mono is activated."</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2140</ID>
+              <Description>"You can do so by clicking the below script."</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2141</ID>
+              <Description>"Or, go to the 'Mono' tab and check for a checkmark."</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2142</ID>
+              <Description>"Check Mono."</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+
+{$LUA}
+
+if not syntaxcheck then
+
+   if not monopipe
+   then
+      LaunchMonoDataCollector()
+      showMessage('Mono Injection Successful.')
+   else
+      showMessage('Mono has already injected.')
+   end
+
+end
+
+[DISABLE]
+
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2238</ID>
+          <Description>"deposit Items Anywhere  {jgoemat}"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+assert(BBI.Unity.Game:SalvageAcceptorVolumeBase:IsCorrectSalvageOption,55 48 8B EC 48 81)
+
+BBI.Unity.Game:SalvageAcceptorVolumeBase:IsCorrectSalvageOption:
+db B8 01 00 00 00 C3
+
+[disable]
+
+BBI.Unity.Game:SalvageAcceptorVolumeBase:IsCorrectSalvageOption:
+db 55 48 8B EC 48 81
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2168</ID>
+          <Description>"explore Out of Bounds"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+assert(BBI.Unity.Game:PlayableAreaUIController:Update, 55 48 8B EC 48)
+
+BBI.Unity.Game:PlayableAreaUIController:Update:
+db C3 90 90 90 90
+
+[DISABLE]
+
+BBI.Unity.Game:PlayableAreaUIController:Update:
+db 55 48 8B EC 48
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>2169</ID>
+              <Description>"Enable in the playable area first."</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>808080</Color>
+              <GroupHeader>1</GroupHeader>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2134</ID>
+          <Description>"inf.Equipment Durability.2"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-18
+[ENABLE]
+aobscanregion(DurabilityAob,ProcessQueuedDurabilityModificationsJob:Execute+1A0,ProcessQueuedDurabilityModificationsJob:Execute+1CA,48 63 48 0C 89 8D 0C FF FF FF)
+registersymbol(DurabilityAob)
+
+DurabilityAob:
+movsxd rcx,dword ptr [rax+10]
+mov [rax+0C],ecx
+mov [rbp-000000F4],ecx
+mov [rbp-000000F0],ecx
+nop
+
+[DISABLE]
+
+DurabilityAob:
+movsxd  rcx,dword ptr [rax+0C]
+mov [rbp-000000F4],ecx
+movsxd  rax,dword ptr [rax+10]
+mov [rbp-000000F0],eax
+
+unregistersymbol(DurabilityAob)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ProcessQueuedDurabilityModificationsJob:Execute+1c0
+
+1D83A952FD4: 49 63 CD                 -  movsxd  rcx,r13d
+1D83A952FD7: BA 14 00 00 00           -  mov edx,00000014
+1D83A952FDC: 48 0F AF CA              -  imul rcx,rdx
+1D83A952FE0: 48 03 C1                 -  add rax,rcx
+1D83A952FE3: 48 63 08                 -  movsxd  rcx,dword ptr [rax]
+1D83A952FE6: 89 8D 00 FF FF FF        -  mov [rbp-00000100],ecx
+1D83A952FEC: 48 63 48 04              -  movsxd  rcx,dword ptr [rax+04]
+1D83A952FF0: 89 8D 04 FF FF FF        -  mov [rbp-000000FC],ecx
+1D83A952FF6: 48 63 48 08              -  movsxd  rcx,dword ptr [rax+08]
+1D83A952FFA: 89 8D 08 FF FF FF        -  mov [rbp-000000F8],ecx
+// ---------- INJECTING HERE ----------
+1D83A953000: 48 63 48 0C              -  movsxd  rcx,dword ptr [rax+0C]
+1D83A953004: 89 8D 0C FF FF FF        -  mov [rbp-000000F4],ecx
+1D83A95300A: 48 63 40 10              -  movsxd  rax,dword ptr [rax+10]
+1D83A95300E: 89 85 10 FF FF FF        -  mov [rbp-000000F0],eax
+// ---------- DONE INJECTING  ----------
+1D83A953014: 48 63 85 00 FF FF FF     -  movsxd  rax,dword ptr [rbp-00000100]
+1D83A95301B: 89 85 A8 FE FF FF        -  mov [rbp-00000158],eax
+1D83A953021: 48 63 85 04 FF FF FF     -  movsxd  rax,dword ptr [rbp-000000FC]
+1D83A953028: 89 85 AC FE FF FF        -  mov [rbp-00000154],eax
+1D83A95302E: 48 63 85 08 FF FF FF     -  movsxd  rax,dword ptr [rbp-000000F8]
+1D83A953035: 89 85 B0 FE FF FF        -  mov [rbp-00000150],eax
+1D83A95303B: 48 63 85 0C FF FF FF     -  movsxd  rax,dword ptr [rbp-000000F4]
+1D83A953042: 89 85 B4 FE FF FF        -  mov [rbp-0000014C],eax
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2131</ID>
+          <Description>"inf.Fuel"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-18
+[ENABLE]
+aobscanregion(ThrustChargeAob,BBI.Unity.Game:ThrustController:set_Charge,BBI.Unity.Game:ThrustController:set_Charge+40,F3 0F 5A C0 F2 0F 5A E8 F3 0F 11 AE)
+registersymbol(ThrustChargeAob)
+
+ThrustChargeAob:
+db F3 0F 10 AE EC 00 00 00
+//movss xmm5, dword ptr [rsi+000000EC]
+
+[DISABLE]
+
+ThrustChargeAob:
+db F3 0F 5A C0 F2 0F 5A E8
+
+unregistersymbol(ThrustChargeAob)
+
+{
+// ORIGINAL CODE - INJECTION POINT: BBI.Unity.Game:ThrustController:set_Charge+2e
+
+21758020C21: 48 8B EC                       -  mov rbp,rsp
+21758020C24: 48 83 EC 60                    -  sub rsp,60
+21758020C28: 48 89 75 F8                    -  mov [rbp-08],rsi
+21758020C2C: 48 8B F1                       -  mov rsi,rcx
+21758020C2F: F3 0F 11 4D E0                 -  movss [rbp-20],xmm1
+21758020C34: F3 0F 10 86 F0 00 00 00        -  movss xmm0,[rsi+000000F0]
+21758020C3C: F3 0F 5A C0                    -  cvtss2sd xmm0,xmm0
+21758020C40: F2 0F 5A E8                    -  cvtsd2ss xmm5,xmm0
+21758020C44: F3 0F 11 6D EC                 -  movss [rbp-14],xmm5
+21758020C49: F3 0F 10 45 E0                 -  movss xmm0,[rbp-20]
+// ---------- INJECTING HERE ----------
+21758020C4E: F3 0F 5A C0                    -  cvtss2sd xmm0,xmm0
+21758020C52: F2 0F 5A E8                    -  cvtsd2ss xmm5,xmm0
+// ---------- DONE INJECTING  ----------
+21758020C56: F3 0F 11 AE F0 00 00 00        -  movss [rsi+000000F0],xmm5
+21758020C5E: 48 63 86 F4 00 00 00           -  movsxd  rax,dword ptr [rsi+000000F4]
+21758020C65: 83 F8 01                       -  cmp eax,01
+21758020C68: 0F 85 8E 01 00 00              -  jne 21758020DFC
+21758020C6E: F3 0F 10 45 EC                 -  movss xmm0,[rbp-14]
+21758020C73: F3 0F 5A C0                    -  cvtss2sd xmm0,xmm0
+21758020C77: F3 0F 10 8E EC 00 00 00        -  movss xmm1,[rsi+000000EC]
+21758020C7F: F3 0F 5A C9                    -  cvtss2sd xmm1,xmm1
+21758020C83: F2 0F 5E C1                    -  divsd xmm0,xmm1
+21758020C87: F2 0F 11 45 D8                 -  movsd [rbp-28],xmm0
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2144</ID>
+          <Description>"inf.Health.2"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-18
+// you will still die if you enter a furnace or take a nuclear explosion
+[ENABLE]
+aobscanregion(HealthCompAob,BBI.Unity.Game:VitalityHandlerSystem:OnUpdate+B90,BBI.Unity.Game:VitalityHandlerSystem:OnUpdate+BC0,48 63 08 89 8D ?? ?? ?? ?? 48 63 48 ?? )
+registersymbol(HealthCompAob)
+
+HealthCompAob: //28 bytes
+movsxd rcx,dword ptr [rax+08]
+mov [rax],ecx
+mov [rbp-00000360],ecx
+mov [rbp-00000358],ecx
+movsxd rcx,dword ptr [rax+04]
+mov [rbp-0000035C],ecx
+nop
+
+[DISABLE]
+
+HealthCompAob: //29 bytes
+movsxd  rcx,dword ptr [rax]
+mov [rbp-00000360],ecx
+movsxd  rcx,dword ptr [rax+04]
+mov [rbp-0000035C],ecx
+movsxd  rcx,dword ptr [rax+08]
+mov [rbp-00000358],ecx
+
+unregistersymbol(HealthCompAob)
+
+{
+// ORIGINAL CODE - INJECTION POINT: BBI.Unity.Game:VitalityHandlerSystem:OnUpdate+ba4
+
+1CF43EF82A6: C7 85 AC FC FF FF 00 00 00 00  -  mov [rbp-00000354],00000000
+1CF43EF82B0: C7 85 B0 FC FF FF 00 00 00 00  -  mov [rbp-00000350],00000000
+1CF43EF82BA: C7 85 B4 FC FF FF 00 00 00 00  -  mov [rbp-0000034C],00000000
+1CF43EF82C4: 48 8B 85 B0 F9 FF FF           -  mov rax,[rbp-00000650]
+1CF43EF82CB: 48 8B 00                       -  mov rax,[rax]
+1CF43EF82CE: 48 63 8D A8 F9 FF FF           -  movsxd  rcx,dword ptr [rbp-00000658]
+1CF43EF82D5: 48 63 C9                       -  movsxd  rcx,ecx
+1CF43EF82D8: BA 18 00 00 00                 -  mov edx,00000018
+1CF43EF82DD: 48 0F AF CA                    -  imul rcx,rdx
+1CF43EF82E1: 48 03 C1                       -  add rax,rcx
+// ---------- INJECTING HERE ----------
+1CF43EF82E4: 48 63 08                       -  movsxd  rcx,dword ptr [rax]
+1CF43EF82E7: 89 8D A0 FC FF FF              -  mov [rbp-00000360],ecx
+1CF43EF82ED: 48 63 48 04                    -  movsxd  rcx,dword ptr [rax+04]
+1CF43EF82F1: 89 8D A4 FC FF FF              -  mov [rbp-0000035C],ecx
+1CF43EF82F7: 48 63 48 08                    -  movsxd  rcx,dword ptr [rax+08]
+1CF43EF82FB: 89 8D A8 FC FF FF              -  mov [rbp-00000358],ecx
+// ---------- DONE INJECTING  ----------
+1CF43EF8301: 48 63 48 0C                    -  movsxd  rcx,dword ptr [rax+0C]
+1CF43EF8305: 89 8D AC FC FF FF              -  mov [rbp-00000354],ecx
+1CF43EF830B: 48 63 48 10                    -  movsxd  rcx,dword ptr [rax+10]
+1CF43EF830F: 89 8D B0 FC FF FF              -  mov [rbp-00000350],ecx
+1CF43EF8315: 48 63 40 14                    -  movsxd  rax,dword ptr [rax+14]
+1CF43EF8319: 89 85 B4 FC FF FF              -  mov [rbp-0000034C],eax
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2136</ID>
+          <Description>"inf.Oxygen.2"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-18
+[ENABLE]
+aobscanregion(OxygenCompAob,BBI.Unity.Game:VitalityHandlerSystem:OnUpdate+1000,BBI.Unity.Game:VitalityHandlerSystem:OnUpdate+1110,48 63 08 89 8D ?? ?? ?? ?? 48 63 48 04 89 8D)
+registersymbol(OxygenCompAob)
+
+OxygenCompAob: //28 bytes
+movsxd rcx,dword ptr [rax+08]
+mov [rax],ecx
+mov [rbp-00000328],ecx
+mov [rbp-00000320],ecx
+movsxd rcx,dword ptr [rax+04]
+mov [rbp-00000324],ecx
+nop
+
+[DISABLE]
+
+OxygenCompAob: //29 bytes
+movsxd  rcx,dword ptr [rax]
+mov [rbp-00000328],ecx
+movsxd  rcx,dword ptr [rax+04]
+mov [rbp-00000324],ecx
+movsxd  rcx,dword ptr [rax+08]
+mov [rbp-00000320],ecx
+
+
+unregistersymbol(OxygenCompAob)
+
+{
+// ORIGINAL CODE - INJECTION POINT: BBI.Unity.Game:VitalityHandlerSystem:OnUpdate+10f4
+
+1CF43EF880F: FF 00                 -  inc [rax]
+1CF43EF8811: 00 00                 -  add [rax],al
+1CF43EF8813: 00 48 8B              -  add [rax-75],cl
+1CF43EF8816: 85 B0 F9 FF FF 48     -  test [rax+48FFFFF9],esi
+1CF43EF881C: 8B 00                 -  mov eax,[rax]
+1CF43EF881E: 48 63 8D A8 F9 FF FF  -  movsxd  rcx,dword ptr [rbp-00000658]
+1CF43EF8825: 48 63 C9              -  movsxd  rcx,ecx
+1CF43EF8828: BA 18 00 00 00        -  mov edx,00000018
+1CF43EF882D: 48 0F AF CA           -  imul rcx,rdx
+1CF43EF8831: 48 03 C1              -  add rax,rcx
+// ---------- INJECTING HERE ----------
+1CF43EF8834: 48 63 08              -  movsxd  rcx,dword ptr [rax]
+1CF43EF8837: 89 8D D8 FC FF FF     -  mov [rbp-00000328],ecx
+1CF43EF883D: 48 63 48 04           -  movsxd  rcx,dword ptr [rax+04]
+1CF43EF8841: 89 8D DC FC FF FF     -  mov [rbp-00000324],ecx
+1CF43EF8847: 48 63 48 08           -  movsxd  rcx,dword ptr [rax+08]
+1CF43EF884B: 89 8D E0 FC FF FF     -  mov [rbp-00000320],ecx
+// ---------- DONE INJECTING  ----------
+1CF43EF8851: 48 63 48 0C           -  movsxd  rcx,dword ptr [rax+0C]
+1CF43EF8855: 89 8D E4 FC FF FF     -  mov [rbp-0000031C],ecx
+1CF43EF885B: 48 63 48 10           -  movsxd  rcx,dword ptr [rax+10]
+1CF43EF885F: 89 8D E8 FC FF FF     -  mov [rbp-00000318],ecx
+1CF43EF8865: 48 63 40 14           -  movsxd  rax,dword ptr [rax+14]
+1CF43EF8869: 89 85 EC FC FF FF     -  mov [rbp-00000314],eax
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2122</ID>
+          <Description>"inf.Tether"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-18
+[ENABLE]
+aobscanregion(TetherWriteAob,TetherController:set_NumAvailableTethers,TetherController:set_NumAvailableTethers+40,48 89 55 F0 48 8B C2 89)
+registersymbol(TetherWriteAob)
+
+TetherWriteAob:
+db 8b 87 30 01 00 00 90
+//mov eax, dword ptr [rdi+130]
+
+[DISABLE]
+
+TetherWriteAob:
+db 48 89 55 F0 48 8B C2
+
+unregistersymbol(TetherWriteAob)
+
+{
+// ORIGINAL CODE - INJECTION POINT: TetherController:set_NumAvailableTethers+f
+
+1D843D715F3: 05 04 03 01 50                 -  add eax,50010304
+1D843D715F8: 00 00                          -  add [rax],al
+1D843D715FA: 00 00                          -  add [rax],al
+1D843D715FC: 00 00                          -  add [rax],al
+1D843D715FE: 00 00                          -  add [rax],al
+1D843D71600: 55                             -  push rbp
+1D843D71601: 48 8B EC                       -  mov rbp,rsp
+1D843D71604: 48 83 EC 40                    -  sub rsp,40
+1D843D71608: 48 89 7D F8                    -  mov [rbp-08],rdi
+1D843D7160C: 48 8B F9                       -  mov rdi,rcx
+// ---------- INJECTING HERE ----------
+1D843D7160F: 48 89 55 F0                    -  mov [rbp-10],rdx
+1D843D71613: 48 8B C2                       -  mov rax,rdx
+// ---------- DONE INJECTING  ----------
+1D843D71616: 89 87 2C 01 00 00              -  mov [rdi+0000012C],eax
+1D843D7161C: 48 8B 87 20 01 00 00           -  mov rax,[rdi+00000120]
+1D843D71623: 48 85 C0                       -  test rax,rax
+1D843D71626: 74 1C                          -  je 1D843D71644
+1D843D71628: 48 8B 87 20 01 00 00           -  mov rax,[rdi+00000120]
+1D843D7162F: 48 63 97 2C 01 00 00           -  movsxd  rdx,dword ptr [rdi+0000012C]
+1D843D71636: 48 8B C8                       -  mov rcx,rax
+1D843D71639: 48 89 45 E8                    -  mov [rbp-18],rax
+1D843D7163D: FF 50 18                       -  call qword ptr [rax+18]
+1D843D71640: 48 8B 45 E8                    -  mov rax,[rbp-18]
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2107</ID>
+          <Description>"inf.Tether Lifetime"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-18
+[ENABLE]
+assert(BBI.Unity.Game:Tether:HandleLifeTime,55 48 8B EC 48)
+
+BBI.Unity.Game:Tether:HandleLifeTime:
+db C3 90 90 90 90
+
+[DISABLE]
+
+BBI.Unity.Game:Tether:HandleLifeTime:
+db 55 48 8B EC 48
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2130</ID>
+          <Description>"instant Max Push"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-19
+[ENABLE]
+aobscanregion(PushMaxAob,GrapplingHook:set_PushChargeTime,GrapplingHook:set_PushChargeTime+30,F2 0F 5A E8 F3)
+registersymbol(PushMaxAob)
+
+PushMaxAob:
+db F2 0F 5A EA
+//cvtsd2ss xmm5,xmm2
+
+[DISABLE]
+
+PushMaxAob:
+db F2 0F 5A E8
+
+unregistersymbol(PushMaxAob)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GrapplingHook:set_PushChargeTime+1d
+
+1D8D5EB2DAC: 00 00                             -  add [rax],al
+1D8D5EB2DAE: 00 00                             -  add [rax],al
+1D8D5EB2DB0: 55                                -  push rbp
+1D8D5EB2DB1: 48 8B EC                          -  mov rbp,rsp
+1D8D5EB2DB4: 48 83 EC 50                       -  sub rsp,50
+1D8D5EB2DB8: 48 89 75 F8                       -  mov [rbp-08],rsi
+1D8D5EB2DBC: 48 8B F1                          -  mov rsi,rcx
+1D8D5EB2DBF: F3 0F 11 4D F0                    -  movss [rbp-10],xmm1
+1D8D5EB2DC4: F3 0F 10 45 F0                    -  movss xmm0,[rbp-10]
+1D8D5EB2DC9: F3 0F 5A C0                       -  cvtss2sd xmm0,xmm0
+// ---------- INJECTING HERE ----------
+1D8D5EB2DCD: F2 0F 5A E8                       -  cvtsd2ss xmm5,xmm0
+// ---------- DONE INJECTING  ----------
+1D8D5EB2DD1: F3 0F 11 AE 54 02 00 00           -  movss [rsi+00000254],xmm5
+1D8D5EB2DD9: 48 B8 E0 5A 1D C6 D9 01 00 00     -  mov rax,000001D9C61D5AE0
+1D8D5EB2DE3: 48 89 45 E8                       -  mov [rbp-18],rax
+1D8D5EB2DE7: F3 0F 10 86 54 02 00 00           -  movss xmm0,[rsi+00000254]
+1D8D5EB2DEF: F3 0F 5A C0                       -  cvtss2sd xmm0,xmm0
+1D8D5EB2DF3: F2 0F 11 45 E0                    -  movsd [rbp-20],xmm0
+1D8D5EB2DF8: 48 8B 86 60 01 00 00              -  mov rax,[rsi+00000160]
+1D8D5EB2DFF: 48 8B C8                          -  mov rcx,rax
+1D8D5EB2E02: 48 8B 00                          -  mov rax,[rax]
+1D8D5EB2E05: 49 BA D8 3F 7C 4A D8 01 00 00     -  mov r10,000001D84A7C3FD8
+1D8D5EB2E0F: FF 50 B8                          -  call qword ptr [rax-48]
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2172</ID>
+          <Description>"move Freely While Grappling"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-18
+// no more movement penalty when grappeled
+[ENABLE]
+assert(GrapplingHook:get_IsGrapplingHeavy,55 48 8B EC 48)
+assert(GrapplingHook:get_IsGrapplingMedium,55 48 8B EC 48)
+assert(GrapplingHook:get_IsGrapplingLight,55 48 8B EC 48 83)
+
+GrapplingHook:get_IsGrapplingHeavy:
+db 31 C0 C3 90 90
+//xor eax,eax
+//ret
+
+GrapplingHook:get_IsGrapplingMedium:
+db 31 C0 C3 90 90
+//xor eax,eax
+//ret
+
+GrapplingHook:get_IsGrapplingLight:
+db b8 01 00 00 00 C3
+//mov eax,01
+//ret
+
+[DISABLE]
+
+GrapplingHook:get_IsGrapplingHeavy:
+db 55 48 8B EC 48
+
+GrapplingHook:get_IsGrapplingMedium:
+db 55 48 8B EC 48
+
+GrapplingHook:get_IsGrapplingLight:
+db 55 48 8B EC 48 83
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2123</ID>
+          <Description>"no Cutter Overheat"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-18
+[ENABLE]
+assert(BBI.Unity.Game:CuttingToolController:AddHeat,55 48 8B EC 48)
+
+BBI.Unity.Game:CuttingToolController:AddHeat:
+db C3 90 90 90 90
+
+[DISABLE]
+
+BBI.Unity.Game:CuttingToolController:AddHeat:
+db 55 48 8B EC 48
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2128</ID>
+          <Description>"no Push Cooldown"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Started : 2020-06-19
+[ENABLE]
+aobscanregion(PushCDAob,GrapplingHook:Update+390,GrapplingHook:Update+3B0,F2 0F 5A E8 F3)
+registersymbol(PushCDAob)
+
+PushCDAob:
+db 0F 57 ED 90
+//xorps xmm5,xmm5
+
+[DISABLE]
+
+PushCDAob:
+db F2 0F 5A E8
+
+unregistersymbol(PushCDAob)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GrapplingHook:Update+3a3
+
+1D84F934849: 0F 83 40 00 00 00              -  jae 1D84F93488F
+1D84F93484F: F3 0F 10 86 04 02 00 00        -  movss xmm0,[rsi+00000204]
+1D84F934857: F3 0F 5A C0                    -  cvtss2sd xmm0,xmm0
+1D84F93485B: F2 0F 11 85 E8 FE FF FF        -  movsd [rbp-00000118],xmm0
+1D84F934863: 66 66 90                       -  nop 3
+1D84F934866: 49 BB 50 27 18 FF D9 01 00 00  -  mov r11,000001D9FF182750
+1D84F934870: 41 FF D3                       -  call r11
+1D84F934873: F3 0F 5A C8                    -  cvtss2sd xmm1,xmm0
+1D84F934877: F2 0F 10 85 E8 FE FF FF        -  movsd xmm0,[rbp-00000118]
+1D84F93487F: F2 0F 5C C1                    -  subsd xmm0,xmm1
+// ---------- INJECTING HERE ----------
+1D84F934883: F2 0F 5A E8                    -  cvtsd2ss xmm5,xmm0
+// ---------- DONE INJECTING  ----------
+1D84F934887: F3 0F 11 AE 04 02 00 00        -  movss [rsi+00000204],xmm5
+1D84F93488F: 48 8B 8E E8 00 00 00           -  mov rcx,[rsi+000000E8]
+1D84F934896: 33 D2                          -  xor edx,edx
+1D84F934898: 48 8D 64 24 00                 -  lea rsp,[rsp+00]
+1D84F93489D: 90                             -  nop
+1D84F93489E: 49 BB F0 19 08 69 D9 01 00 00  -  mov r11,000001D9690819F0
+1D84F9348A8: 41 FF D3                       -  call r11
+1D84F9348AB: 85 C0                          -  test eax,eax
+1D84F9348AD: 0F 84 70 00 00 00              -  je 1D84F934923
+1D84F9348B3: 48 8B 86 E8 00 00 00           -  mov rax,[rsi+000000E8]
+1D84F9348BA: 48 8B C8                       -  mov rcx,rax
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2175</ID>
+          <Description>"no Suit Damage"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-18
+[ENABLE]
+assert(BBI.Unity.Game:VitalitySystem:TryModifySuit,55 48 8B EC 48)
+
+BBI.Unity.Game:VitalitySystem:TryModifySuit:
+db C3 90 90 90 90
+
+[DISABLE]
+
+BBI.Unity.Game:VitalitySystem:TryModifySuit:
+db 55 48 8B EC 48
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2146</ID>
+          <Description>"purchase Any Upgrade"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+assert(BBI.Unity.Game:UpgradeService:CanPurchaseUpgrade,55 48 8B EC 48 83 EC 70)
+assert(BBI.Unity.Game:CurrencyInstance:Subtract,48 83 EC 48 48)
+
+BBI.Unity.Game:UpgradeService:CanPurchaseUpgrade:
+db B8 01 00 00 00 C3 90 90
+//mov eax,1
+//ret
+//nop 2
+
+BBI.Unity.Game:CurrencyInstance:Subtract:
+db C3 90 90 90 90
+
+
+[DISABLE]
+
+BBI.Unity.Game:UpgradeService:CanPurchaseUpgrade:
+db 55 48 8B EC 48 83 EC 70
+
+BBI.Unity.Game:CurrencyInstance:Subtract:
+db 48 83 EC 48 48
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>2176</ID>
+              <Description>"Game might get boring if you purchase everything."</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>808080</Color>
+              <GroupHeader>1</GroupHeader>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2133</ID>
+          <Description>"set Full Time.2 (enable in game)  {used the hook by astor}"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">[ENABLE]
+//used hook from astor
+//Unity.Entities:EntityQueryImpl:SetSingleton+202
+//seems to crash with mono addresses so aob scans were used
+//enable in game since it needs to jit
+//time displayed in seconds
+
+aobscan(aob_timer,486351xx8950xx48xxxxxx89xxxx48xxxxxx89xxxx48xxxxxx89xxxx48xxxxxx4Cxxxxxx4Cxxxxxx48xxxxxxxxxx000000)//00xx00xx)
+registersymbol(aob_timer)
+
+aob_timer+7:
+db 48 63 51 04
+//movsxd rdx,dword ptr [rcx+04]
+ 
+[DISABLE]
+
+aob_timer+7:
+db 48 63 51 08
+
+unregistersymbol(aob_timer)
+
+{
+// ORIGINAL CODE - INJECTION POINT: Unity.Entities:EntityQueryImpl:SetSingleton+1fe
+
+1CF56CE756E: 48 8B 8D 68 FF FF FF           -  mov rcx,[rbp-00000098]
+1CF56CE7575: BA 01 00 00 00                 -  mov edx,00000001
+1CF56CE757A: 48 8D 6D 00                    -  lea rbp,[rbp+00]
+1CF56CE757E: 49 BB 60 E8 F4 44 CF 01 00 00  -  mov r11,000001CF44F4E860
+1CF56CE7588: 41 FF D3                       -  call r11
+1CF56CE758B: 48 8B 8D 70 FF FF FF           -  mov rcx,[rbp-00000090]
+1CF56CE7592: 48 63 11                       -  movsxd  rdx,dword ptr [rcx]
+1CF56CE7595: 89 10                          -  mov [rax],edx
+1CF56CE7597: 48 63 51 04                    -  movsxd  rdx,dword ptr [rcx+04]
+1CF56CE759B: 89 50 04                       -  mov [rax+04],edx
+// ---------- INJECTING HERE ----------
+1CF56CE759E: 48 63 51 08                    -  movsxd  rdx,dword ptr [rcx+08]
+1CF56CE75A2: 89 50 08                       -  mov [rax+08],edx
+// ---------- DONE INJECTING  ----------
+1CF56CE75A5: 48 63 51 0C                    -  movsxd  rdx,dword ptr [rcx+0C]
+1CF56CE75A9: 89 50 0C                       -  mov [rax+0C],edx
+1CF56CE75AC: 48 63 49 10                    -  movsxd  rcx,dword ptr [rcx+10]
+1CF56CE75B0: 89 48 10                       -  mov [rax+10],ecx
+1CF56CE75B3: 48 8B 75 E8                    -  mov rsi,[rbp-18]
+1CF56CE75B7: 4C 8B 75 F0                    -  mov r14,[rbp-10]
+1CF56CE75BB: 4C 8B 7D F8                    -  mov r15,[rbp-08]
+1CF56CE75BF: 48 8D 65 00                    -  lea rsp,[rbp+00]
+1CF56CE75C3: 5D                             -  pop rbp
+1CF56CE75C4: C3                             -  ret
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2179</ID>
+          <Description>"unbrekable Tethers/Hook"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-20
+[ENABLE]
+assert(GrapplingHook:CheckIfObjectInBounds,55 48 8B EC 48)
+aobscanregion(UnbreakableAob,BBI.Unity.Game:LaserRope:ResolveRopeIntersection+660,BBI.Unity.Game:LaserRope:ResolveRopeIntersection+6B0,0F ?? ?? ?? ?? ?? 48)
+registersymbol(UnbreakableAob)
+
+GrapplingHook:CheckIfObjectInBounds:
+db C3 90 90 90 90
+
+UnbreakableAob:
+db E9 84 00 00 00 90
+//jmp rel.
+
+[DISABLE]
+
+GrapplingHook:CheckIfObjectInBounds:
+db 55 48 8B EC 48
+
+UnbreakableAob:
+db 0F 82 83 00 00 00
+
+unregistersymbol(UnbreakableAob)
+
+{
+// ORIGINAL CODE - INJECTION POINT: BBI.Unity.Game:LaserRope:ResolveRopeIntersection+683
+
+14C2BA39727: 48 8D AD 00 00 00 00           -  lea rbp,[rbp+00000000]
+14C2BA3972E: 49 BB 00 00 96 D7 4C 01 00 00  -  mov r11,0000014CD7960000
+14C2BA39738: 41 FF D3                       -  call r11
+14C2BA3973B: F3 0F 5A C8                    -  cvtss2sd xmm1,xmm0
+14C2BA3973F: F2 0F 10 85 E0 FE FF FF        -  movsd xmm0,[rbp-00000120]
+14C2BA39747: F2 0F 5C C1                    -  subsd xmm0,xmm1
+14C2BA3974B: F2 0F 5A E8                    -  cvtsd2ss xmm5,xmm0
+14C2BA3974F: F3 0F 11 AE 48 02 00 00        -  movss [rsi+00000248],xmm5
+14C2BA39757: F3 0F 10 86 48 02 00 00        -  movss xmm0,[rsi+00000248]
+14C2BA3975F: F3 0F 5A C0                    -  cvtss2sd xmm0,xmm0
+14C2BA39763: 66 0F 57 C9                    -  xorpd xmm1,xmm1
+14C2BA39767: 66 0F 2F C8                    -  comisd xmm1,xmm0
+// ---------- INJECTING HERE ----------
+14C2BA3976B: 0F 82 83 00 00 00              -  jb 14C2BA397F4
+// ---------- DONE INJECTING  ----------
+14C2BA39771: 48 8B CE                       -  mov rcx,rsi
+14C2BA39774: BA 02 00 00 00                 -  mov edx,00000002
+14C2BA39779: 48 8D 64 24 00                 -  lea rsp,[rsp+00]
+14C2BA3977E: 49 BB 20 99 A3 2B 4C 01 00 00  -  mov r11,0000014C2BA39920
+14C2BA39788: 41 FF D3                       -  call r11
+14C2BA3978B: 48 8B CE                       -  mov rcx,rsi
+14C2BA3978E: 49 BB F4 98 A3 2B 4C 01 00 00  -  mov r11,0000014C2BA398F4
+14C2BA39798: 41 FF D3                       -  call r11
+14C2BA3979B: 48 85 C0                       -  test rax,rax
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2214</ID>
+          <Description>"profile Values (enable at Habitaion Module)"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Started : 2020-06-24
+// main thread makes a loop until finished
+[ENABLE]
+aobscanregion(ProfileValuesAob,BBI.Unity.Game:PlayerProfileSaveLoadManager:SerializePlayerCurrencyData+140,BBI.Unity.Game:PlayerProfileSaveLoadManager:SerializePlayerCurrencyData+170,83 39 00 F3 0F 10 40 ?? F3 0F 5A C0 F2)
+registersymbol(ProfileValuesAob)
+
+globalalloc(ProfileValuesMem,4096,ProfileValuesAob)
+label(returnToProfileValuesAob)
+label(ProfileValuesAob_o)
+registersymbol(ProfileValuesAob_o)
+label(someValue)
+registersymbol(someValue)
+label(currentOffset)
+label(L1)
+label(L2)
+
+ProfileValuesMem:
+sub rsp,10
+mov [rbp-10],rbx
+mov [rbp-8],rcx
+mov rbx,someValue
+movzx ecx,[currentOffset] //16 profile values currently
+lea rbx,[rbx+rcx]
+mov [rbx],rax
+cmp ecx,78 //78 (7 * 16) is last exectuion, array starts at zero
+jl short L1
+// 30 C9 88 0D 1F 00 00 00 | xor cl,cl / mov [],cl (8 bytes)
+// C6 05 21 00 00 00 00    | mov byte ptr [],00 (7 bytes)
+// 83 25 20 00 00 00 00    | and [],00 (7 bytes)
+and [currentOffset],00
+jmp short L2
+L1:
+add dword ptr [currentOffset],08
+L2:
+mov rcx,[rbp-8]
+mov rbx,[rbp-10]
+add rsp,10
+/**/
+ProfileValuesAob_o:
+readmem(ProfileValuesAob,16)
+jmp far returnToProfileValuesAob
+
+align 8 90
+currentOffset:
+dq 00
+someValue:
+dq 00
+
+ProfileValuesAob:
+jmp far ProfileValuesMem
+nop 2
+
+returnToProfileValuesAob:
+[DISABLE]
+
+ProfileValuesAob:
+readmem(ProfileValuesAob_o,16)
+
+unregistersymbol(ProfileValuesAob)
+unregistersymbol(ProfileValuesAob_o)
+dealloc(ProfileValuesMem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: BBI.Unity.Game:PlayerProfileSaveLoadManager:SerializePlayerCurrencyData+145
+
+1D8D5BB4E8F: 89 4D B8                          -  mov [rbp-48],ecx
+1D8D5BB4E92: 48 8B C8                          -  mov rcx,rax
+1D8D5BB4E95: 48 8B 55 B8                       -  mov rdx,[rbp-48]
+1D8D5BB4E99: 83 38 00                          -  cmp dword ptr [rax],00
+1D8D5BB4E9C: 66 90                             -  nop 2
+1D8D5BB4E9E: 49 BB 10 54 BB D5 D8 01 00 00     -  mov r11,000001D8D5BB5410
+1D8D5BB4EA8: 41 FF D3                          -  call r11
+1D8D5BB4EAB: 4C 8B F8                          -  mov r15,rax
+1D8D5BB4EAE: 48 8B 45 A8                       -  mov rax,[rbp-58]
+1D8D5BB4EB2: 48 8B C8                          -  mov rcx,rax
+// ---------- INJECTING HERE ----------
+1D8D5BB4EB5: 83 39 00                          -  cmp dword ptr [rcx],00
+1D8D5BB4EB8: F3 0F 10 40 24                    -  movss xmm0,[rax+24]
+1D8D5BB4EBD: F3 0F 5A C0                       -  cvtss2sd xmm0,xmm0
+1D8D5BB4EC1: F2 0F 5A E8                       -  cvtsd2ss xmm5,xmm0
+// ---------- DONE INJECTING  ----------
+1D8D5BB4EC5: F3 0F 11 AD 74 FF FF FF           -  movss [rbp-0000008C],xmm5
+1D8D5BB4ECD: F3 0F 10 85 74 FF FF FF           -  movss xmm0,[rbp-0000008C]
+1D8D5BB4ED5: F3 0F 5A C0                       -  cvtss2sd xmm0,xmm0
+1D8D5BB4ED9: F2 0F 5A E8                       -  cvtsd2ss xmm5,xmm0
+1D8D5BB4EDD: F3 0F 11 6D CC                    -  movss [rbp-34],xmm5
+1D8D5BB4EE2: F3 0F 10 45 CC                    -  movss xmm0,[rbp-34]
+1D8D5BB4EE7: F3 0F 5A C0                       -  cvtss2sd xmm0,xmm0
+1D8D5BB4EEB: 49 8B CE                          -  mov rcx,r14
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>2215</ID>
+              <Description>"ReadMe"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>2216</ID>
+                  <Description>"This script hooks onto 'ProfileSaveLoadManager'"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>2217</ID>
+                  <Description>"As such, most of your save stats are below."</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>2218</ID>
+                  <Description>"The labels (paid debt,etc) below are what I have observed."</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>2219</ID>
+                  <Description>"However, check them yourself."</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>2220</ID>
+                  <Description>"Afterwards, quit to main menu and come back to Habstation"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>2221</ID>
+                  <Description>"for the changes to take effect."</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2222</ID>
+              <Description>"paid debt?"</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2223</ID>
+              <Description>""</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+8</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2224</ID>
+              <Description>""</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+10</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2225</ID>
+              <Description>""</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+18</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2226</ID>
+              <Description>""</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+20</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2227</ID>
+              <Description>""</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+28</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2228</ID>
+              <Description>""</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+30</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2229</ID>
+              <Description>""</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+38</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2230</ID>
+              <Description>""</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+40</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2231</ID>
+              <Description>""</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+48</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2232</ID>
+              <Description>""</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+50</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2233</ID>
+              <Description>""</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+58</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2234</ID>
+              <Description>"lynx Tokens?"</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+60</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2235</ID>
+              <Description>"repair Kits?"</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+68</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2236</ID>
+              <Description>""</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+70</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2237</ID>
+              <Description>"utility Keys?"</Description>
+              <Color>808080</Color>
+              <VariableType>Float</VariableType>
+              <Address>someValue+78</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>28</ID>
+      <Description>"debug"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>FFFFFF</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2094</ID>
+          <Description>"backup"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+alloc(Instance,512,Shipbreaker.exe)
+registersymbol(Instance)
+alloc(Thread,256,Shipbreaker.exe)
+registersymbol(Thread)
+createthread(Thread)
+
+label(GetInstance)
+label(State)
+registersymbol(State)
+label(ThreadLoop)
+
+Thread:
+push rbp
+mov rbp,rsp
+and spl,F0
+sub rsp,20
+ThreadLoop:
+mov rcx,A
+call KERNEL32.Sleep
+cmp byte ptr [State],1
+jz GetInstance
+mov rsp,rbp
+pop rbp
+mov rcx,Thread
+xor rdx,rdx
+mov r8d,8000
+jmp KERNEL32.VirtualFree
+GetInstance:
+mov r11,"BBI:LynxPlayerController:get_Instance"
+call r11
+test ax,ax
+jz ThreadLoop
+mov [Instance],rax
+mov rcx,rax
+mov r11, "BBI:LynxPlayerController:get_Player"
+call r11
+mov [Instance+8],rax
+mov r11,"BBI:LynxPlayerController:get_PlayerRigidbody"
+call r11
+mov [Instance+10],rax
+mov rcx,[Instance+8]
+//mov rdx,[Instance+8]
+mov r11,"BBI.Unity.Game:Player:get_Entity"
+call r11
+mov [Instance+18],rax
+mov rcx,[Instance+8]
+mov r11,"BBI.Unity.Game:Player:get_PlayerCollider"
+call r11
+mov [Instance+20],rax
+jmp ThreadLoop
+State:
+dq 01
+Instance:
+dq 00
+
+[DISABLE]
+State:
+dq 00
+
+unregistersymbol(Instance)
+unregistersymbol(State)
+unregistersymbol(Thread)
+dealloc(Instance)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2124</ID>
+          <Description>"Auto Assemble script"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+aobscanregion(DurabilityAob,ProcessQueuedDurabilityModificationsJob:Execute+1A0,ProcessQueuedDurabilityModificationsJob:Execute+1CA,48 63 08 89 8D ?? ?? ?? ?? 48 63 48 ?? 89)
+registersymbol(DurabilityAob)
+aobscanregion(ThrustConAob,BBI.Unity.Game:ThrustController:set_Charge+30,BBI.Unity.Game:ThrustController:set_Charge+50,F3 0F 11 AE ?? ?? ?? ?? 48 63 86 ?? ?? ?? ?? 83 F8 ??)
+registersymbol(ThrustConAob)
+aobscanregion(OxygenCompAob,BBI.Unity.Game:VitalityHandlerSystem:OnUpdate+f40,BBI.Unity.Game:VitalityHandlerSystem:OnUpdate+f60,48 63 08 89 8D ?? ?? ?? ?? 48 63 48 ?? 89)
+registersymbol(OxygenCompAob)
+aobscanregion(TetherWriteAob,TetherController:set_NumAvailableTethers,TetherController:set_NumAvailableTethers+40,89 87 ?? ?? ?? ?? 48 8B 87 ?? ?? ?? ?? 48)
+registersymbol(TetherWriteAob)
+//aobscan(aob_timer,89xxxx48xxxxxx89xxxx48xxxxxx89xxxx48xxxxxx4Cxxxxxx4Cxxxxxx48xxxxxxxxxx00xx00xx)
+//registersymbol(aob_timer)
+aobscanregion(LynxTokenAob,BBI.Unity.Game:CurrencyInstance:get_AmountString+64,BBI.Unity.Game:CurrencyInstance:get_AmountString+81,F3 0F 10 46 ?? F3 0F 5A ?? F2 0F 5A ?? F3 0F 11 6D F4)
+registersymbol(LynxTokenAob)
+aobscanregion(ESCAob,BBI.Unity.Game:EquipmentScreenController:UpdateRepairInfo,BBI.Unity.Game:EquipmentScreenController:UpdateRepairInfo+30,48 8B 86 ?? ?? ?? ?? 48 85 C0 75 43)
+registersymbol(ESCAob)
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+unregistersymbol(DurabilityAob)
+unregistersymbol(ThrustConAob)
+unregistersymbol(OxygenCompAob)
+unregistersymbol(TetherWriteAob)
+unregistersymbol(aob_timer)
+unregistersymbol(LynxTokenAob)
+unregistersymbol(ESCAob)
+
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2178</ID>
+          <Description>"script"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-20
+[ENABLE]
+aobscanregion(UnbreakableAob,BBI.Unity.Game:LaserRope:ResolveRopeIntersection+660,BBI.Unity.Game:LaserRope:ResolveRopeIntersection+6B0,66 ?? ?? ?? 0F ?? ?? ?? ?? ?? 48)
+registersymbol(UnbreakableAob)
+
+UnbreakableAob:
+db 66 0F 2F C1
+//comisd xmm2,xmm1
+
+[DISABLE]
+
+UnbreakableAob:
+db 66 0F 2F C8
+
+unregistersymbol(UnbreakableAob)
+
+{
+// ORIGINAL CODE - INJECTION POINT: BBI.Unity.Game:LaserRope:ResolveRopeIntersection+683
+
+14C2BA39727: 48 8D AD 00 00 00 00           -  lea rbp,[rbp+00000000]
+14C2BA3972E: 49 BB 00 00 96 D7 4C 01 00 00  -  mov r11,0000014CD7960000
+14C2BA39738: 41 FF D3                       -  call r11
+14C2BA3973B: F3 0F 5A C8                    -  cvtss2sd xmm1,xmm0
+14C2BA3973F: F2 0F 10 85 E0 FE FF FF        -  movsd xmm0,[rbp-00000120]
+14C2BA39747: F2 0F 5C C1                    -  subsd xmm0,xmm1
+14C2BA3974B: F2 0F 5A E8                    -  cvtsd2ss xmm5,xmm0
+14C2BA3974F: F3 0F 11 AE 48 02 00 00        -  movss [rsi+00000248],xmm5
+14C2BA39757: F3 0F 10 86 48 02 00 00        -  movss xmm0,[rsi+00000248]
+14C2BA3975F: F3 0F 5A C0                    -  cvtss2sd xmm0,xmm0
+14C2BA39763: 66 0F 57 C9                    -  xorpd xmm1,xmm1
+// ---------- INJECTING HERE ----------
+14C2BA39767: 66 0F 2F C8                    -  comisd xmm1,xmm0
+// ---------- DONE INJECTING  ----------
+14C2BA3976B: 0F 82 83 00 00 00              -  jb 14C2BA397F4
+14C2BA39771: 48 8B CE                       -  mov rcx,rsi
+14C2BA39774: BA 02 00 00 00                 -  mov edx,00000002
+14C2BA39779: 48 8D 64 24 00                 -  lea rsp,[rsp+00]
+14C2BA3977E: 49 BB 20 99 A3 2B 4C 01 00 00  -  mov r11,0000014C2BA39920
+14C2BA39788: 41 FF D3                       -  call r11
+14C2BA3978B: 48 8B CE                       -  mov rcx,rsi
+14C2BA3978E: 49 BB F4 98 A3 2B 4C 01 00 00  -  mov r11,0000014C2BA398F4
+14C2BA39798: 41 FF D3                       -  call r11
+14C2BA3979B: 48 85 C0                       -  test rax,rax
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>30</ID>
+          <Description>"DebugViewer hook"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Started : 2020-06-18
+[ENABLE]
+aobscanregion(DebugViewerAob,BBI.Core.Utility:DebugViewer:Update,BBI.Core.Utility:DebugViewer:Update+30,48 8B F1 48 B8 ?? ?? ?? ?? ?? ?? ?? ?? 48 8B 08)
+registersymbol(DebugViewerAob)
+
+alloc(DebugViewerMem,256,DebugViewerAob)
+label(returnToDebugViewerAob)
+label(DebugViewerAob_o)
+registersymbol(DebugViewerAob_o)
+label(DebugViewer)
+registersymbol(DebugViewer)
+
+DebugViewerMem:
+mov [DebugViewer],rcx
+/**/
+DebugViewerAob_o:
+readmem(DebugViewerAob,13)
+jmp returnToDebugViewerAob
+DebugViewer:
+dq 00
+
+DebugViewerAob:
+jmp DebugViewerMem
+nop 8
+
+returnToDebugViewerAob:
+[DISABLE]
+
+DebugViewerAob:
+readmem(DebugViewerAob_o,13)
+//db 48 8B F1 48 B8 60 32 DF 19 B5 01 00 00
+
+unregistersymbol(DebugViewerAob)
+unregistersymbol(DebugViewerAob_o)
+unregistersymbol(DebugViewer)
+dealloc(DebugViewerMem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: BBI.Core.Utility:DebugViewer:Update+14
+
+1B55FC1C658: 00 00                          -  add [rax],al
+1B55FC1C65A: 00 00                          -  add [rax],al
+1B55FC1C65C: 00 00                          -  add [rax],al
+1B55FC1C65E: 00 00                          -  add [rax],al
+1B55FC1C660: 55                             -  push rbp
+1B55FC1C661: 48 8B EC                       -  mov rbp,rsp
+1B55FC1C664: 48 83 EC 50                    -  sub rsp,50
+1B55FC1C668: 48 89 75 E8                    -  mov [rbp-18],rsi
+1B55FC1C66C: 48 89 7D F0                    -  mov [rbp-10],rdi
+1B55FC1C670: 4C 89 7D F8                    -  mov [rbp-08],r15
+// ---------- INJECTING HERE ----------
+1B55FC1C674: 48 8B F1                       -  mov rsi,rcx
+1B55FC1C677: 48 B8 60 32 DF 19 B5 01 00 00  -  mov rax,000001B519DF3260
+// ---------- DONE INJECTING  ----------
+1B55FC1C681: 48 8B 08                       -  mov rcx,[rax]
+1B55FC1C684: 33 D2                          -  xor edx,edx
+1B55FC1C686: 49 BB B7 58 68 5F B5 01 00 00  -  mov r11,000001B55F6858B7
+1B55FC1C690: 41 FF D3                       -  call r11
+1B55FC1C693: 85 C0                          -  test eax,eax
+1B55FC1C695: 0F 84 D6 03 00 00              -  je 1B55FC1CA71
+1B55FC1C69B: 48 B8 60 32 DF 19 B5 01 00 00  -  mov rax,000001B519DF3260
+1B55FC1C6A5: 48 8B 00                       -  mov rax,[rax]
+1B55FC1C6A8: 48 8B 40 18                    -  mov rax,[rax+18]
+1B55FC1C6AC: 48 8B 80 80 03 00 00           -  mov rax,[rax+00000380]
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>32</ID>
+              <Description>"DebugViewer"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>808080</Color>
+              <GroupHeader>1</GroupHeader>
+              <Address>[DebugViewer]</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>46</ID>
+                  <Description>"mShowDebugControls"</Description>
+                  <Color>808080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>+89</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2147</ID>
+          <Description>"call functions"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-18
+// jit each method maunally or with lua before enabling
+[ENABLE]
+
+alloc(MemBase,512,Shipbreaker.exe)
+registersymbol(MemBase)
+alloc(Thread,256,Shipbreaker.exe)
+registersymbol(Thread)
+createthread(Thread)
+
+label(ThreadLoop)
+label(GetInstance)
+label(mPlayerReference)
+label(LynxPlayerController)
+label(State)
+label(mPlayerEntity)
+label(PlayerCollider)
+label(EntityManager)
+label(mRigidbodyReference)
+
+registersymbol(LynxPlayerController)
+registersymbol(State)
+registersymbol(mPlayerReference)
+registersymbol(mPlayerEntity)
+registersymbol(PlayerCollider)
+registersymbol(EntityManager)
+registersymbol(mRigidbodyReference)
+
+Thread:
+push rbp
+mov rbp,rsp
+and spl,F0
+sub rsp,20
+ThreadLoop:
+mov rcx,A
+call KERNEL32.Sleep
+cmp byte ptr [State],1
+jz GetInstance
+mov rsp,rbp
+pop rbp
+mov rcx,Thread
+xor rdx,rdx
+mov r8d,8000
+jmp KERNEL32.VirtualFree
+
+GetInstance:
+mov r11,"BBI:LynxPlayerController:get_Instance"
+test r11,r11
+jz ThreadLoop
+call r11
+test rax,rax
+jz ThreadLoop
+mov [LynxPlayerController],rax
+//mov rax,[rax+20]
+//mov rax, [rax+228]
+//mov [mRigidbodyReference],rax
+mov rcx,[LynxPlayerController]
+mov r11,"BBI:LynxPlayerController:get_Player"
+call r11
+test rax,rax
+jz ThreadLoop
+mov [mPlayerReference],rax
+mov rcx,rax
+mov r11,"BBI.Unity.Game:Player:get_Entity"
+//test r11,r11 //check if addy is valid
+//jz ThreadLoop
+call r11
+test rax,rax
+jz ThreadLoop
+mov [mPlayerEntity],rax
+mov rcx,[mPlayerReference]
+mov r11,"BBI.Unity.Game:Player:FindPlayerCollider"
+test r11,r11 // if function has jitted
+jz ThreadLoop
+call r11
+test rax,rax
+jz ThreadLoop
+mov [PlayerCollider],rax
+mov rcx,60
+call USER32.GetAsyncKeyState
+test ax,ax
+jz ThreadLoop
+
+//mov rcx,[mPlayerEntity]
+//mov rdx,[EntityManager]
+//mov r8,01
+//mov r11,"BBI.Unity.Game:Player:SetGodMode"
+//call r11
+//mov rcx,[PlayerCollider]
+//mov rdx,[mRigidbodyReference]
+//mov r8,1
+//mov r11,"BBI.Unity.Game:Player:SetNoClipMode"
+//call r11
+jmp ThreadLoop
+State:
+dq 01
+
+MemBase:
+LynxPlayerController:
+dq 00
+mPlayerReference:
+dq 00
+mPlayerEntity:
+dq 00
+PlayerCollider:
+dq 00
+EntityManager:
+dq 00
+mRigidbodyReference:
+dq 00
+
+[DISABLE]
+State:
+dq 00
+
+MemBase:
+LynxPlayerController:
+dq 00
+mPlayerReference:
+dq 00
+mPlayerEntity:
+dq 00
+PlayerCollider:
+dq 00
+EntityManager:
+dq 00
+mRigidbodyReference:
+dq 00
+
+unregistersymbol(Thread)
+unregistersymbol(State)
+unregistersymbol(MemBase)
+unregistersymbol(mPlayerReference)
+unregistersymbol(mPlayerEntity)
+unregistersymbol(LynxPlayerController)
+unregistersymbol(PlayerCollider)
+unregistersymbol(EntityManager)
+unregistersymbol(mRigidbodyReference)
+dealloc(MemBase)
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>2148</ID>
+              <Description>"Thread State"</Description>
+              <VariableType>Byte</VariableType>
+              <Address>State</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>2149</ID>
+                  <Description>"Lynx.PlayerController"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <Address>[LynxPlayerController]</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>2158</ID>
+                      <Description>"Type: LynxPlayerController"</Description>
+                      <LastState Value="" RealAddress="00000000"/>
+                      <GroupHeader>1</GroupHeader>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>2155</ID>
+                  <Description>"mRigidbodyReference"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <Address>[mRigidbodyReference]</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>2164</ID>
+                      <Description>"Type: Unity.Game.PlayerMotion"</Description>
+                      <LastState Value="" RealAddress="00000000"/>
+                      <GroupHeader>1</GroupHeader>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>2157</ID>
+                  <Description>"mPlayerReference"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <Address>[mPlayerReference]</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>2159</ID>
+                      <Description>"Type: BBI.Unity.Game.Player"</Description>
+                      <LastState Value="" RealAddress="00000000"/>
+                      <GroupHeader>1</GroupHeader>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>2152</ID>
+                  <Description>"mPlayerEntity"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <Address>[mPlayerEntity]</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>2160</ID>
+                      <Description>"Type: BBI.Unity.Entities.Entity"</Description>
+                      <LastState Value="" RealAddress="00000000"/>
+                      <GroupHeader>1</GroupHeader>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>2153</ID>
+                  <Description>"PlayerCollider"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <Address>[PlayerCollider]</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>2163</ID>
+                      <Description>"Type: UnityEngine.Collider"</Description>
+                      <LastState Value="" RealAddress="00000000"/>
+                      <GroupHeader>1</GroupHeader>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2154</ID>
+              <Description>"EntityManager"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>[EntityManager]</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2161</ID>
+              <Description>"EntityManager"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>EntityManager</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2151</ID>
+              <Description>"UnityEngine.RigidBody"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>[[LPC]+20]</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2162</ID>
+              <Description>"No description"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>mPlayerEntity</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"equipment Screen.Controller"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-18
+[ENABLE]
+aobscanregion(ESCAob,BBI.Unity.Game:EquipmentScreenController:UpdateRepairInfo,BBI.Unity.Game:EquipmentScreenController:UpdateRepairInfo+30,4C 89 7D F8 48 8B F1 48 8B 86 ?? ?? ?? ?? 48 85 C0)
+registersymbol(ESCAob)
+
+alloc(ESCMem,256,ESCAob)
+
+//label(returnToESCAob)
+label(ESCAob_o)
+registersymbol(ESCAob_o)
+label(ESC)
+registersymbol(ESC)
+
+ESCMem:
+mov [ESC],rcx
+/**/
+ESCAob_o:
+readmem(ESCAob,17)
+jmp ESCAob+11
+//jmp returnToESCAob
+db CC CC
+ESC:
+dq 00
+
+
+ESCAob:
+jmp ESCMem
+nop 2
+
+//returnToESCAob:
+[DISABLE]
+
+ESCAob:
+readmem(ESCAob_o,17)
+
+unregistersymbol(ESCAob)
+unregistersymbol(ESCAob_o)
+dealloc(ESCMem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: BBI.Unity.Game:EquipmentScreenController:UpdateRepairInfo+1a
+
+28310ABED09: 00 00                          -  add [rax],al
+28310ABED0B: 00 00                          -  add [rax],al
+28310ABED0D: 00 00                          -  add [rax],al
+28310ABED0F: 00 55 48                       -  add [rbp+48],dl
+28310ABED12: 8B EC                          -  mov ebp,esp
+28310ABED14: 48 81 EC B0 00 00 00           -  sub rsp,000000B0
+28310ABED1B: 48 89 75 E8                    -  mov [rbp-18],rsi
+28310ABED1F: 48 89 7D F0                    -  mov [rbp-10],rdi
+// ---------- INJECTING HERE ----------
+28310ABED23: 4C 89 7D F8                    -  mov [rbp-08],r15
+28310ABED27: 48 8B F1                       -  mov rsi,rcx
+28310ABED2A: 48 8B 86 B0 00 00 00           -  mov rax,[rsi+000000B0]
+28310ABED31: 48 85 C0                       -  test rax,rax
+// ---------- DONE INJECTING  ----------
+28310ABED34: 75 43                          -  jne 28310ABED79
+28310ABED36: 48 8B 46 40                    -  mov rax,[rsi+40]
+28310ABED3A: 48 8B C8                       -  mov rcx,rax
+28310ABED3D: 33 D2                          -  xor edx,edx
+28310ABED3F: 83 38 00                       -  cmp dword ptr [rax],00
+28310ABED42: 48 8D 6D 00                    -  lea rbp,[rbp+00]
+28310ABED46: 49 BB F0 11 4E 83 82 02 00 00  -  mov r11,00000282834E11F0
+28310ABED50: 41 FF D3                       -  call r11
+28310ABED53: C6 86 DC 00 00 00 00           -  mov byte ptr [rsi+000000DC],00
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>23</ID>
+              <Description>"equipmentScreen.Controller"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>808080</Color>
+              <GroupHeader>1</GroupHeader>
+              <Address>[ESC]</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>24</ID>
+                  <Description>"mNumRepairKits"</Description>
+                  <Color>808080</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>+D8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>25</ID>
+                  <Description>"mIsValidRepairType"</Description>
+                  <Color>808080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+DC</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>26</ID>
+                  <Description>"mCurrentEquipmentInfoDurabilityType"</Description>
+                  <Color>808080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+E0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>27</ID>
+                  <Description>"mCurrentEquipmentInfoDurability"</Description>
+                  <Color>808080</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>+E4</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"lnyx Tokens"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">// Started : 2020-06-18
+[ENABLE]
+aobscanregion(LynxTokenAob,BBI.Unity.Game:CurrencyInstance:get_AmountString+64,BBI.Unity.Game:CurrencyInstance:get_AmountString+90,F3 0F 10 46 ?? F3 0F 5A ?? F2 0F 5A ?? F3 0F 11 6D F4)
+registersymbol(LynxTokenAob)
+
+alloc(LynxTokenMem,256,LynxTokenAob)
+
+label(LynxTokenAob_o)
+registersymbol(LynxTokenAob_o)
+label(CurrencyInstance)
+registersymbol(CurrencyInstance)
+//label(returnToLynxTokenAob)
+
+LynxTokenMem:
+mov [CurrencyInstance],rsi
+/**/
+LynxTokenAob_o:
+readmem(LynxTokenAob,18)
+jmp LynxTokenAob+12
+//jmp returnToLynxTokenAob
+CurrencyInstance:
+dq 00
+
+LynxTokenAob:
+jmp LynxTokenMem
+
+//returnToLynxTokenAob:
+[DISABLE]
+
+LynxTokenAob:
+readmem(LynxTokenAob_o,18)
+//db F3 0F 10 46 24
+
+unregistersymbol(LynxTokenAob)
+unregistersymbol(LynxTokenAob_o)
+unregistersymbol(CurrencyInstance)
+dealloc(LynxTokenMem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: BBI.Unity.Game:CurrencyInstance:get_AmountString+78
+
+282E53019B6: F3 0F 5A C0                    -  cvtss2sd xmm0,xmm0
+282E53019BA: F2 0F 5A E8                    -  cvtsd2ss xmm5,xmm0
+282E53019BE: F3 0F 11 6D F0                 -  movss [rbp-10],xmm5
+282E53019C3: 48 8B CD                       -  mov rcx,rbp
+282E53019C6: 48 83 C1 F0                    -  add rcx,-10
+282E53019CA: 48 BA 80 7F 81 58 81 02 00 00  -  mov rdx,0000028158817F80
+282E53019D4: 66 90                          -  nop 2
+282E53019D6: 49 BB 80 1A 30 E5 82 02 00 00  -  mov r11,00000282E5301A80
+282E53019E0: 41 FF D3                       -  call r11
+282E53019E3: E9 4B 00 00 00                 -  jmp 282E5301A33
+// ---------- INJECTING HERE ----------
+282E53019E8: F3 0F 10 46 24                 -  movss xmm0,[rsi+24]
+282E53019ED: F3 0F 5A C0                    -  cvtss2sd xmm0,xmm0
+282E53019F1: F2 0F 5A E8                    -  cvtsd2ss xmm5,xmm0
+282E53019F5: F3 0F 11 6D F4                 -  movss [rbp-0C],xmm5
+// ---------- DONE INJECTING  ----------
+282E53019FA: F3 0F 10 45 F4                 -  movss xmm0,[rbp-0C]
+282E53019FF: F3 0F 5A C0                    -  cvtss2sd xmm0,xmm0
+282E5301A03: F2 0F 5A C0                    -  cvtsd2ss xmm0,xmm0
+282E5301A07: 48 8D AD 00 00 00 00           -  lea rbp,[rbp+00000000]
+282E5301A0E: 49 BB 90 6E 58 83 82 02 00 00  -  mov r11,0000028283586E90
+282E5301A18: 41 FF D3                       -  call r11
+282E5301A1B: 89 45 E8                       -  mov [rbp-18],eax
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>13</ID>
+              <Description>"mName"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>808080</Color>
+              <GroupHeader>1</GroupHeader>
+              <Address>[[CurrencyInstance]+10]</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>16</ID>
+                  <Description>"length"</Description>
+                  <Color>808080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>15</ID>
+                  <Description>"value"</Description>
+                  <Color>808080</Color>
+                  <VariableType>String</VariableType>
+                  <Length>10</Length>
+                  <Unicode>1</Unicode>
+                  <CodePage>0</CodePage>
+                  <ZeroTerminate>1</ZeroTerminate>
+                  <Address>+14</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>14</ID>
+              <Description>"mRange"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>808080</Color>
+              <GroupHeader>1</GroupHeader>
+              <Address>[[CurrencyInstance]+18]</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>17</ID>
+                  <Description>"min"</Description>
+                  <Color>808080</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>18</ID>
+                  <Description>"max"</Description>
+                  <Color>808080</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>+14</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10</ID>
+              <Description>"CurrencyInstance"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>808080</Color>
+              <GroupHeader>1</GroupHeader>
+              <Address>[CurrencyInstance]</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>11</ID>
+                  <Description>"lynx Tokens"</Description>
+                  <Color>808080</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>+24</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>12</ID>
+                  <Description>"mRoundToInt"</Description>
+                  <Color>808080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+28</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2145</ID>
+          <Description>"Pointers"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>808080</Color>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2185</ID>
+          <Description>"profile Values (enable at Habitaion Module) // old"</Description>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Started : 2020-06-24
+// main thread makes a loop until finished
+[ENABLE]
+aobscanregion(ProfileValuesAob,BBI.Unity.Game:PlayerProfileSaveLoadManager:SerializePlayerCurrencyData+140,BBI.Unity.Game:PlayerProfileSaveLoadManager:SerializePlayerCurrencyData+170,F3 0F 10 40 ?? F3 0F 5A C0 F2)
+registersymbol(ProfileValuesAob)
+
+globalalloc(ProfileValuesMem,4096,ProfileValuesAob)
+label(returnToProfileValuesAob)
+label(ProfileValuesAob_o)
+registersymbol(ProfileValuesAob_o)
+label(someValue)
+registersymbol(someValue)
+label(currentOffset)
+label(L1)
+label(L2)
+
+ProfileValuesMem:
+sub rsp,10
+mov [rbp-10],rbx
+mov [rbp-8],rcx
+mov rbx,someValue
+movzx ecx,[currentOffset] //16 profile values
+lea rbx,[rbx+rcx]
+mov [rbx],rax
+cmp ecx,78 //78 (7 * 16) is last exectuion, array starts at zero
+jl short L1
+// 30 C9 88 0D 1F 00 00 00 | xor cl,cl / mov [],cl (8 bytes)
+// C6 05 21 00 00 00 00    | mov byte ptr [],00 (7 bytes)
+// 83 25 20 00 00 00 00    | and [],00 (7 bytes)
+and [currentOffset],00
+jmp short L2
+L1:
+add dword ptr [currentOffset],08
+L2:
+mov rcx,[rbp-8]
+mov rbx,[rbp-10]
+add rsp,10
+/**/
+ProfileValuesAob_o:
+reassemble(ProfileValuesAob)
+jmp returnToProfileValuesAob
+
+align 8 90
+currentOffset:
+dq 00
+someValue:
+dq 00
+
+ProfileValuesAob:
+jmp ProfileValuesMem
+
+returnToProfileValuesAob:
+[DISABLE]
+
+ProfileValuesAob:
+readmem(ProfileValuesAob_o,5)
+
+unregistersymbol(ProfileValuesAob)
+unregistersymbol(ProfileValuesAob_o)
+dealloc(ProfileValuesMem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: BBI.Unity.Game:PlayerProfileSaveLoadManager:SerializePlayerCurrencyData+148
+
+1C257236FD2: 48 8B C8                          -  mov rcx,rax
+1C257236FD5: 48 8B 55 B8                       -  mov rdx,[rbp-48]
+1C257236FD9: 83 38 00                          -  cmp dword ptr [rax],00
+1C257236FDC: 66 90                             -  nop 2
+1C257236FDE: 49 BB D0 75 23 57 C2 01 00 00     -  mov r11,000001C2572375D0
+1C257236FE8: 41 FF D3                          -  call r11
+1C257236FEB: 4C 8B F8                          -  mov r15,rax
+1C257236FEE: 48 8B 45 A8                       -  mov rax,[rbp-58]
+1C257236FF2: 48 8B C8                          -  mov rcx,rax
+1C257236FF5: 83 39 00                          -  cmp dword ptr [rcx],00
+// ---------- INJECTING HERE ----------
+1C257236FF8: F3 0F 10 40 24                    -  movss xmm0,[rax+24]
+// ---------- DONE INJECTING  ----------
+1C257236FFD: F3 0F 5A C0                       -  cvtss2sd xmm0,xmm0
+1C257237001: F2 0F 5A E8                       -  cvtsd2ss xmm5,xmm0
+1C257237005: F3 0F 11 AD 74 FF FF FF           -  movss [rbp-0000008C],xmm5
+1C25723700D: F3 0F 10 85 74 FF FF FF           -  movss xmm0,[rbp-0000008C]
+1C257237015: F3 0F 5A C0                       -  cvtss2sd xmm0,xmm0
+1C257237019: F2 0F 5A E8                       -  cvtsd2ss xmm5,xmm0
+1C25723701D: F3 0F 11 6D CC                    -  movss [rbp-34],xmm5
+1C257237022: F3 0F 10 45 CC                    -  movss xmm0,[rbp-34]
+1C257237027: F3 0F 5A C0                       -  cvtss2sd xmm0,xmm0
+1C25723702B: 49 8B CE                          -  mov rcx,r14
+}
+
+//aGFwcHlUdWdzCg==
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="20000000">
+      <Description>Change of jne BBI.Unity.Game:PlayableAreaUIController:SetState+290</Description>
+      <AddressString>22B4835D7C2</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>83</Byte>
+        <Byte>F8</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>85</Byte>
+        <Byte>58</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>47</Byte>
+        <Byte>20</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [rdi+00000128],esi</Description>
+      <AddressString>22B4835DB1B</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>41</Byte>
+        <Byte>FF</Byte>
+        <Byte>D3</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>B7</Byte>
+        <Byte>28</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>75</Byte>
+        <Byte>E0</Byte>
+        <Byte>48</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of je GrapplingHook:IsObjectStatic+65</Description>
+      <AddressString>22B5469B015</AddressString>
+      <Before>
+        <Byte>41</Byte>
+        <Byte>FF</Byte>
+        <Byte>D3</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>84</Byte>
+        <Byte>3A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>CE</Byte>
+        <Byte>83</Byte>
+        <Byte>3E</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jne GrapplingHook:OnGrapplePressed+108</Description>
+      <AddressString>20E56296158</AddressString>
+      <Before>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>85</Byte>
+        <Byte>DA</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>8E</Byte>
+        <Byte>00</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jng TetherController:TryDespawnTether+184</Description>
+      <AddressString>2C839BEF8F2</AddressString>
+      <Before>
+        <Byte>63</Byte>
+        <Byte>40</Byte>
+        <Byte>18</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>8E</Byte>
+        <Byte>4C</Byte>
+        <Byte>01</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>B8</Byte>
+        <Byte>60</Byte>
+        <Byte>32</Byte>
+        <Byte>6F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call r11</Description>
+      <AddressString>2C839BEF9D8</AddressString>
+      <Before>
+        <Byte>D4</Byte>
+        <Byte>C8</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>FF</Byte>
+        <Byte>D3</Byte>
+      </Actual>
+      <After>
+        <Byte>FF</Byte>
+        <Byte>CF</Byte>
+        <Byte>85</Byte>
+        <Byte>FF</Byte>
+        <Byte>0F</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of je 2C839A5E643</Description>
+      <AddressString>2C839A5E621</AddressString>
+      <Before>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>20</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>86</Byte>
+        <Byte>B0</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of movsxd  rdx,dword ptr [rcx+0C]</Description>
+      <AddressString>25BC7707F45</AddressString>
+      <Before>
+        <Byte>51</Byte>
+        <Byte>08</Byte>
+        <Byte>89</Byte>
+        <Byte>50</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>51</Byte>
+        <Byte>0C</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>50</Byte>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>51</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [rax+48],edx</Description>
+      <AddressString>25BC7707F49</AddressString>
+      <Before>
+        <Byte>08</Byte>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>51</Byte>
+        <Byte>0C</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>50</Byte>
+        <Byte>48</Byte>
+      </Actual>
+      <After>
+        <Byte>63</Byte>
+        <Byte>51</Byte>
+        <Byte>08</Byte>
+        <Byte>10</Byte>
+        <Byte>89</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov [rax+08],edx</Description>
+      <AddressString>25BC7707F42</AddressString>
+      <Before>
+        <Byte>04</Byte>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>51</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>50</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>63</Byte>
+        <Byte>51</Byte>
+        <Byte>0C</Byte>
+        <Byte>89</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call r11</Description>
+      <AddressString>20E7652F498</AddressString>
+      <Before>
+        <Byte>76</Byte>
+        <Byte>0E</Byte>
+        <Byte>02</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>41</Byte>
+        <Byte>FF</Byte>
+        <Byte>D3</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>86</Byte>
+        <Byte>B0</Byte>
+        <Byte>01</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>ProfileValuesMem</Name>
+      <Address>1D830B00000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+  <Comments>LynxPlayerController
+entity manager == LPC + 28 + 228 QWORD PTR
+Unity.Entities:EntityDataAccess:GetComponentData+9b 
+Unity.Entities:EntityQueryImpl:GetSingleton+2c8 
+Unity.Entities:EntityQueryImpl:SetSingleton+202
+Unit.game.healthcomponent
+interaction controller
+grab controller
+player motion auto brake delays!
+</Comments>
+</CheatTable>

@@ -1,0 +1,1117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>525</ID>
+      <Description>"Craft For Free"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+alloc(craftBkp,100)
+registersymbol(craftBkp)
+
+aobscanmodule(craftForFree,$process,C7 ?? ?? 00 00 00 00 4C ?? ?? ?? 49 ?? ?? 48 8D ?? ?? ?? E8 ?? ?? ?? ?? F3 41 0F 10 ?? 08 F3 0F 59)
+craftBkp+00:
+  readmem(craftForFree+18,6)
+craftForFree+18:
+  db 0F 57 C0 0F 57 C9
+registersymbol(craftForFree)
+
+aobscanmodule(craftWithoutResource,$process,41 80 ?? ?? ?? ?? ?? 00 0F 85 ?? ?? ?? ?? F3 41 0F 10 ?? 08 0F 28 ?? F3 0F ?? ?? F3 0F)
+craftBkp+30:
+  readmem(craftWithoutResource+1B,4)
+craftWithoutResource+1B:
+  db 0F 57 C9 90
+registersymbol(craftWithoutResource)
+
+[DISABLE]
+craftForFree+18:
+  readmem(craftBkp+00,6)
+unregistersymbol(craftForFree)
+
+craftWithoutResource+1B:
+  readmem(craftBkp+30,4)
+unregistersymbol(craftWithoutResource)
+
+unregistersymbol(craftBkp)
+dealloc(craftBkp)
+
+{
+Astro-Win64-Shipping.exe+813622 - C7 45 58 00000000     - mov [rbp+58],00000000
+Astro-Win64-Shipping.exe+813629 - 4C 8D 45 58           - lea r8,[rbp+58]
+Astro-Win64-Shipping.exe+81362D - 49 8B 17              - mov rdx,[r15]
+Astro-Win64-Shipping.exe+813630 - 48 8D 4C 24 30        - lea rcx,[rsp+30]
+Astro-Win64-Shipping.exe+813635 - E8 E6CB1200           - call Astro-Win64-Shipping.exe+940220
+Astro-Win64-Shipping.exe+81363A - F3 41 0F10 4F 08      - movss xmm1,[r15+08]
+Astro-Win64-Shipping.exe+813640 - F3 0F59 CE            - mulss xmm1,xmm6
+Astro-Win64-Shipping.exe+813644 - F3 0F59 CF            - mulss xmm1,xmm7
+Astro-Win64-Shipping.exe+813648 - F3 41 0F5C C8         - subss xmm1,xmm8
+Astro-Win64-Shipping.exe+81364D - F3 0F2D F9            - cvtss2si edi,xmm1
+Astro-Win64-Shipping.exe+813651 - D1 FF                 - sar edi,1
+Astro-Win64-Shipping.exe+813653 - 49 8D 8D B0030000     - lea rcx,[r13+000003B0]
+}
+
+{
+Astro-Win64-Shipping.exe+813699 - E8 B292C200           - call Astro-Win64-Shipping.exe+143C950
+Astro-Win64-Shipping.exe+81369E - 48 8B 0E              - mov rcx,[rsi]
+Astro-Win64-Shipping.exe+8136A1 - 48 8D 14 99           - lea rdx,[rcx+rbx*4]
+Astro-Win64-Shipping.exe+8136A5 - 48 85 D2              - test rdx,rdx
+Astro-Win64-Shipping.exe+8136A8 - 74 06                 - je Astro-Win64-Shipping.exe+8136B0
+Astro-Win64-Shipping.exe+8136AA - C7 02 00000000        - mov [rdx],00000000
+Astro-Win64-Shipping.exe+8136B0 - 41 80 BD 28020000 00  - cmp byte ptr [r13+00000228],00
+Astro-Win64-Shipping.exe+8136B8 - 0F85 09030000         - jne Astro-Win64-Shipping.exe+8139C7
+Astro-Win64-Shipping.exe+8136BE - F3 41 0F10 4F 08      - movss xmm1,[r15+08]
+Astro-Win64-Shipping.exe+8136C4 - F3 0F59 CE            - mulss xmm1,xmm6
+Astro-Win64-Shipping.exe+8136C8 - F3 0F59 CF            - mulss xmm1,xmm7
+Astro-Win64-Shipping.exe+8136CC - F3 41 0F5C C8         - subss xmm1,xmm8
+Astro-Win64-Shipping.exe+8136D1 - F3 0F2D F1            - cvtss2si esi,xmm1
+Astro-Win64-Shipping.exe+8136D5 - D1 FE                 - sar esi,1
+Astro-Win64-Shipping.exe+8136D7 - 2B 75 58              - sub esi,[rbp+58]
+}
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Astro-Win64-Shipping.exe"+8100F8
+
+"Astro-Win64-Shipping.exe"+8100C8: 49 03 C7                    -  add rax,r15
+"Astro-Win64-Shipping.exe"+8100CB: 48 89 45 D7                 -  mov [rbp-29],rax
+"Astro-Win64-Shipping.exe"+8100CF: 4C 3B F8                    -  cmp r15,rax
+"Astro-Win64-Shipping.exe"+8100D2: 0F 84 A8 03 00 00           -  je Astro-Win64-Shipping.exe+810480
+"Astro-Win64-Shipping.exe"+8100D8: 0F 1F 84 00 00 00 00 00     -  nop dword ptr [rax+rax+00000000]
+"Astro-Win64-Shipping.exe"+8100E0: C7 45 6F 00 00 00 00        -  mov [rbp+6F],00000000
+"Astro-Win64-Shipping.exe"+8100E7: 4C 8D 45 6F                 -  lea r8,[rbp+6F]
+"Astro-Win64-Shipping.exe"+8100EB: 49 8B 17                    -  mov rdx,[r15]
+"Astro-Win64-Shipping.exe"+8100EE: 48 8D 4C 24 30              -  lea rcx,[rsp+30]
+"Astro-Win64-Shipping.exe"+8100F3: E8 58 74 10 00              -  call Astro-Win64-Shipping.exe+917550
+// ---------- INJECTING HERE ----------
+"Astro-Win64-Shipping.exe"+8100F8: F3 41 0F 10 47 08           -  movss xmm0,[r15+08]
+// ---------- DONE INJECTING  ----------
+"Astro-Win64-Shipping.exe"+8100FE: E8 FD 12 FA FF              -  call Astro-Win64-Shipping.exe+7B1400
+"Astro-Win64-Shipping.exe"+810103: 8B F8                       -  mov edi,eax
+"Astro-Win64-Shipping.exe"+810105: 49 8D 8D B0 03 00 00        -  lea rcx,[r13+000003B0]
+"Astro-Win64-Shipping.exe"+81010C: 48 63 59 08                 -  movsxd  rbx,dword ptr [rcx+08]
+"Astro-Win64-Shipping.exe"+810110: 8D 43 01                    -  lea eax,[rbx+01]
+"Astro-Win64-Shipping.exe"+810113: 89 41 08                    -  mov [rcx+08],eax
+"Astro-Win64-Shipping.exe"+810116: 3B 41 0C                    -  cmp eax,[rcx+0C]
+"Astro-Win64-Shipping.exe"+810119: 7E 0E                       -  jle Astro-Win64-Shipping.exe+810129
+"Astro-Win64-Shipping.exe"+81011B: 8B D3                       -  mov edx,ebx
+"Astro-Win64-Shipping.exe"+81011D: E8 CE 60 04 01              -  call Astro-Win64-Shipping.exe+18561F0
+}
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Astro-Win64-Shipping.exe"+810170
+
+"Astro-Win64-Shipping.exe"+810146: 8B D3                    -  mov edx,ebx
+"Astro-Win64-Shipping.exe"+810148: 48 8B CE                 -  mov rcx,rsi
+"Astro-Win64-Shipping.exe"+81014B: E8 A0 60 04 01           -  call Astro-Win64-Shipping.exe+18561F0
+"Astro-Win64-Shipping.exe"+810150: 48 8B 0E                 -  mov rcx,[rsi]
+"Astro-Win64-Shipping.exe"+810153: 48 8D 14 99              -  lea rdx,[rcx+rbx*4]
+"Astro-Win64-Shipping.exe"+810157: 48 85 D2                 -  test rdx,rdx
+"Astro-Win64-Shipping.exe"+81015A: 74 06                    -  je Astro-Win64-Shipping.exe+810162
+"Astro-Win64-Shipping.exe"+81015C: C7 02 00 00 00 00        -  mov [rdx],00000000
+"Astro-Win64-Shipping.exe"+810162: 41 80 BD 28 02 00 00 00  -  cmp byte ptr [r13+00000228],00
+"Astro-Win64-Shipping.exe"+81016A: 0F 85 F5 02 00 00        -  jne Astro-Win64-Shipping.exe+810465
+// ---------- INJECTING HERE ----------
+"Astro-Win64-Shipping.exe"+810170: F3 41 0F 10 47 08        -  movss xmm0,[r15+08]
+// ---------- DONE INJECTING  ----------
+"Astro-Win64-Shipping.exe"+810176: E8 85 12 FA FF           -  call Astro-Win64-Shipping.exe+7B1400
+"Astro-Win64-Shipping.exe"+81017B: 8B F8                    -  mov edi,eax
+"Astro-Win64-Shipping.exe"+81017D: 2B 7D 6F                 -  sub edi,[rbp+6F]
+"Astro-Win64-Shipping.exe"+810180: 85 FF                    -  test edi,edi
+"Astro-Win64-Shipping.exe"+810182: 0F 8E 86 02 00 00        -  jng Astro-Win64-Shipping.exe+81040E
+"Astro-Win64-Shipping.exe"+810188: 33 F6                    -  xor esi,esi
+"Astro-Win64-Shipping.exe"+81018A: 8B DE                    -  mov ebx,esi
+"Astro-Win64-Shipping.exe"+81018C: 89 5D 77                 -  mov [rbp+77],ebx
+"Astro-Win64-Shipping.exe"+81018F: FF CF                    -  dec edi
+"Astro-Win64-Shipping.exe"+810191: 89 7D 7F                 -  mov [rbp+7F],edi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>619</ID>
+      <Description>"Unlimited Jetpack"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(jetpack,$process,E8 ?? ?? ?? ?? F3 0F 10 83 ?? ?? ?? ?? 0F 28 ?? 48)
+alloc(jetpackBkp,8)
+
+jetpackBkp:
+  readmem(jetpack+05,8)
+
+jetpack+05:
+  xorps xmm0,xmm0
+  nop 5
+registersymbol(jetpack)
+registersymbol(jetpackBkp)
+
+[DISABLE]
+jetpack+05:
+  readmem(jetpackBkp,8)
+unregistersymbol(jetpack)
+unregistersymbol(jetpackBkp)
+dealloc(jetpackBkp)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Astro-Win64-Shipping.exe"+E0A32A
+
+"Astro-Win64-Shipping.exe"+E0A2FB: 80 B8 20 01 00 00 03     -  cmp byte ptr [rax+00000120],03
+"Astro-Win64-Shipping.exe"+E0A302: 0F 85 A3 00 00 00        -  jne Astro-Win64-Shipping.exe+E0A3AB
+"Astro-Win64-Shipping.exe"+E0A308: 48 8B CB                 -  mov rcx,rbx
+"Astro-Win64-Shipping.exe"+E0A30B: E8 B0 90 FF FF           -  call Astro-Win64-Shipping.exe+E033C0
+"Astro-Win64-Shipping.exe"+E0A310: 84 C0                    -  test al,al
+"Astro-Win64-Shipping.exe"+E0A312: 0F 84 EB 00 00 00        -  je Astro-Win64-Shipping.exe+E0A403
+"Astro-Win64-Shipping.exe"+E0A318: 48 89 74 24 40           -  mov [rsp+40],rsi
+"Astro-Win64-Shipping.exe"+E0A31D: 48 8B CB                 -  mov rcx,rbx
+"Astro-Win64-Shipping.exe"+E0A320: 48 89 7C 24 48           -  mov [rsp+48],rdi
+"Astro-Win64-Shipping.exe"+E0A325: E8 46 77 00 00           -  call Astro-Win64-Shipping.exe+E11A70
+// ---------- INJECTING HERE ----------
+"Astro-Win64-Shipping.exe"+E0A32A: F3 0F 10 83 28 01 00 00  -  movss xmm0,[rbx+00000128]
+// ---------- DONE INJECTING  ----------
+"Astro-Win64-Shipping.exe"+E0A332: 0F 28 CE                 -  movaps xmm1,xmm6
+"Astro-Win64-Shipping.exe"+E0A335: 48 8B B8 B8 03 00 00     -  mov rdi,[rax+000003B8]
+"Astro-Win64-Shipping.exe"+E0A33C: E8 1F A7 02 00           -  call Astro-Win64-Shipping.exe+E34A60
+"Astro-Win64-Shipping.exe"+E0A341: 48 8B CF                 -  mov rcx,rdi
+"Astro-Win64-Shipping.exe"+E0A344: 8B F0                    -  mov esi,eax
+"Astro-Win64-Shipping.exe"+E0A346: E8 05 B1 25 01           -  call Astro-Win64-Shipping.exe+2065450
+"Astro-Win64-Shipping.exe"+E0A34B: 83 F8 03                 -  cmp eax,03
+"Astro-Win64-Shipping.exe"+E0A34E: 75 1C                    -  jne Astro-Win64-Shipping.exe+E0A36C
+"Astro-Win64-Shipping.exe"+E0A350: 48 8B 7C 24 48           -  mov rdi,[rsp+48]
+"Astro-Win64-Shipping.exe"+E0A355: 33 C9                    -  xor ecx,ecx
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>630</ID>
+      <Description>"Unlimited Power"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(power,$process,72 ?? F3 0F 10 ?? ?? ?? ?? ?? F3 0F 5D C1 44)
+power+0C:
+  db 5F
+registersymbol(power)
+
+[DISABLE]
+power+0C:
+  db 5D
+unregistersymbol(power)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Astro-Win64-Shipping.exe"+F0F4E2
+
+"Astro-Win64-Shipping.exe"+F0F4B2: 48 8D 4D 14                 -  lea rcx,[rbp+14]
+"Astro-Win64-Shipping.exe"+F0F4B6: 48 8B D8                    -  mov rbx,rax
+"Astro-Win64-Shipping.exe"+F0F4B9: E8 32 5F 46 00              -  call Astro-Win64-Shipping.exe+13753F0
+"Astro-Win64-Shipping.exe"+F0F4BE: 45 0F 57 C0                 -  xorps xmm8,xmm8
+"Astro-Win64-Shipping.exe"+F0F4C2: F3 0F 10 88 60 02 00 00     -  movss xmm1,[rax+00000260]
+"Astro-Win64-Shipping.exe"+F0F4CA: F3 0F 58 4D 4C              -  addss xmm1,[rbp+4C]
+"Astro-Win64-Shipping.exe"+F0F4CF: F3 0F 5C 4D 48              -  subss xmm1,[rbp+48]
+"Astro-Win64-Shipping.exe"+F0F4D4: 41 0F 2F C8                 -  comiss xmm1,xmm8
+"Astro-Win64-Shipping.exe"+F0F4D8: 72 10                       -  jb Astro-Win64-Shipping.exe+F0F4EA
+"Astro-Win64-Shipping.exe"+F0F4DA: F3 0F 10 83 0C 01 00 00     -  movss xmm0,[rbx+0000010C]
+// ---------- INJECTING HERE ----------
+"Astro-Win64-Shipping.exe"+F0F4E2: F3 0F 5D C1                 -  minss xmm0,xmm1
+"Astro-Win64-Shipping.exe"+F0F4E6: 44 0F 28 C0                 -  movaps xmm8,xmm0
+// ---------- DONE INJECTING  ----------
+"Astro-Win64-Shipping.exe"+F0F4EA: 48 8D 4D 14                 -  lea rcx,[rbp+14]
+"Astro-Win64-Shipping.exe"+F0F4EE: E8 FD 5E 46 00              -  call Astro-Win64-Shipping.exe+13753F0
+"Astro-Win64-Shipping.exe"+F0F4F3: 48 8D 4D 14                 -  lea rcx,[rbp+14]
+"Astro-Win64-Shipping.exe"+F0F4F7: F3 44 0F 11 80 60 02 00 00  -  movss [rax+00000260],xmm8
+"Astro-Win64-Shipping.exe"+F0F500: E8 EB 5E 46 00              -  call Astro-Win64-Shipping.exe+13753F0
+"Astro-Win64-Shipping.exe"+F0F505: 8B 88 60 02 00 00           -  mov ecx,[rax+00000260]
+"Astro-Win64-Shipping.exe"+F0F50B: 89 4D 4C                    -  mov [rbp+4C],ecx
+"Astro-Win64-Shipping.exe"+F0F50E: 48 8D 4D 14                 -  lea rcx,[rbp+14]
+"Astro-Win64-Shipping.exe"+F0F512: E8 D9 5E 46 00              -  call Astro-Win64-Shipping.exe+13753F0
+"Astro-Win64-Shipping.exe"+F0F517: 44 0F 28 44 24 20           -  movaps xmm8,[rsp+20]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>589</ID>
+      <Description>"Research Pointer"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>//CanvasPanelSlot Transient.AstroEngine_2147482621.AstroGameInstance_2147480855.PrinterControlPanelPrimary_C_2147443814.WidgetTree_1.RecipeIngredient_2.WidgetTree_1.RecipeRequirementTop.WidgetTree_1.CanvasPanel_1.CanvasPanelSlot_8
+[ENABLE]
+aobscanmodule(research,$process,0F 84 ?? ?? ?? ?? 48 8B ?? ?? 48 89 ?? ?? 48 89 ?? ?? 48 63 ?? ?? 4C)
+alloc(newmem,$1000,research)
+
+label(researchBkp)
+label(researchPtr)
+label(return)
+
+newmem:
+researchBkp:
+  readmem(research+06,8)
+  mov rax,researchPtr
+  mov [rax],rdx
+  jmp return
+
+researchPtr:
+  dq 0
+
+research+06:
+  jmp newmem
+  nop 3
+return:
+registersymbol(research)
+registersymbol(researchBkp)
+registersymbol(researchPtr)
+
+[DISABLE]
+research+06:
+  readmem(researchBkp,8)
+unregistersymbol(research)
+unregistersymbol(researchBkp)
+unregistersymbol(researchPtr)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Astro-Win64-Shipping.exe"+F46E4B
+
+"Astro-Win64-Shipping.exe"+F46E30: 8B 40 08                 -  mov eax,[rax+08]
+"Astro-Win64-Shipping.exe"+F46E33: C1 E8 1D                 -  shr eax,1D
+"Astro-Win64-Shipping.exe"+F46E36: A8 01                    -  test al,01
+"Astro-Win64-Shipping.exe"+F46E38: 75 07                    -  jne Astro-Win64-Shipping.exe+F46E41
+"Astro-Win64-Shipping.exe"+F46E3A: B0 01                    -  mov al,01
+"Astro-Win64-Shipping.exe"+F46E3C: EB 05                    -  jmp Astro-Win64-Shipping.exe+F46E43
+"Astro-Win64-Shipping.exe"+F46E3E: 49 8B DC                 -  mov rbx,r12
+"Astro-Win64-Shipping.exe"+F46E41: 32 C0                    -  xor al,al
+"Astro-Win64-Shipping.exe"+F46E43: 84 C0                    -  test al,al
+"Astro-Win64-Shipping.exe"+F46E45: 0F 84 9E 00 00 00        -  je Astro-Win64-Shipping.exe+F46EE9
+// ---------- INJECTING HERE ----------
+"Astro-Win64-Shipping.exe"+F46E4B: 48 8B 53 60              -  mov rdx,[rbx+60]
+"Astro-Win64-Shipping.exe"+F46E4F: 48 89 55 88              -  mov [rbp-78],rdx
+// ---------- DONE INJECTING  ----------
+"Astro-Win64-Shipping.exe"+F46E53: 48 89 55 90              -  mov [rbp-70],rdx
+"Astro-Win64-Shipping.exe"+F46E57: 48 63 43 68              -  movsxd  rax,dword ptr [rbx+68]
+"Astro-Win64-Shipping.exe"+F46E5B: 4C 8D 04 80              -  lea r8,[rax+rax*4]
+"Astro-Win64-Shipping.exe"+F46E5F: 49 C1 E0 06              -  shl r8,06
+"Astro-Win64-Shipping.exe"+F46E63: 4C 03 C2                 -  add r8,rdx
+"Astro-Win64-Shipping.exe"+F46E66: 4C 89 45 98              -  mov [rbp-68],r8
+"Astro-Win64-Shipping.exe"+F46E6A: 81 7A 0C 00 00 00 80     -  cmp [rdx+0C],80000000
+"Astro-Win64-Shipping.exe"+F46E71: 75 26                    -  jne Astro-Win64-Shipping.exe+F46E99
+"Astro-Win64-Shipping.exe"+F46E73: 49 3B D0                 -  cmp rdx,r8
+"Astro-Win64-Shipping.exe"+F46E76: 74 21                    -  je Astro-Win64-Shipping.exe+F46E99
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>590</ID>
+          <Description>"Bytes"</Description>
+          <LastState Value="841355.6875" RealAddress="27E81FB00B0"/>
+          <VariableType>Double</VariableType>
+          <Address>researchPtr</Address>
+          <Offsets>
+            <Offset>B0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>555</ID>
+      <Description>"Game Pointers"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(player,$process,45 0F ?? ?? 48 8B ?? ?? ?? ?? ?? 48 8B CE E8)
+alloc(newmem,$1000,player)
+
+label(playerBkp)
+label(playerPtr)
+label(return)
+
+newmem:
+  mov rcx,playerPtr
+  mov [rcx],rbx
+playerBkp:
+  readmem(player+04,7)
+  jmp return
+
+playerPtr:
+  dq 0
+
+player+04:
+  jmp newmem
+  nop 2
+return:
+registersymbol(player)
+registersymbol(playerPtr)
+
+[DISABLE]
+player+04:
+  readmem(playerBkp,7)
+unregistersymbol(player)
+unregistersymbol(playerPtr)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Astro-Win64-Shipping.exe"+E7AF21
+
+"Astro-Win64-Shipping.exe"+E7AEFE: 48 8D 45 20           -  lea rax,[rbp+20]
+"Astro-Win64-Shipping.exe"+E7AF02: 48 85 D2              -  test rdx,rdx
+"Astro-Win64-Shipping.exe"+E7AF05: 48 0F 45 C6           -  cmovne rax,rsi
+"Astro-Win64-Shipping.exe"+E7AF09: 48 0B C2              -  or rax,rdx
+"Astro-Win64-Shipping.exe"+E7AF0C: 48 8B 34 C8           -  mov rsi,[rax+rcx*8]
+"Astro-Win64-Shipping.exe"+E7AF10: 45 8B F0              -  mov r14d,r8d
+"Astro-Win64-Shipping.exe"+E7AF13: 45 2B F4              -  sub r14d,r12d
+"Astro-Win64-Shipping.exe"+E7AF16: 45 85 F6              -  test r14d,r14d
+"Astro-Win64-Shipping.exe"+E7AF19: 41 0F 9F C4           -  setg r12l
+"Astro-Win64-Shipping.exe"+E7AF1D: 45 0F B6 C4           -  movzx r8d,r12l
+// ---------- INJECTING HERE ----------
+"Astro-Win64-Shipping.exe"+E7AF21: 48 8B 93 70 07 00 00  -  mov rdx,[rbx+00000770]
+// ---------- DONE INJECTING  ----------
+"Astro-Win64-Shipping.exe"+E7AF28: 48 8B CE              -  mov rcx,rsi
+"Astro-Win64-Shipping.exe"+E7AF2B: E8 50 46 F8 FF        -  call Astro-Win64-Shipping.exe+DFF580
+"Astro-Win64-Shipping.exe"+E7AF30: 48 8B CE              -  mov rcx,rsi
+"Astro-Win64-Shipping.exe"+E7AF33: 84 C0                 -  test al,al
+"Astro-Win64-Shipping.exe"+E7AF35: 74 1F                 -  je Astro-Win64-Shipping.exe+E7AF56
+"Astro-Win64-Shipping.exe"+E7AF37: 48 8B 93 70 07 00 00  -  mov rdx,[rbx+00000770]
+"Astro-Win64-Shipping.exe"+E7AF3E: 45 8B C6              -  mov r8d,r14d
+"Astro-Win64-Shipping.exe"+E7AF41: 41 B1 01              -  mov r9l,01
+"Astro-Win64-Shipping.exe"+E7AF44: E8 07 49 F8 FF        -  call Astro-Win64-Shipping.exe+DFF850
+"Astro-Win64-Shipping.exe"+E7AF49: 44 8B 65 88           -  mov r12d,[rbp-78]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>591</ID>
+          <Description>"In-Game Cheats"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(cheats,$process,74 ?? A8 ?? 74 ?? F6 83 ?? ?? ?? ?? ?? 74)
+label(cheatsOffset)
+(DWORD)[cheats+08]:
+cheatsOffset:
+registersymbol(cheatsOffset)
+
+[DISABLE]
+unregistersymbol(cheatsOffset)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Astro-Win64-Shipping.exe"+E7B73F
+
+"Astro-Win64-Shipping.exe"+E7B723: 48 85 C9                    -  test rcx,rcx
+"Astro-Win64-Shipping.exe"+E7B726: 74 06                       -  je Astro-Win64-Shipping.exe+E7B72E
+"Astro-Win64-Shipping.exe"+E7B728: E8 93 43 29 00              -  call Astro-Win64-Shipping.exe+110FAC0
+"Astro-Win64-Shipping.exe"+E7B72D: 90                          -  nop 
+"Astro-Win64-Shipping.exe"+E7B72E: 80 8B 1A 07 00 00 40        -  or byte ptr [rbx+0000071A],40
+"Astro-Win64-Shipping.exe"+E7B735: EB 6B                       -  jmp Astro-Win64-Shipping.exe+E7B7A2
+"Astro-Win64-Shipping.exe"+E7B737: A8 20                       -  test al,20
+"Astro-Win64-Shipping.exe"+E7B739: 74 04                       -  je Astro-Win64-Shipping.exe+E7B73F
+"Astro-Win64-Shipping.exe"+E7B73B: A8 10                       -  test al,10
+"Astro-Win64-Shipping.exe"+E7B73D: 74 63                       -  je Astro-Win64-Shipping.exe+E7B7A2
+// ---------- INJECTING HERE ----------
+"Astro-Win64-Shipping.exe"+E7B73F: F6 83 1A 07 00 00 40        -  test byte ptr [rbx+0000071A],40
+// ---------- DONE INJECTING  ----------
+"Astro-Win64-Shipping.exe"+E7B746: 74 5A                       -  je Astro-Win64-Shipping.exe+E7B7A2
+"Astro-Win64-Shipping.exe"+E7B748: 48 89 74 24 50              -  mov [rsp+50],rsi
+"Astro-Win64-Shipping.exe"+E7B74D: 48 C7 44 24 58 1B 00 00 00  -  mov qword ptr [rsp+58],0000001B
+"Astro-Win64-Shipping.exe"+E7B756: 33 D2                       -  xor edx,edx
+"Astro-Win64-Shipping.exe"+E7B758: 48 8D 4C 24 50              -  lea rcx,[rsp+50]
+"Astro-Win64-Shipping.exe"+E7B75D: E8 BE A9 93 FF              -  call Astro-Win64-Shipping.exe+7B6120
+"Astro-Win64-Shipping.exe"+E7B762: 41 B8 36 00 00 00           -  mov r8d,00000036
+"Astro-Win64-Shipping.exe"+E7B768: 48 8D 15 21 F2 45 02        -  lea rdx,[Astro-Win64-Shipping.exe+32DA990]
+"Astro-Win64-Shipping.exe"+E7B76F: 48 8B 4C 24 50              -  mov rcx,[rsp+50]
+"Astro-Win64-Shipping.exe"+E7B774: E8 E7 04 26 00              -  call Astro-Win64-Shipping.exe+10DBC60
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>592</ID>
+              <Description>"Unlimited Health"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Off
+1:On
+</DropDownList>
+              <VariableType>Binary</VariableType>
+              <BitStart>2</BitStart>
+              <BitLength>1</BitLength>
+              <ShowAsBinary>0</ShowAsBinary>
+              <Address>playerPtr</Address>
+              <Offsets>
+                <Offset>cheatsOffset</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>593</ID>
+              <Description>"Unlimited Oxygen"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Off
+1:On
+</DropDownList>
+              <VariableType>Binary</VariableType>
+              <BitStart>4</BitStart>
+              <BitLength>1</BitLength>
+              <ShowAsBinary>0</ShowAsBinary>
+              <Address>playerPtr</Address>
+              <Offsets>
+                <Offset>cheatsOffset</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>621</ID>
+          <Description>"Movement Pointer"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(movement,$process,4C 8B ?? 4C 8B 80 ?? ?? ?? ?? 4D 85 C0)
+label(movementOffset)
+(DWORD)[movement+06]:
+movementOffset:
+registersymbol(movementOffset)
+
+[DISABLE]
+unregistersymbol(movementOffset)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Astro-Win64-Shipping.exe"+E4C9BA
+
+"Astro-Win64-Shipping.exe"+E4C9A8: CC                                -  int 3 
+"Astro-Win64-Shipping.exe"+E4C9A9: CC                                -  int 3 
+"Astro-Win64-Shipping.exe"+E4C9AA: CC                                -  int 3 
+"Astro-Win64-Shipping.exe"+E4C9AB: CC                                -  int 3 
+"Astro-Win64-Shipping.exe"+E4C9AC: CC                                -  int 3 
+"Astro-Win64-Shipping.exe"+E4C9AD: CC                                -  int 3 
+"Astro-Win64-Shipping.exe"+E4C9AE: CC                                -  int 3 
+"Astro-Win64-Shipping.exe"+E4C9AF: CC                                -  int 3 
+"Astro-Win64-Shipping.exe"+E4C9B0: 48 8B 81 A0 05 00 00              -  mov rax,[rcx+000005A0]
+"Astro-Win64-Shipping.exe"+E4C9B7: 4C 8B C9                          -  mov r9,rcx
+// ---------- INJECTING HERE ----------
+"Astro-Win64-Shipping.exe"+E4C9BA: 4C 8B 80 78 04 00 00              -  mov r8,[rax+00000478]
+// ---------- DONE INJECTING  ----------
+"Astro-Win64-Shipping.exe"+E4C9C1: 4D 85 C0                          -  test r8,r8
+"Astro-Win64-Shipping.exe"+E4C9C4: 74 5F                             -  je Astro-Win64-Shipping.exe+E4CA25
+"Astro-Win64-Shipping.exe"+E4C9C6: 41 8B 40 0C                       -  mov eax,[r8+0C]
+"Astro-Win64-Shipping.exe"+E4C9CA: 3B 05 1C 82 B4 03                 -  cmp eax,[Astro-Win64-Shipping.exe+4994BEC]
+"Astro-Win64-Shipping.exe"+E4C9D0: 7D 2A                             -  jnl Astro-Win64-Shipping.exe+E4C9FC
+"Astro-Win64-Shipping.exe"+E4C9D2: 99                                -  cdq 
+"Astro-Win64-Shipping.exe"+E4C9D3: 0F B7 D2                          -  movzx edx,dx
+"Astro-Win64-Shipping.exe"+E4C9D6: 03 C2                             -  add eax,edx
+"Astro-Win64-Shipping.exe"+E4C9D8: 8B C8                             -  mov ecx,eax
+"Astro-Win64-Shipping.exe"+E4C9DA: 0F B7 C0                          -  movzx eax,ax
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>623</ID>
+              <Description>"Speed"</Description>
+              <VariableType>Float</VariableType>
+              <Address>playerPtr</Address>
+              <Offsets>
+                <Offset>280</Offset>
+                <Offset>movementOffset</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>625</ID>
+              <Description>"Jump"</Description>
+              <VariableType>Float</VariableType>
+              <Address>playerPtr</Address>
+              <Offsets>
+                <Offset>2FC</Offset>
+                <Offset>movementOffset</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>632</ID>
+          <Description>"Player Pointer (not implemented)"</Description>
+          <LastState Value="" RealAddress="27EADED60A0"/>
+          <GroupHeader>1</GroupHeader>
+          <Address>playerPtr</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>594</ID>
+          <Description>"Held Item Pointer (not implemented)"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(heldItem,$process,48 8B 05 ?? ?? ?? ?? ?? 33 ?? ?? 8B ?? ?? ?? ?? ?? 48 8B)
+label(heldItemOffset)
+(DWORD)[heldItem+0D]:
+heldItemOffset:
+registersymbol(heldItemOffset)
+
+[DISABLE]
+unregistersymbol(heldItemOffset)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Astro-Win64-Shipping.exe"+E9B6CC
+
+"Astro-Win64-Shipping.exe"+E9B6A0: 40 55                    -  push rbp
+"Astro-Win64-Shipping.exe"+E9B6A2: 56                       -  push rsi
+"Astro-Win64-Shipping.exe"+E9B6A3: 41 57                    -  push r15
+"Astro-Win64-Shipping.exe"+E9B6A5: 48 8D AC 24 50 FF FF FF  -  lea rbp,[rsp-000000B0]
+"Astro-Win64-Shipping.exe"+E9B6AD: 48 81 EC B0 01 00 00     -  sub rsp,000001B0
+"Astro-Win64-Shipping.exe"+E9B6B4: 48 8B 05 ED 84 A7 03     -  mov rax,[Astro-Win64-Shipping.exe+4913BA8]
+"Astro-Win64-Shipping.exe"+E9B6BB: 48 33 C4                 -  xor rax,rsp
+"Astro-Win64-Shipping.exe"+E9B6BE: 48 89 45 00              -  mov [rbp+00],rax
+"Astro-Win64-Shipping.exe"+E9B6C2: 48 8B 05 5F 73 A9 03     -  mov rax,[Astro-Win64-Shipping.exe+4932A28]
+"Astro-Win64-Shipping.exe"+E9B6C9: 45 33 FF                 -  xor r15d,r15d
+// ---------- INJECTING HERE ----------
+"Astro-Win64-Shipping.exe"+E9B6CC: 4C 8B 89 00 04 00 00     -  mov r9,[rcx+00000400]
+// ---------- DONE INJECTING  ----------
+"Astro-Win64-Shipping.exe"+E9B6D3: 48 8B F1                 -  mov rsi,rcx
+"Astro-Win64-Shipping.exe"+E9B6D6: 44 8B 10                 -  mov r10d,[rax]
+"Astro-Win64-Shipping.exe"+E9B6D9: 4D 85 C9                 -  test r9,r9
+"Astro-Win64-Shipping.exe"+E9B6DC: 74 47                    -  je Astro-Win64-Shipping.exe+E9B725
+"Astro-Win64-Shipping.exe"+E9B6DE: 41 8B 41 0C              -  mov eax,[r9+0C]
+"Astro-Win64-Shipping.exe"+E9B6E2: 3B 05 04 95 AF 03        -  cmp eax,[Astro-Win64-Shipping.exe+4994BEC]
+"Astro-Win64-Shipping.exe"+E9B6E8: 7D 2A                    -  jnl Astro-Win64-Shipping.exe+E9B714
+"Astro-Win64-Shipping.exe"+E9B6EA: 99                       -  cdq 
+"Astro-Win64-Shipping.exe"+E9B6EB: 0F B7 D2                 -  movzx edx,dx
+"Astro-Win64-Shipping.exe"+E9B6EE: 03 C2                    -  add eax,edx
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>595</ID>
+              <Description>"Held Item"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>playerPtr</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>heldItemOffset</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>597</ID>
+          <Description>"Driving Vehicle Pointer (not implemented)"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(vehicle,$process,74 ?? 33 ?? ?? 8B ?? ?? ?? ?? ?? ?? 8B ?? ?? ?? ?? ?? ?? 8B ?? ?? ?? ?? ?? ?? 85)
+label(vehicleOffset)
+(DWORD)[vehicle+07]:
+vehicleOffset:
+registersymbol(vehicleOffset)
+
+[DISABLE]
+unregistersymbol(vehicleOffset)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Astro-Win64-Shipping.exe"+E93C26
+
+"Astro-Win64-Shipping.exe"+E93C06: 48 8B 56 10                 -  mov rdx,[rsi+10]
+"Astro-Win64-Shipping.exe"+E93C0A: 4C 8D 40 30                 -  lea r8,[rax+30]
+"Astro-Win64-Shipping.exe"+E93C0E: 49 63 40 08                 -  movsxd  rax,dword ptr [r8+08]
+"Astro-Win64-Shipping.exe"+E93C12: 3B 42 38                    -  cmp eax,[rdx+38]
+"Astro-Win64-Shipping.exe"+E93C15: 7F 0D                       -  jg Astro-Win64-Shipping.exe+E93C24
+"Astro-Win64-Shipping.exe"+E93C17: 48 8B C8                    -  mov rcx,rax
+"Astro-Win64-Shipping.exe"+E93C1A: 48 8B 42 30                 -  mov rax,[rdx+30]
+"Astro-Win64-Shipping.exe"+E93C1E: 4C 39 04 C8                 -  cmp [rax+rcx*8],r8
+"Astro-Win64-Shipping.exe"+E93C22: 74 02                       -  je Astro-Win64-Shipping.exe+E93C26
+"Astro-Win64-Shipping.exe"+E93C24: 33 F6                       -  xor esi,esi
+// ---------- INJECTING HERE ----------
+"Astro-Win64-Shipping.exe"+E93C26: 4C 8B B7 48 03 00 00        -  mov r14,[rdi+00000348]
+// ---------- DONE INJECTING  ----------
+"Astro-Win64-Shipping.exe"+E93C2D: 48 8B 87 60 01 00 00        -  mov rax,[rdi+00000160]
+"Astro-Win64-Shipping.exe"+E93C34: 48 8B 98 E8 00 00 00        -  mov rbx,[rax+000000E8]
+"Astro-Win64-Shipping.exe"+E93C3B: 48 85 DB                    -  test rbx,rbx
+"Astro-Win64-Shipping.exe"+E93C3E: 74 45                       -  je Astro-Win64-Shipping.exe+E93C85
+"Astro-Win64-Shipping.exe"+E93C40: 8B 43 0C                    -  mov eax,[rbx+0C]
+"Astro-Win64-Shipping.exe"+E93C43: 3B 05 A3 0F B0 03           -  cmp eax,[Astro-Win64-Shipping.exe+4994BEC]
+"Astro-Win64-Shipping.exe"+E93C49: 7D 2A                       -  jnl Astro-Win64-Shipping.exe+E93C75
+"Astro-Win64-Shipping.exe"+E93C4B: 99                          -  cdq 
+"Astro-Win64-Shipping.exe"+E93C4C: 0F B7 D2                    -  movzx edx,dx
+"Astro-Win64-Shipping.exe"+E93C4F: 03 C2                       -  add eax,edx
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>598</ID>
+              <Description>"Vehicle"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>playerPtr</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>vehicleOffset</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>631</ID>
+      <Description>"Ignore This"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>FFFFFF</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>556</ID>
+          <Description>"Player Pointer"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="27EADED60A0"/>
+          <GroupHeader>1</GroupHeader>
+          <Address>playerPtr</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>557</ID>
+              <Description>"IsPowered"</Description>
+              <LastState Value="1" RealAddress="27EADED67BA"/>
+              <VariableType>Binary</VariableType>
+              <BitStart>0</BitStart>
+              <BitLength>1</BitLength>
+              <ShowAsBinary>0</ShowAsBinary>
+              <Address>+71A</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>559</ID>
+              <Description>"IsLightsOn"</Description>
+              <LastState Value="1" RealAddress="27EADED67BA"/>
+              <VariableType>Binary</VariableType>
+              <BitStart>1</BitStart>
+              <BitLength>1</BitLength>
+              <ShowAsBinary>0</ShowAsBinary>
+              <Address>+71A</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>560</ID>
+              <Description>"Invincible"</Description>
+              <LastState Value="1" RealAddress="27EADED67BA"/>
+              <VariableType>Binary</VariableType>
+              <BitStart>2</BitStart>
+              <BitLength>1</BitLength>
+              <ShowAsBinary>0</ShowAsBinary>
+              <Address>+71A</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>561</ID>
+              <Description>"SimulationStarted"</Description>
+              <LastState Value="1" RealAddress="27EADED67BA"/>
+              <VariableType>Binary</VariableType>
+              <BitStart>3</BitStart>
+              <BitLength>1</BitLength>
+              <ShowAsBinary>0</ShowAsBinary>
+              <Address>+71A</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>562</ID>
+              <Description>"FreeOxygen"</Description>
+              <LastState Value="1" RealAddress="27EADED67BA"/>
+              <VariableType>Binary</VariableType>
+              <BitStart>4</BitStart>
+              <BitLength>1</BitLength>
+              <ShowAsBinary>0</ShowAsBinary>
+              <Address>+71A</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>558</ID>
+              <Description>"OxygenUseMultiplier"</Description>
+              <LastState Value="1" RealAddress="27EADED67BC"/>
+              <VariableType>Float</VariableType>
+              <Address>+71C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>563</ID>
+              <Description>"Health"</Description>
+              <LastState Value="1" RealAddress="27EADED67CC"/>
+              <VariableType>Float</VariableType>
+              <Address>+72C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>582</ID>
+              <Description>"Max Health"</Description>
+              <LastState Value="1" RealAddress="27EADED67D4"/>
+              <VariableType>Float</VariableType>
+              <Address>+734</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>564</ID>
+              <Description>"HeldItem Pointer"</Description>
+              <LastState Value="" RealAddress="27EADED64A0"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+400</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>585</ID>
+              <Description>"HeldItem"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+400</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>579</ID>
+              <Description>"LastHeldItem"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+530</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>596</ID>
+              <Description>"DrivingActor Pointer"</Description>
+              <LastState Value="" RealAddress="27EADED63E8"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+348</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>566</ID>
+              <Description>"DrivingActor"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+348</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>577</ID>
+              <Description>"AttachOwner"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+350</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>565</ID>
+              <Description>"Movement"</Description>
+              <LastState Value="" RealAddress="27ECDD55730"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+478</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>575</ID>
+              <Description>"Movement"</Description>
+              <LastState Value="" RealAddress="27ECDD55730"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+8A0</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>620</ID>
+              <Description>"Movement Pointer"</Description>
+              <LastState Value="0000027ECDD55730" RealAddress="27EADED6518"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>+478</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>578</ID>
+              <Description>"PlayerState"</Description>
+              <LastState Value="" RealAddress="27E8B913620"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+2D8</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>584</ID>
+              <Description>"Controller"</Description>
+              <LastState Value="" RealAddress="27EAA8213C0"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+2F0</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>583</ID>
+              <Description>"Capsule"</Description>
+              <LastState Value="" RealAddress="27ECDD532B0"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+480</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>580</ID>
+              <Description>"Action"</Description>
+              <LastState Value="" RealAddress="27ECC0F0E80"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+538</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>581</ID>
+              <Description>"Customization"</Description>
+              <LastState Value="" RealAddress="27EADED66E0"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+640</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>576</ID>
+              <Description>"Slots"</Description>
+              <LastState Value="" RealAddress="27E89A2FEC0"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+860</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>567</ID>
+              <Description>"Clickable"</Description>
+              <LastState Value="" RealAddress="27ECC0FF880"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+868</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>568</ID>
+              <Description>"ActorEntityLink"</Description>
+              <LastState Value="" RealAddress="27E963F7EA0"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+850</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>569</ID>
+              <Description>"ActorStreamingPowerNode"</Description>
+              <LastState Value="" RealAddress="27E963F7FC0"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+848</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>570</ID>
+              <Description>"TethorSlot"</Description>
+              <LastState Value="" RealAddress="27E8F31EF80"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+870</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>571</ID>
+              <Description>"TethorAttach"</Description>
+              <LastState Value="" RealAddress="27E845D6C00"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+878</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>572</ID>
+              <Description>"Crackable"</Description>
+              <LastState Value="" RealAddress="27E84641900"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+880</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>573</ID>
+              <Description>"Backpack"</Description>
+              <LastState Value="" RealAddress="27EB0A30B00"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+888</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>574</ID>
+              <Description>"Spotlight"</Description>
+              <LastState Value="" RealAddress="27ECD97E860"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+890</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>608</ID>
+          <Description>"ConsumableJumpjet_BP_C"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="27ECA9B6930"/>
+          <GroupHeader>1</GroupHeader>
+          <Address>27ECA9B6930</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>609</ID>
+              <Description>"FuelConsumerComponent"</Description>
+              <LastState Value="" RealAddress="27ECD7FEF80"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+590</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>617</ID>
+                  <Description>"FuelPerPortion"</Description>
+                  <LastState Value="0.01999999955" RealAddress="27ECD7FF05C"/>
+                  <VariableType>Float</VariableType>
+                  <Address>+DC</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>618</ID>
+                  <Description>"ConsumptionRate"</Description>
+                  <LastState Value="0.01499999966" RealAddress="27ECD7FF0A8"/>
+                  <VariableType>Float</VariableType>
+                  <Address>+128</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>610</ID>
+              <Description>"JetpackMovementOverride"</Description>
+              <LastState Value="" RealAddress="27E93423DC0"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+598</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>611</ID>
+              <Description>"AstroCharacter"</Description>
+              <LastState Value="" RealAddress="27EADED60A0"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+5A0</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>612</ID>
+              <Description>"Backpack"</Description>
+              <LastState Value="" RealAddress="27ECE355A40"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+5A8</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>615</ID>
+              <Description>"ItemComponent"</Description>
+              <LastState Value="" RealAddress="27E9342D980"/>
+              <GroupHeader>1</GroupHeader>
+              <Address>+3B8</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>616</ID>
+                  <Description>"Count"</Description>
+                  <LastState Value="91001" RealAddress="27E9342DB08"/>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+188</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>613</ID>
+              <Description>"FuelPortionAmount"</Description>
+              <LastState Value="0.01999998093" RealAddress="27ECA9B6EEC"/>
+              <VariableType>Float</VariableType>
+              <Address>+5BC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>614</ID>
+              <Description>"RemainingFuelStateReplicated"</Description>
+              <LastState Value="0" RealAddress="27ECA9B6F2A"/>
+              <VariableType>Byte</VariableType>
+              <Address>+5FA</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>627</ID>
+          <Description>"PowerComponent"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="27EA0F0CE00"/>
+          <GroupHeader>1</GroupHeader>
+          <Address>0000027EA0F0CE00</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>628</ID>
+              <Description>"CurrentCharge"</Description>
+              <LastState Value="10" RealAddress="27EA0F0D060"/>
+              <VariableType>Float</VariableType>
+              <Address>+260</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>ignore_craft</Name>
+      <Address>7FF6C0A41D30</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>always_craft</Name>
+      <Address>7FF6C0A41702</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>printer</Name>
+      <Address>7FF6C0A3E8D3</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>printer2</Name>
+      <Address>7FF6C0A3FCA3</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>subtract_resource</Name>
+      <Address>7FF6C0A3118F</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>backpack</Name>
+      <Address>7FF6C0A30E8A</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>GObjects</Name>
+      <Address>7FF6864B00B0</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>GNames</Name>
+      <Address>7FF6864A7058</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>

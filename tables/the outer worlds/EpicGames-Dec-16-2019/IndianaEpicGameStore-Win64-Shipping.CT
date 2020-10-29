@@ -1,0 +1,2418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"The Outer Worlds (Epic Game Store)"</Description>
+      <Options moHideChildren="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"Enable"</Description>
+          <Options moHideChildren="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+{$lua}
+local al = getAddressList()
+
+local ItemList = {}
+
+local index = 0
+local ItemListEntryAddress = 0
+
+--- Get Category IDs
+ItemListEntryAddress = 0
+ItemList[index+1] = string.format("%0.16X:Get Category IDs",ItemListEntryAddress)
+index = index + 1
+--- Only Receive A Specific Item
+ItemListEntryAddress = 0xFFFFFFFFFFFFFFFF
+ItemList[index+1] = string.format("%0.16X:Only Receive A Specific Item",ItemListEntryAddress)
+index = index + 1
+--- Body Armor
+ItemListEntryAddress = getAddress("IndianaEpicGameStore-Win64-Shipping.exe")+0x27ED130
+ItemList[index+1] = string.format("%0.16X:Body Armor",ItemListEntryAddress)
+index = index + 1
+--- Helmets
+ItemListEntryAddress = getAddress("IndianaEpicGameStore-Win64-Shipping.exe")+0x27ED4D8
+ItemList[index+1] = string.format("%0.16X:Helmets",ItemListEntryAddress)
+index = index + 1
+--- Identity Quest Items
+ItemListEntryAddress = getAddress("IndianaEpicGameStore-Win64-Shipping.exe")+0x2A28260
+ItemList[index+1] = string.format("%0.16X:Identity Quest Items",ItemListEntryAddress)
+index = index + 1
+--- Consumables
+ItemListEntryAddress = getAddress("IndianaEpicGameStore-Win64-Shipping.exe")+0x29FC110
+ItemList[index+1] = string.format("%0.16X:Consumables",ItemListEntryAddress)
+index = index + 1
+--- General and Junk Items
+ItemListEntryAddress = getAddress("IndianaEpicGameStore-Win64-Shipping.exe")+0x29FBDE8
+ItemList[index+1] = string.format("%0.16X:General and Junk Items",ItemListEntryAddress)
+index = index + 1
+--- Armor Modification Items
+ItemListEntryAddress = getAddress("IndianaEpicGameStore-Win64-Shipping.exe")+0x27EA900
+ItemList[index+1] = string.format("%0.16X:Armor Modification Items",ItemListEntryAddress)
+index = index + 1
+--- Weapon Modification Items
+ItemListEntryAddress = getAddress("IndianaEpicGameStore-Win64-Shipping.exe")+0x28FA980
+ItemList[index+1] = string.format("%0.16X:Weapon Modification Items",ItemListEntryAddress)
+index = index + 1
+--- Other Quest Items
+ItemListEntryAddress = getAddress("IndianaEpicGameStore-Win64-Shipping.exe")+0x284F6B8
+ItemList[index+1] = string.format("%0.16X:Other Quest Items",ItemListEntryAddress)
+index = index + 1
+--- Ammo
+ItemListEntryAddress = getAddress("IndianaEpicGameStore-Win64-Shipping.exe")+0x28F6238
+ItemList[index+1] = string.format("%0.16X:Ammo",ItemListEntryAddress)
+index = index + 1
+--- Weapons
+ItemListEntryAddress = getAddress("IndianaEpicGameStore-Win64-Shipping.exe")+0x28F6B90
+ItemList[index+1] = string.format("%0.16X:Weapons",ItemListEntryAddress)
+index = index + 1
+
+local DropDownListITM = createStringlist()
+for i,j in ipairs(ItemList) do
+	DropDownListITM.add(string.format("%s",j))
+end
+
+local mr = al.getMemoryRecordByDescription("Make Console Command GivePlayerAllItems Only Give You Specific Category of Items")
+al[mr.Index+1].DropDownList.Text = DropDownListITM.Text
+al[mr.Index+1].DropDownReadOnly = false
+al[mr.Index+1].DropDownDescriptionOnly = true
+al[mr.Index+1].DisplayAsDropDownListItem = true
+
+{$asm}
+{
+//luaCall(lua_aobscan("GetCharacterEXPAOB","IndianaEpicGameStore-Win64-Shipping.exe","8B 98 78 07 00 00 E8 ?? ?? ?? ?? 66 0F 6E F3",2))
+//alloc(newmem,1024,GetCharacterEXPAOB)
+}
+
+///
+aobscanmodule(GetPlayerPtrAOB,"IndianaEpicGameStore-Win64-Shipping.exe",48 8B 53 10 4C 8D 80 90 00 00 00 49 63 40 08 3B 82 98 00 00 00 7F 14 48 8B C8 48 8B 82 90 00 00 00 4C 39 04 C8 75 04 B0 01 EB 02 32 C0 84 C0 74 09 F6 83 D2 00 00 00 01 75 16)
+registersymbol(GetPlayerPtrAOB)
+alloc(newmem,1024,GetPlayerPtrAOB)
+
+///
+aobscanmodule(GetBitPtrAOB,"IndianaEpicGameStore-Win64-Shipping.exe",0F 10 03 48 8B C5 48 03 C0)
+registersymbol(GetBitPtrAOB)
+alloc(newmem2,1024,GetBitPtrAOB)
+
+///
+aobscanmodule(GetDifficultyPtrAOB,"IndianaEpicGameStore-Win64-Shipping.exe",80 78 50 03 75 17 48 8B 8B B0 02 00 00)
+registersymbol(GetDifficultyPtrAOB)
+alloc(newmem3,1024,GetDifficultyPtrAOB)
+
+///
+label(return)
+label(originalcode)
+label(PlayerPtr)
+registersymbol(PlayerPtr)
+
+///
+label(return2)
+label(originalcode2)
+label(BitPtr)
+registersymbol(BitPtr)
+
+///
+label(return3)
+label(originalcode3)
+label(DifficultyPtr)
+registersymbol(DifficultyPtr)
+
+newmem:
+  cmp rdx,5
+  jne originalcode
+  mov [PlayerPtr],rbx
+  
+originalcode:
+  mov rdx,[rbx+10]
+  lea r8,[rax+00000090]
+  jmp return
+  
+PlayerPtr:
+dq 0
+
+newmem2:
+  mov [BitPtr],rbx
+  
+originalcode2:
+  movups xmm0,[rbx]
+  mov rax,rbp
+  jmp return2
+  
+BitPtr:
+dq 0
+
+newmem3:
+  mov [DifficultyPtr],rax
+  
+originalcode3:
+  cmp byte ptr [rax+50],03
+  jne GetDifficultyPtrAOB+1D
+  jmp return3
+
+DifficultyPtr:
+dq 0
+
+GetPlayerPtrAOB:
+  jmp newmem
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  return:
+
+GetBitPtrAOB:
+  jmp newmem2
+  nop
+  return2:
+
+GetDifficultyPtrAOB:
+  jmp newmem3
+  nop
+  return3:
+ 
+[DISABLE]
+
+GetPlayerPtrAOB:
+  db 48 8B 53 10 4C 8D 80 90 00 00 00
+  
+unregistersymbol(GetPlayerPtrAOB)
+unregistersymbol(PlayerPtr)
+
+///
+GetBitPtrAOB:
+  db 0F 10 03 48 8B C5
+
+unregistersymbol(GetBitPtrAOB)
+unregistersymbol(BitPtr)
+
+///
+GetDifficultyPtrAOB:
+  db 80 78 50 03 75 17
+
+unregistersymbol(GetDifficultyPtrAOB)
+unregistersymbol(DifficultyPtr)
+  
+dealloc(newmem)
+dealloc(newmem2)
+dealloc(newmem3)
+</AssemblerScript>
+        <CheatEntries>
+			<CheatEntry>
+			  <ID>1000</ID>
+			  <Description>"Scripts By Zanzer"</Description>
+			  <Options moHideChildren="1"/>
+			  <GroupHeader>1</GroupHeader>
+			  <CheatEntries>
+				<CheatEntry>
+				  <ID>1005</ID>
+				  <Description>"Trash to Duplicate Items"</Description>
+				  <LastState/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript Async="1">[ENABLE]
+{$lua}
+return "aobscanmodule(dupe,"..process..",7E 5A 4C 8B 3E)"
+{$asm}
+dupe:
+  nop 2
+registersymbol(dupe)
+
+[DISABLE]
+dupe:
+  db 7E 5A
+unregistersymbol(dupe)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "IndianaEpicGameStore-Win64-Shipping.exe"+6B0E1B
+
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0DF4: 0F 8F F6 00 00 00        -  jg IndianaEpicGameStore-Win64-Shipping.exe+6B0EF0
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0DFA: 48 8B 01                 -  mov rax,[rcx]
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0DFD: 44 2B CD                 -  sub r9d,ebp
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E00: 48 8B 16                 -  mov rdx,[rsi]
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E03: 44 8B C5                 -  mov r8d,ebp
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E06: FF 90 20 04 00 00        -  call qword ptr [rax+00000420]
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E0C: 0F 10 06                 -  movups xmm0,[rsi]
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E0F: 0F 29 44 24 50           -  movaps [rsp+50],xmm0
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E14: 89 6C 24 58              -  mov [rsp+58],ebp
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E18: 39 6E 08                 -  cmp [rsi+08],ebp
+// ---------- INJECTING HERE ----------
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E1B: 7E 5A                    -  jle IndianaEpicGameStore-Win64-Shipping.exe+6B0E77
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E1D: 4C 8B 3E                 -  mov r15,[rsi]
+// ---------- DONE INJECTING  ----------
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E20: 33 FF                    -  xor edi,edi
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E22: 48 89 7C 24 40           -  mov [rsp+40],rdi
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E27: 4D 85 FF                 -  test r15,r15
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E2A: 74 32                    -  je IndianaEpicGameStore-Win64-Shipping.exe+6B0E5E
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E2C: E8 BF 32 66 00           -  call IndianaEpicGameStore-Win64-Shipping.exe+D140F0
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E31: C6 44 24 38 01           -  mov byte ptr [rsp+38],01
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E36: 41 B9 FF FF FF 0F        -  mov r9d,0FFFFFFF
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E3C: C7 44 24 30 00 00 F0 FF  -  mov [rsp+30],FFF00000
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E44: 44 8B C7                 -  mov r8d,edi
+"IndianaEpicGameStore-Win64-Shipping.exe"+6B0E47: 89 7C 24 28              -  mov [rsp+28],edi
+}
+</AssemblerScript>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>1010</ID>
+				  <Description>"Unlimited Holographic Shroud"</Description>
+				  <LastState/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript Async="1">[ENABLE]
+{$lua}
+return "aobscanmodule(shroud,"..process..",F3 0F 5D CA 48 8B CE)"
+{$asm}
+shroud+2:
+  db 5F
+registersymbol(shroud)
+
+[DISABLE]
+shroud+2:
+  db 5D
+unregistersymbol(shroud)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "IndianaEpicGameStore-Win64-Shipping.exe"+5F642A
+
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F63F8: 48 8B AC 24 98 00 00 00  -  mov rbp,[rsp+00000098]
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6400: 48 8B 9C 24 90 00 00 00  -  mov rbx,[rsp+00000090]
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6408: F3 0F 11 86 CC 03 00 00  -  movss [rsi+000003CC],xmm0
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6410: F3 0F 59 C7              -  mulss xmm0,xmm7
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6414: F3 0F 5C D0              -  subss xmm2,xmm0
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6418: 0F 2F D6                 -  comiss xmm2,xmm6
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F641B: 73 05                    -  jae IndianaEpicGameStore-Win64-Shipping.exe+5F6422
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F641D: 0F 57 C9                 -  xorps xmm1,xmm1
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6420: EB 0C                    -  jmp IndianaEpicGameStore-Win64-Shipping.exe+5F642E
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6422: F3 0F 10 8E B0 03 00 00  -  movss xmm1,[rsi+000003B0]
+// ---------- INJECTING HERE ----------
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F642A: F3 0F 5D CA              -  minss xmm1,xmm2
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F642E: 48 8B CE                 -  mov rcx,rsi
+// ---------- DONE INJECTING  ----------
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6431: E8 9A 9F FF FF           -  call IndianaEpicGameStore-Win64-Shipping.exe+5F03D0
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6436: F3 0F 10 86 CC 03 00 00  -  movss xmm0,[rsi+000003CC]
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F643E: 44 0F 2E C6              -  ucomiss xmm8,xmm6
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6442: 44 0F 28 44 24 40        -  movaps xmm8,[rsp+40]
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6448: 75 0E                    -  jne IndianaEpicGameStore-Win64-Shipping.exe+5F6458
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F644A: 0F 2E C6                 -  ucomiss xmm0,xmm6
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F644D: 74 1C                    -  je IndianaEpicGameStore-Win64-Shipping.exe+5F646B
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F644F: 48 8D 8E 38 02 00 00     -  lea rcx,[rsi+00000238]
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6456: EB 0C                    -  jmp IndianaEpicGameStore-Win64-Shipping.exe+5F6464
+"IndianaEpicGameStore-Win64-Shipping.exe"+5F6458: 0F 2E C6                 -  ucomiss xmm0,xmm6
+}
+</AssemblerScript>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>1015</ID>
+				  <Description>"Unlimited TTD"</Description>
+				  <LastState/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript Async="1">[ENABLE]
+{$lua}
+return "aobscanmodule(ttd,"..process..",F3 0F 5D F0 0F 2F 0D)"
+{$asm}
+ttd:
+  nop 4
+registersymbol(ttd)
+
+[DISABLE]
+ttd:
+  db F3 0F 5D F0
+unregistersymbol(ttd)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "IndianaEpicGameStore-Win64-Shipping.exe"+6FC580
+
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC553: 0F 57 F6                    -  xorps xmm6,xmm6
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC556: 0F 28 F9                    -  movaps xmm7,xmm1
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC559: 44 0F 29 44 24 20           -  movaps [rsp+20],xmm8
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC55F: F3 44 0F 10 81 80 01 00 00  -  movss xmm8,[rcx+00000180]
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC568: F3 0F 10 89 84 01 00 00     -  movss xmm1,[rcx+00000184]
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC570: 41 0F 28 C0                 -  movaps xmm0,xmm8
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC574: F3 0F 58 C7                 -  addss xmm0,xmm7
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC578: 0F 2F C6                    -  comiss xmm0,xmm6
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC57B: 72 07                       -  jb IndianaEpicGameStore-Win64-Shipping.exe+6FC584
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC57D: 0F 28 F1                    -  movaps xmm6,xmm1
+// ---------- INJECTING HERE ----------
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC580: F3 0F 5D F0                 -  minss xmm6,xmm0
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC584: 0F 2F 0D CD 0A 02 02        -  comiss xmm1,[IndianaEpicGameStore-Win64-Shipping.exe+271D058]
+// ---------- DONE INJECTING  ----------
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC58B: F3 0F 11 B1 80 01 00 00     -  movss [rcx+00000180],xmm6
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC593: 0F 86 E9 00 00 00           -  jbe IndianaEpicGameStore-Win64-Shipping.exe+6FC682
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC599: 0F 28 C6                    -  movaps xmm0,xmm6
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC59C: F3 41 0F 5C C0              -  subss xmm0,xmm8
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC5A1: 0F 54 05 98 00 FE 01        -  andps xmm0,[IndianaEpicGameStore-Win64-Shipping.exe+26DC640]
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC5A8: 0F 2F 05 A9 0A 02 02        -  comiss xmm0,[IndianaEpicGameStore-Win64-Shipping.exe+271D058]
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC5AF: 0F 86 CD 00 00 00           -  jbe IndianaEpicGameStore-Win64-Shipping.exe+6FC682
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC5B5: 4C 8B 89 08 01 00 00        -  mov r9,[rcx+00000108]
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC5BC: 45 33 C0                    -  xor r8d,r8d
+"IndianaEpicGameStore-Win64-Shipping.exe"+6FC5BF: 48 8B 0D E2 F1 69 03        -  mov rcx,[IndianaEpicGameStore-Win64-Shipping.exe+3D9B7A8]
+}
+</AssemblerScript>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>1020</ID>
+				  <Description>"Walk Speed"</Description>
+				  <Options moHideChildren="1"/>
+				  <LastState/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript Async="1">[ENABLE]
+{$lua}
+return "aobscanmodule(walk,"..process..",F3 0F 10 83 0C 02 00 00 48 8B)"
+{$asm}
+alloc(newmem,$1000,walk)
+
+label(code)
+label(return)
+label(walkValue)
+
+newmem:
+  mov rdx,walkValue
+  movss xmm0,[rdx]
+code:
+  //movss xmm0,[rbx+0000020C]
+  jmp return
+
+walkValue:
+  dd (float)800
+
+walk:
+  jmp newmem
+  nop 3
+return:
+registersymbol(walk)
+registersymbol(walkValue)
+
+[DISABLE]
+walk:
+  db F3 0F 10 83 0C 02 00 00
+unregistersymbol(walk)
+unregistersymbol(walkValue)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "IndianaEpicGameStore-Win64-Shipping.exe"+60AD3F
+
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD11: 48 8B 15 20 0C 79 03        -  mov rdx,[IndianaEpicGameStore-Win64-Shipping.exe+3D9B938]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD18: EB 34                       -  jmp IndianaEpicGameStore-Win64-Shipping.exe+60AD4E
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD1A: 48 8B 01                    -  mov rax,[rcx]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD1D: FF 90 40 05 00 00           -  call qword ptr [rax+00000540]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD23: 48 8B 8B 38 08 00 00        -  mov rcx,[rbx+00000838]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD2A: 84 C0                       -  test al,al
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD2C: 74 11                       -  je IndianaEpicGameStore-Win64-Shipping.exe+60AD3F
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD2E: F3 0F 10 83 10 02 00 00     -  movss xmm0,[rbx+00000210]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD36: 48 8B 15 EB 0B 79 03        -  mov rdx,[IndianaEpicGameStore-Win64-Shipping.exe+3D9B928]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD3D: EB 0F                       -  jmp IndianaEpicGameStore-Win64-Shipping.exe+60AD4E
+// ---------- INJECTING HERE ----------
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD3F: F3 0F 10 83 0C 02 00 00     -  movss xmm0,[rbx+0000020C]
+// ---------- DONE INJECTING  ----------
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD47: 48 8B 15 E2 0B 79 03        -  mov rdx,[IndianaEpicGameStore-Win64-Shipping.exe+3D9B930]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD4E: 48 85 C9                    -  test rcx,rcx
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD51: 74 19                       -  je IndianaEpicGameStore-Win64-Shipping.exe+60AD6C
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD53: 48 85 D2                    -  test rdx,rdx
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD56: 74 14                       -  je IndianaEpicGameStore-Win64-Shipping.exe+60AD6C
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD58: 0F 28 D8                    -  movaps xmm3,xmm0
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD5B: 48 C7 44 24 20 00 00 00 00  -  mov qword ptr [rsp+20],00000000
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD64: 41 B0 01                    -  mov r8l,01
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD67: E8 04 2C 13 00              -  call IndianaEpicGameStore-Win64-Shipping.exe+73D970
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD6C: 48 83 C4 30                 -  add rsp,30
+}
+</AssemblerScript>
+				  <CheatEntries>
+					<CheatEntry>
+					  <ID>261</ID>
+					  <Description>"Speed"</Description>
+					  <VariableType>Float</VariableType>
+					  <Address>walkValue</Address>
+					</CheatEntry>
+				  </CheatEntries>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>262</ID>
+				  <Description>"Crouch Speed"</Description>
+				  <Options moHideChildren="1"/>
+				  <LastState/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript Async="1">[ENABLE]
+{$lua}
+return "aobscanmodule(crouch,"..process..",74 * F3 0F 10 83 10 02 00 00 48 8B)"
+{$asm}
+alloc(newmem,$1000,crouch)
+
+label(code)
+label(return)
+label(crouchValue)
+
+newmem:
+  mov rdx,crouchValue
+  movss xmm0,[rdx]
+code:
+  //movss xmm0,[rbx+00000210]
+  jmp return
+
+crouchValue:
+  dd (float)500
+
+crouch+02:
+  jmp newmem
+  nop 3
+return:
+registersymbol(crouch)
+registersymbol(crouchValue)
+
+[DISABLE]
+crouch+02:
+  db F3 0F 10 83 10 02 00 00
+unregistersymbol(crouch)
+unregistersymbol(crouchValue)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "IndianaEpicGameStore-Win64-Shipping.exe"+60AD2E
+
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD00: 74 18                       -  je IndianaEpicGameStore-Win64-Shipping.exe+60AD1A
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD02: F3 0F 10 81 00 08 00 00     -  movss xmm0,[rcx+00000800]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD0A: 48 8B 89 38 08 00 00        -  mov rcx,[rcx+00000838]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD11: 48 8B 15 20 0C 79 03        -  mov rdx,[IndianaEpicGameStore-Win64-Shipping.exe+3D9B938]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD18: EB 34                       -  jmp IndianaEpicGameStore-Win64-Shipping.exe+60AD4E
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD1A: 48 8B 01                    -  mov rax,[rcx]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD1D: FF 90 40 05 00 00           -  call qword ptr [rax+00000540]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD23: 48 8B 8B 38 08 00 00        -  mov rcx,[rbx+00000838]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD2A: 84 C0                       -  test al,al
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD2C: 74 11                       -  je IndianaEpicGameStore-Win64-Shipping.exe+60AD3F
+// ---------- INJECTING HERE ----------
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD2E: F3 0F 10 83 10 02 00 00     -  movss xmm0,[rbx+00000210]
+// ---------- DONE INJECTING  ----------
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD36: 48 8B 15 EB 0B 79 03        -  mov rdx,[IndianaEpicGameStore-Win64-Shipping.exe+3D9B928]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD3D: EB 0F                       -  jmp IndianaEpicGameStore-Win64-Shipping.exe+60AD4E
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD3F: F3 0F 10 83 0C 02 00 00     -  movss xmm0,[rbx+0000020C]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD47: 48 8B 15 E2 0B 79 03        -  mov rdx,[IndianaEpicGameStore-Win64-Shipping.exe+3D9B930]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD4E: 48 85 C9                    -  test rcx,rcx
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD51: 74 19                       -  je IndianaEpicGameStore-Win64-Shipping.exe+60AD6C
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD53: 48 85 D2                    -  test rdx,rdx
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD56: 74 14                       -  je IndianaEpicGameStore-Win64-Shipping.exe+60AD6C
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD58: 0F 28 D8                    -  movaps xmm3,xmm0
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD5B: 48 C7 44 24 20 00 00 00 00  -  mov qword ptr [rsp+20],00000000
+}
+</AssemblerScript>
+				  <CheatEntries>
+					<CheatEntry>
+					  <ID>263</ID>
+					  <Description>"Speed"</Description>
+					  <VariableType>Float</VariableType>
+					  <Address>crouchValue</Address>
+					</CheatEntry>
+				  </CheatEntries>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>429</ID>
+				  <Description>"Run Speed"</Description>
+				  <Options moHideChildren="1"/>
+				  <LastState/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+{$lua}
+return "aobscanmodule(run,"..process..",F3 0F 10 81 00 08 00 00 48)"
+{$asm}
+alloc(newmem,$1000,run)
+
+label(code)
+label(return)
+label(runValue)
+
+newmem:
+  mov rdx,runValue
+  movss xmm0,[rdx]
+code:
+  //movss xmm0,[rcx+00000800]
+  jmp return
+
+runValue:
+  dd (float)1200
+
+run:
+  jmp newmem
+  nop 3
+return:
+registersymbol(run)
+registersymbol(runValue)
+
+[DISABLE]
+run:
+  db F3 0F 10 81 00 08 00 00
+unregistersymbol(run)
+unregistersymbol(runValue)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "IndianaEpicGameStore-Win64-Shipping.exe"+60AD02
+
+"IndianaEpicGameStore-Win64-Shipping.exe"+60ACEB: CC                          -  int 3 
+"IndianaEpicGameStore-Win64-Shipping.exe"+60ACEC: CC                          -  int 3 
+"IndianaEpicGameStore-Win64-Shipping.exe"+60ACED: CC                          -  int 3 
+"IndianaEpicGameStore-Win64-Shipping.exe"+60ACEE: CC                          -  int 3 
+"IndianaEpicGameStore-Win64-Shipping.exe"+60ACEF: CC                          -  int 3 
+"IndianaEpicGameStore-Win64-Shipping.exe"+60ACF0: 40 53                       -  push rbx
+"IndianaEpicGameStore-Win64-Shipping.exe"+60ACF2: 48 83 EC 30                 -  sub rsp,30
+"IndianaEpicGameStore-Win64-Shipping.exe"+60ACF6: 80 B9 90 08 00 00 00        -  cmp byte ptr [rcx+00000890],00
+"IndianaEpicGameStore-Win64-Shipping.exe"+60ACFD: 48 8B D9                    -  mov rbx,rcx
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD00: 74 18                       -  je IndianaEpicGameStore-Win64-Shipping.exe+60AD1A
+// ---------- INJECTING HERE ----------
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD02: F3 0F 10 81 00 08 00 00     -  movss xmm0,[rcx+00000800]
+// ---------- DONE INJECTING  ----------
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD0A: 48 8B 89 38 08 00 00        -  mov rcx,[rcx+00000838]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD11: 48 8B 15 20 0C 79 03        -  mov rdx,[IndianaEpicGameStore-Win64-Shipping.exe+3D9B938]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD18: EB 34                       -  jmp IndianaEpicGameStore-Win64-Shipping.exe+60AD4E
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD1A: 48 8B 01                    -  mov rax,[rcx]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD1D: FF 90 40 05 00 00           -  call qword ptr [rax+00000540]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD23: 48 8B 8B 38 08 00 00        -  mov rcx,[rbx+00000838]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD2A: 84 C0                       -  test al,al
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD2C: 74 11                       -  je IndianaEpicGameStore-Win64-Shipping.exe+60AD3F
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD2E: F3 0F 10 83 10 02 00 00     -  movss xmm0,[rbx+00000210]
+"IndianaEpicGameStore-Win64-Shipping.exe"+60AD36: 48 8B 15 EB 0B 79 03        -  mov rdx,[IndianaEpicGameStore-Win64-Shipping.exe+3D9B928]
+}
+</AssemblerScript>
+				  <CheatEntries>
+					<CheatEntry>
+					  <ID>430</ID>
+					  <Description>"Speed"</Description>
+					  <VariableType>Float</VariableType>
+					  <Address>runValue</Address>
+					</CheatEntry>
+				  </CheatEntries>
+				</CheatEntry>
+			  </CheatEntries>
+			</CheatEntry>
+			<CheatEntry>
+              <ID>200</ID>
+              <Description>"[Scripts]"</Description>
+              <Options moHideChildren="1"/>
+              <GroupHeader>1</GroupHeader>
+		      <CheatEntries>
+				<CheatEntry>
+				  <ID>201</ID>
+				  <Description>"Attribute Pointers During Character Creation (Add 1 Point To Each, Then You Can Change These To Maximum of 4)"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+
+aobscanmodule(AttributesCCAOB,"IndianaEpicGameStore-Win64-Shipping.exe",03 93 0C 03 00 00 84 C0 74 40)
+registersymbol(AttributesCCAOB)
+alloc(newmem,1024,AttributesCCAOB)
+
+///
+label(originalcode)
+label(return)
+label(AttributePtr)
+registersymbol(AttributePtr)
+label(NumAttributesFound)
+
+///
+newmem:
+  push rax
+  push rdx
+  mov rax,AttributePtr
+  mov rdx,[NumAttributesFound]
+  mov [rax+rdx*8],rbx
+  inc [NumAttributesFound]
+  pop rdx
+  pop rax
+  jmp originalcode
+  
+originalcode:
+  add edx,[rbx+0000030C]
+  jmp return
+
+NumAttributesFound:
+dq 0
+AttributePtr:
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+ 
+AttributesCCAOB:
+  jmp newmem
+  nop
+  return:
+ 
+[DISABLE]
+
+AttributesCCAOB:
+  db 03 93 0C 03 00 00
+
+unregistersymbol(AttributesCCAOB)
+ 
+dealloc(newmem)
+</AssemblerScript>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>202</ID>
+                      <Description>"Strength Attribute"</Description>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>AttributePtr</Address>
+					  <Offsets>
+					    <Offset>30C</Offset>
+					  </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>203</ID>
+                      <Description>"Dexterity Attribute"</Description>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>AttributePtr+8</Address>
+					  <Offsets>
+					    <Offset>30C</Offset>
+					  </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>204</ID>
+                      <Description>"Intelligence Attribute"</Description>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>AttributePtr+10</Address>
+					  <Offsets>
+					    <Offset>30C</Offset>
+					  </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>205</ID>
+                      <Description>"Perception Attribute"</Description>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>AttributePtr+18</Address>
+					  <Offsets>
+					    <Offset>30C</Offset>
+					  </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>206</ID>
+                      <Description>"Charm Attribute"</Description>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>AttributePtr+20</Address>
+					  <Offsets>
+					    <Offset>30C</Offset>
+					  </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>207</ID>
+                      <Description>"Temperament Attribute"</Description>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>AttributePtr+28</Address>
+					  <Offsets>
+					    <Offset>30C</Offset>
+					  </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>210</ID>
+				  <Description>"Set Available Skill Points During Character Creation To 7"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+
+aobscanmodule(SkillsCCAOB,"IndianaEpicGameStore-Win64-Shipping.exe",3B 58 4C 0F 9D C0 48 83 C4 20)
+registersymbol(SkillsCCAOB)
+alloc(newmem,1024,SkillsCCAOB)
+
+///
+label(originalcode)
+label(return)
+label(AvailableSkillPointsPtr)
+registersymbol(AvailableSkillPointsPtr)
+
+///
+newmem:
+  mov [AvailableSkillPointsPtr],rax
+  mov dword ptr [rax+4C],7
+  
+originalcode:
+  cmp ebx,[rax+4C]
+  setge al
+  jmp return
+
+AvailableSkillPointsPtr:
+dq 0
+ 
+SkillsCCAOB:
+  jmp newmem
+  nop
+  return:
+ 
+[DISABLE]
+
+SkillsCCAOB:
+  db 3B 58 4C 0F 9D C0
+
+unregistersymbol(SkillsCCAOB)
+unregistersymbol(AvailableSkillPointsPtr)
+ 
+dealloc(newmem)
+</AssemblerScript>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>215</ID>
+				  <Description>"Infinite Ammo Clip"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+
+aobscanmodule(InfAmmoClipAOB,"IndianaEpicGameStore-Win64-Shipping.exe",F3 0F 2D C1 D1 F8 2B C8 85 C9 0F 4E CF)
+registersymbol(InfAmmoClipAOB)
+
+InfAmmoClipAOB+6:
+  db 90 90
+ 
+[DISABLE]
+
+InfAmmoClipAOB+6:
+  db 2B C8
+
+unregistersymbol(InfAmmoClipAOB)
+</AssemblerScript>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>220</ID>
+				  <Description>"EXP Multiplier"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+
+aobscanmodule(EXPMultiplierAOB,"IndianaEpicGameStore-Win64-Shipping.exe",44 8B E2 48 8B F9 85 D2 0F 8E AB 01 00 00)
+registersymbol(EXPMultiplierAOB)
+alloc(newmem,1024,EXPMultiplierAOB)
+
+///
+label(return)
+label(originalcode)
+label(EXPMultiplier)
+registersymbol(EXPMultiplier)
+
+newmem:
+  push edx
+  fild dword ptr [rsp]
+  fmul dword ptr [EXPMultiplier]
+  fistp dword ptr [rsp]  
+  pop edx
+
+originalcode:
+  mov r12d,edx
+  mov rdi,rcx
+  jmp return
+
+EXPMultiplier:
+dq (float)5.0
+  
+EXPMultiplierAOB:
+  jmp newmem
+  nop
+  return:
+ 
+[DISABLE]
+
+EXPMultiplierAOB:
+  db 44 8B E2 48 8B F9
+
+unregistersymbol(EXPMultiplierAOB)
+unregistersymbol(EXPMultiplier)
+
+dealloc(newmem)
+</AssemblerScript>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>221</ID>
+                      <Description>"EXP Multiplier"</Description>
+                      <VariableType>Float</VariableType>
+                      <Address>EXPMultiplier</Address>
+                    </CheatEntry>
+				  </CheatEntries>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>225</ID>
+				  <Description>"Infinite HP"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+{$lua}
+tInfHP = createTimer(nil, false)
+tInfHP.OnTimer = function(fInfHP)
+  errorOnLookupFailure = false
+  if (getAddress("PlayerPtr") == 0) then
+	tInfHP.Destroy()
+  end
+  local PlayerPtr = ReadPointer(getAddress("PlayerPtr"))
+  if (PlayerPtr ~= nil and PlayerPtr ~= 0) then
+	local PlayerBattleInfoPtr = ReadPointer(PlayerPtr + 0x930)
+	
+	if (PlayerBattleInfoPtr ~= nil and PlayerBattleInfoPtr ~= 0) then
+		local MaxHP = ReadFloat(PlayerBattleInfoPtr + 0x1CC)
+		WriteFloat(PlayerBattleInfoPtr + 0x1C8,MaxHP)
+	end  
+  end
+
+end
+tInfHP.Interval = 1000
+tInfHP.Enabled = true
+{$asm}
+
+[DISABLE]
+{$lua}
+tInfHP.Destroy()
+
+{$asm}
+</AssemblerScript>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>230</ID>
+				  <Description>"Always Max Durability"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+
+aobscanmodule(MaxDurabilityAOB,"IndianaEpicGameStore-Win64-Shipping.exe",0F 2F 83 14 01 00 00 48 8B 5C 24 30)
+registersymbol(MaxDurabilityAOB)
+alloc(newmem,1024,MaxDurabilityAOB)
+
+///
+label(return)
+label(originalcode)
+
+newmem:
+  movss [rbx+00000114],xmm0
+
+originalcode:
+  comiss xmm0,[rbx+00000114]
+  jmp return
+  
+MaxDurabilityAOB:
+  jmp newmem
+  nop
+  nop
+  return:
+ 
+[DISABLE]
+
+MaxDurabilityAOB:
+  db 0F 2F 83 14 01 00 00
+
+unregistersymbol(MaxDurabilityAOB)
+
+dealloc(newmem)
+</AssemblerScript>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>235</ID>
+				  <Description>"Save Anywhere On Supernova Difficulty"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+
+aobscanmodule(SaveAnywhereAOB,"IndianaEpicGameStore-Win64-Shipping.exe",80 79 50 03 0F 85 8C 00 00 00)
+registersymbol(SaveAnywhereAOB)
+
+SaveAnywhereAOB+4:
+  db E9 8D 00 00 00 90
+ 
+[DISABLE]
+
+SaveAnywhereAOB+4:
+  db 0F 85 8C 00 00 00
+
+unregistersymbol(SaveAnywhereAOB)
+</AssemblerScript>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>245</ID>
+				  <Description>"Fast Travel Anywhere on Supernova Difficulty"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+
+aobscanmodule(FastTravelAOB,"IndianaEpicGameStore-Win64-Shipping.exe",80 79 50 03 B8 01 00 00 00 0F 44 C2)
+registersymbol(FastTravelAOB)
+  
+FastTravelAOB+3:
+  db 04
+ 
+[DISABLE]
+
+FastTravelAOB+3:
+  db 03
+
+unregistersymbol(FastTravelAOB)
+</AssemblerScript>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>250</ID>
+				  <Description>"Set Companions Essential On Supernova Difficulty (Must Be Enabled When You Load Save Game)"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+
+aobscanmodule(CompanionEssentialAOB,"IndianaEpicGameStore-Win64-Shipping.exe",80 78 50 03 0F 95 C1 88 8E 94 01 00 00)
+registersymbol(CompanionEssentialAOB)
+  
+CompanionEssentialAOB+3:
+  db 04
+ 
+[DISABLE]
+
+CompanionEssentialAOB+3:
+  db 03
+
+unregistersymbol(CompanionEssentialAOB)
+</AssemblerScript>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>240</ID>
+				  <Description>"Items Weigh Zero (Drop and Pickup Item)"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+
+aobscanmodule(ItemsWeighZeroAOB,"IndianaEpicGameStore-Win64-Shipping.exe",F3 0F 58 86 28 03 00 00 F3 0F 11 86 28 03 00 00)
+registersymbol(ItemsWeighZeroAOB)
+alloc(newmem,1024,ItemsWeighZeroAOB)
+
+///
+label(return)
+label(originalcode)
+
+newmem:
+  xorps xmm0,xmm0
+  movss [rsi+00000328],xmm0
+
+originalcode:
+  addss xmm0,[rsi+00000328]
+  jmp return
+  
+ItemsWeighZeroAOB:
+  jmp newmem
+  nop
+  nop
+  nop
+  return:
+ 
+[DISABLE]
+
+ItemsWeighZeroAOB:
+  db F3 0F 58 86 28 03 00 00
+
+unregistersymbol(ItemsWeighZeroAOB)
+
+dealloc(newmem)
+</AssemblerScript>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>241</ID>
+				  <Description>"Have High Carrying Capacity"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+{$lua}
+tCC = createTimer(nil, false)
+tCC.OnTimer = function(fCC)
+  errorOnLookupFailure = false
+  if (getAddress("PlayerPtr") == 0) then
+	tCC.Destroy()
+  end
+  local PlayerPtr = ReadPointer(getAddress("PlayerPtr"))
+  if (PlayerPtr ~= nil and PlayerPtr ~= 0) then
+	local PlayerInfoPtr = ReadPointer(PlayerPtr + 0x928)
+	
+	if (PlayerInfoPtr ~= nil and PlayerInfoPtr ~= 0) then
+		WriteFloat(PlayerInfoPtr + 0x330,5000000)
+	end  
+  end
+
+end
+tCC.Interval = 1000
+tCC.Enabled = true
+{$asm}
+
+//aobscanmodule(HighCCAOB,"IndianaEpicGameStore-Win64-Shipping.exe",F3 0F 11 87 30 03 00 00 89 AF 2C 03 00 00)
+aobscanmodule(HighCCAOB,"IndianaEpicGameStore-Win64-Shipping.exe",F3 0F 11 83 30 03 00 00 89 AB 2C 03 00 00)
+registersymbol(HighCCAOB)
+alloc(newmem,1024,HighCCAOB)
+
+///
+label(return)
+label(originalcode)
+
+newmem:
+  xorps xmm0,xmm0
+  movss [rbx+00000328],xmm0
+  movss xmm0,[HighCCValue]
+
+originalcode:
+  movss [rbx+00000330],xmm0
+  jmp return
+  
+HighCCValue:
+dq (float)5000000.00
+
+HighCCAOB:
+  jmp newmem
+  nop
+  nop
+  nop
+  return:
+
+
+[DISABLE]
+{$lua}
+tCC.Destroy()
+
+{$asm}
+
+HighCCAOB:
+  db F3 0F 11 83 30 03 00 00
+  
+unregistersymbol(HighCCAOB)
+
+dealloc(newmem)
+</AssemblerScript>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>245</ID>
+				  <Description>"Override Item Quantity To Add On Pickup (Don't Use On Weapons or Armor)"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+
+aobscanmodule(OverrideQtyAOB,"IndianaEpicGameStore-Win64-Shipping.exe",41 8B E8 48 8B FA FF 90 B0 02 00 00)
+registersymbol(OverrideQtyAOB)
+alloc(newmem,1024,OverrideQtyAOB)
+
+///
+label(return)
+label(originalcode)
+label(OverrideQtyAmt)
+registersymbol(OverrideQtyAmt)
+
+newmem:
+  cmp r8d,0
+  jle originalcode
+  mov r8,[OverrideQtyAmt]
+
+originalcode:
+  mov ebp,r8d
+  mov rdi,rdx
+  jmp return
+
+OverrideQtyAmt:
+dq #50
+  
+OverrideQtyAOB:
+  jmp newmem
+  nop
+  return:
+ 
+[DISABLE]
+
+OverrideQtyAOB:
+  db 41 8B E8 48 8B FA
+
+unregistersymbol(OverrideQtyAOB)
+unregistersymbol(OverrideQtyAmt)
+
+dealloc(newmem)
+</AssemblerScript>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>246</ID>
+                      <Description>"Override Qty Amount"</Description>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>OverrideQtyAmt</Address>
+                    </CheatEntry>
+				  </CheatEntries>
+				</CheatEntry>
+				<CheatEntry>
+				  <ID>255</ID>
+				  <Description>"Make Console Command GivePlayerAllItems Only Give You Specific Category of Items"</Description>
+				  <Options moHideChildren="1"/>
+				  <VariableType>Auto Assembler Script</VariableType>
+				  <AssemblerScript>[ENABLE]
+
+aobscanmodule(GivePlayerAllItemsAOB,"IndianaEpicGameStore-Win64-Shipping.exe",48 8B D8 48 85 C0 74 0C 48 8B 00 48 8B CB)
+registersymbol(GivePlayerAllItemsAOB)
+alloc(newmem,4096,GivePlayerAllItemsAOB)
+alloc(newmem2,8192,GivePlayerAllItemsAOB)
+
+///
+label(return)
+label(originalcode)
+label(TypeToAdd)
+registersymbol(TypeToAdd)
+label(SpecificItemToAdd)
+registersymbol(SpecificItemToAdd)
+label(Offset0Ptr)
+registersymbol(Offset0Ptr)
+label(TotalPtr)
+registersymbol(TotalPtr)
+
+///
+label(TotalItems)
+registersymbol(TotalItems)
+label(ItemTextIDs)
+registersymbol(ItemTextIDs)
+
+newmem:
+  test rax,rax
+  je originalcode
+SaveItemIDs:
+  xor rbx,rbx
+  mov ebx,[rax+30]
+  push rdx
+  push rcx
+  mov rdx,ItemTextIDs
+  xor rcx,rcx
+StartItemIDLoop:
+  cmp [rdx+rcx*4],ebx
+  je DoneItemIDLoopFound
+  inc rcx
+  cmp rcx,[TotalItems]
+  jg DoneItemIDLoopNotFound
+  jmp StartItemIDLoop
+DoneItemIDLoopFound:
+  pop rcx
+  pop rdx
+  jmp SaveCategoryIDs
+DoneItemIDLoopNotFound:
+  dec rcx
+  mov [rdx+rcx*4],ebx
+  inc [TotalItems]
+  pop rcx
+  pop rdx
+  jmp SaveCategoryIDs
+SaveCategoryIDs:
+  mov rbx,[rax]
+  push rdx
+  push rcx
+  mov rdx,Offset0Ptr
+  xor rcx,rcx
+StartLoop:
+  cmp [rdx+rcx*8],rbx
+  je DoneLoopFound
+  inc rcx
+  cmp rcx,[TotalPtr]
+  jg DoneLoopNotFound
+  jmp StartLoop
+DoneLoopFound:
+  pop rcx
+  pop rdx
+  jmp originalcode
+DoneLoopNotFound:
+  dec rcx
+  mov [rdx+rcx*8],rbx
+  inc [TotalPtr]
+  pop rcx
+  pop rdx
+  jmp originalcode
+  
+originalcode:
+  mov rbx,rax
+  test rax,rax
+  je return
+  cmp [TypeToAdd],FFFFFFFFFFFFFFFF
+  je GetSpecificItem
+GetSpecificCategory:
+  push rbx
+  mov rbx,[TypeToAdd]
+  cmp [rax],rbx
+  pop rbx
+  jne GivePlayerAllItemsAOB+39
+  test rax,rax
+  jmp return
+GetSpecificItem:
+  push rbx
+  xor rbx,rbx
+  mov ebx,[SpecificItemToAdd]
+  cmp [rax+30],ebx
+  pop rbx
+  jne GivePlayerAllItemsAOB+39
+  test rax,rax
+  jmp return
+
+SpecificItemToAdd:
+dq FFFFFFFFFFFFFFFF
+TypeToAdd:
+dq 0
+TotalPtr:
+dq 0
+Offset0Ptr:
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+dq 0
+
+newmem2:
+TotalItems:
+dq 0
+ItemTextIDs:
+dq 0
+dq 0
+ 
+GivePlayerAllItemsAOB:
+  jmp newmem
+  nop
+  return:
+ 
+[DISABLE]
+
+GivePlayerAllItemsAOB:
+  db 48 8B D8 48 85 C0
+
+unregistersymbol(GivePlayerAllItemsAOB)
+unregistersymbol(Offset0Ptr)
+unregistersymbol(TotalPtr)
+unregistersymbol(TypeToAdd)
+unregistersymbol(SpecificItemToAdd)
+
+///
+unregistersymbol(ItemTextIDs)
+unregistersymbol(TotalItems)
+
+dealloc(newmem)
+dealloc(newmem2)
+</AssemblerScript>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>256</ID>
+                      <Description>"Types of Items To Add"</Description>
+					  <ShowAsHex>1</ShowAsHex>
+                      <VariableType>8 Bytes</VariableType>
+                      <Address>TypeToAdd</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>257</ID>
+                      <Description>"Specific Item To Add (Set Types of Items To Add to 'Only Receive A Specific Item')"</Description>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>SpecificItemToAdd</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>258</ID>
+                      <Description>"Set Types of Items To Add to 'Get Category IDs'"</Description>
+					  <ShowAsHex>1</ShowAsHex>
+                      <VariableType>8 Bytes</VariableType>
+                      <Address>TypeToAdd</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>259</ID>
+                      <Description>"Run GivePlayerAllItems Console Command"</Description>
+					  <ShowAsHex>1</ShowAsHex>
+                      <VariableType>8 Bytes</VariableType>
+                      <Address>TypeToAdd</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>260</ID>
+                      <Description>"Then Enable This to Update Drop Down With List Specific To Your Setup"</Description>
+					  <ShowAsHex>1</ShowAsHex>
+					  <VariableType>Auto Assembler Script</VariableType>
+					  <AssemblerScript>[ENABLE]
+{$lua}
+local al = getAddressList()
+
+local ItemList = {}
+
+local index = 0
+local ItemListEntryAddress = 0
+
+--- Get Category IDs
+ItemListEntryAddress = 0
+ItemList[index+1] = string.format("%0.16X:Get Category IDs",ItemListEntryAddress)
+index = index + 1
+--- Only Receive A Specific Item
+ItemListEntryAddress = 0xFFFFFFFFFFFFFFFF
+ItemList[index+1] = string.format("%0.16X:Only Receive A Specific Item",ItemListEntryAddress)
+index = index + 1
+--- Body Armor
+ItemListEntryAddress = ReadPointer(getAddress("Offset0Ptr"))
+ItemList[index+1] = string.format("%0.16X:Body Armor",ItemListEntryAddress)
+index = index + 1
+--- Helmets
+ItemListEntryAddress = ReadPointer(getAddress("Offset0Ptr") + 0x08)
+ItemList[index+1] = string.format("%0.16X:Helmets",ItemListEntryAddress)
+index = index + 1
+--- Identity Quest Items
+ItemListEntryAddress = ReadPointer(getAddress("Offset0Ptr") + 0x10)
+ItemList[index+1] = string.format("%0.16X:Identity Quest Items",ItemListEntryAddress)
+index = index + 1
+--- Consumables
+ItemListEntryAddress = ReadPointer(getAddress("Offset0Ptr") + 0x18)
+ItemList[index+1] = string.format("%0.16X:Consumables",ItemListEntryAddress)
+index = index + 1
+--- General and Junk Items
+ItemListEntryAddress = ReadPointer(getAddress("Offset0Ptr") + 0x20)
+ItemList[index+1] = string.format("%0.16X:General and Junk Items",ItemListEntryAddress)
+index = index + 1
+--- Armor Modification Items
+ItemListEntryAddress = ReadPointer(getAddress("Offset0Ptr") + 0x28)
+ItemList[index+1] = string.format("%0.16X:Armor Modification Items",ItemListEntryAddress)
+index = index + 1
+--- Weapon Modification Items
+ItemListEntryAddress = ReadPointer(getAddress("Offset0Ptr") + 0x30)
+ItemList[index+1] = string.format("%0.16X:Weapon Modification Items",ItemListEntryAddress)
+index = index + 1
+--- Other Quest Items
+ItemListEntryAddress = ReadPointer(getAddress("Offset0Ptr") + 0x38)
+ItemList[index+1] = string.format("%0.16X:Other Quest Items",ItemListEntryAddress)
+index = index + 1
+--- Ammo
+ItemListEntryAddress = ReadPointer(getAddress("Offset0Ptr") + 0x40)
+ItemList[index+1] = string.format("%0.16X:Ammo",ItemListEntryAddress)
+index = index + 1
+--- Weapons
+ItemListEntryAddress = ReadPointer(getAddress("Offset0Ptr") + 0x48)
+ItemList[index+1] = string.format("%0.16X:Weapons",ItemListEntryAddress)
+index = index + 1
+
+local DropDownListITM = createStringlist()
+for i,j in ipairs(ItemList) do
+	DropDownListITM.add(string.format("%s",j))
+end
+
+local mr = al.getMemoryRecordByDescription("Make Console Command GivePlayerAllItems Only Give You Specific Category of Items")
+al[mr.Index+1].DropDownList.Text = DropDownListITM.Text
+al[mr.Index+1].DropDownReadOnly = false
+al[mr.Index+1].DropDownDescriptionOnly = true
+al[mr.Index+1].DisplayAsDropDownListItem = true
+
+{$asm}
+
+[DISABLE]
+
+</AssemblerScript>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>261</ID>
+                      <Description>"Finally Enable This to Update Specific Item Drop Down List"</Description>
+					  <ShowAsHex>1</ShowAsHex>
+					  <VariableType>Auto Assembler Script</VariableType>
+					  <AssemblerScript>[ENABLE]
+{$lua}
+local al = getAddressList()
+
+local ItemList = {}
+local index = 0
+
+ItemList[index+1] = "4294967295:Nothing"
+index = index + 1
+
+local BaseTextIDPtr = getAddress("ItemTextIDs")
+local TotalItems = ReadInteger(getAddress("TotalItems"))
+local CurrentTextIDItem = 0
+while (CurrentTextIDItem &lt; TotalItems) do
+      local CurrentTextID = ReadInteger(BaseTextIDPtr + (0x04 * CurrentTextIDItem))
+      local BasePtrAddr = ReadPointer(getAddress("IndianaEpicGameStore-Win64-Shipping.exe") + 0x03D99AF8)
+      if (BasePtrAddr ~= nil and BasePtrAddr ~= 0) then
+         local Offset0Ptr = ReadPointer(BasePtrAddr + 0x218)
+         if (Offset0Ptr ~= nil and Offset0Ptr ~= 0) then
+            local Offset1Ptr = ReadPointer(Offset0Ptr + 0x60)
+            if (Offset1Ptr ~= nil and Offset1Ptr ~= 0) then
+               local Offset2Ptr = ReadPointer(Offset1Ptr + 0x1D8)
+               if (Offset2Ptr ~= nil and Offset2Ptr ~= 0) then
+                  local NumItems = 0
+                  while (NumItems &lt; 2967) do
+					local ItemTextID = ReadInteger(Offset2Ptr + (0x48 * NumItems) + 0x08)
+					if (CurrentTextID == ItemTextID) then
+					  local ItemText = ReadString(ReadPointer(Offset2Ptr + (0x48 * NumItems) + 0x10),500,true)
+					  if (ItemText == nil) then
+					     ItemText = ""
+					  end
+					  local ItemTextFinal = string.gsub(ItemText,"\n"," | ")
+                      ItemList[index+1] = string.format('%d:%s',ItemTextID,ItemTextFinal)
+                      break
+					else
+						if (ItemTextID &gt; CurrentTextID) then
+						  NumItems = 2967
+						  break
+						end
+                    end
+                    NumItems = NumItems + 1
+                  end
+                  if (NumItems &gt;= 2967) then
+                     ItemList[index+1] = string.format('%d:Unknown Item %d',CurrentTextID,CurrentTextID)
+                  end
+               end
+            end
+         end
+      end
+      CurrentTextIDItem = CurrentTextIDItem + 1
+	  index = index + 1
+end
+
+local DropDownListITM = createStringlist()
+for i,j in ipairs(ItemList) do
+	DropDownListITM.add(string.format("%s",j))
+end
+
+local mr = al.getMemoryRecordByDescription("Make Console Command GivePlayerAllItems Only Give You Specific Category of Items")
+al[mr.Index+2].DropDownList.Text = DropDownListITM.Text
+al[mr.Index+2].DropDownReadOnly = false
+al[mr.Index+2].DropDownDescriptionOnly = true
+al[mr.Index+2].DisplayAsDropDownListItem = true
+
+{$asm}
+
+[DISABLE]
+
+</AssemblerScript>
+                    </CheatEntry>
+				  </CheatEntries>
+				</CheatEntry>
+			  </CheatEntries>
+			</CheatEntry>
+            <CheatEntry>
+              <ID>4000</ID>
+              <Description>"Pointers"</Description>
+              <Options moHideChildren="1"/>
+			  <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>4100</ID>
+                  <Description>"Difficulty (View Settings Menu)"</Description>
+                  <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:Story
+1:Normal
+2:Hard
+3:Supernova
+</DropDownList>
+                  <VariableType>Byte</VariableType>
+                  <Address>DifficultyPtr</Address>
+                  <Offsets>
+                    <Offset>50</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>4101</ID>
+                  <Description>"Bits (Money)"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>BitPtr</Address>
+                  <Offsets>
+                    <Offset>8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>4102</ID>
+                  <Description>"Player Current Health"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>PlayerPtr</Address>
+                  <Offsets>
+                    <Offset>1C8</Offset>
+					<Offset>930</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>4103</ID>
+                  <Description>"Player Max Health"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>PlayerPtr</Address>
+                  <Offsets>
+                    <Offset>1CC</Offset>
+					<Offset>930</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>4104</ID>
+                  <Description>"Player EXP"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>PlayerPtr</Address>
+                  <Offsets>
+                    <Offset>778</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>4105</ID>
+                  <Description>"Player Skill Points Available"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>PlayerPtr</Address>
+                  <Offsets>
+                    <Offset>77C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>4106</ID>
+                  <Description>"Player Perk Points Available"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>PlayerPtr</Address>
+                  <Offsets>
+                    <Offset>314</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>4200</ID>
+                  <Description>"Player Skills"</Description>
+				  <Options moHideChildren="1"  moRecursiveSetValue="1"/>
+				  <GroupHeader>1</GroupHeader>
+				  <CheatEntries>
+					<CheatEntry>
+					  <ID>4201</ID>
+					  <Description>"Handguns"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>880</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4202</ID>
+					  <Description>"Long Guns"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>884</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4203</ID>
+					  <Description>"Heavy Weapons"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>888</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4204</ID>
+					  <Description>"Sneak"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>88C</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4205</ID>
+					  <Description>"Lockpick"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>890</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4206</ID>
+					  <Description>"Engineering"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>894</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4207</ID>
+					  <Description>"Hack"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>898</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4208</ID>
+					  <Description>"Medical"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>89C</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4209</ID>
+					  <Description>"1-Handed Melee"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>8A0</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4210</ID>
+					  <Description>"2-Handed Melee"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>8A4</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4211</ID>
+					  <Description>"Science"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>8A8</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4212</ID>
+					  <Description>"Persuade"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>8AC</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4213</ID>
+					  <Description>"Lie"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>8B0</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4214</ID>
+					  <Description>"Intimidate"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>8B4</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4215</ID>
+					  <Description>"Dodge"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>8B8</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4216</ID>
+					  <Description>"Block"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>8BC</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4217</ID>
+					  <Description>"Inspiration"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>8C0</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4218</ID>
+					  <Description>"Determination"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>8C4</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+				  </CheatEntries>
+				</CheatEntry>
+                <CheatEntry>
+                  <ID>4300</ID>
+                  <Description>"Player Skills (Bonus)"</Description>
+				  <Options moHideChildren="1"  moRecursiveSetValue="1"/>
+				  <GroupHeader>1</GroupHeader>
+				  <CheatEntries>
+					<CheatEntry>
+					  <ID>4301</ID>
+					  <Description>"Handguns"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>838</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4302</ID>
+					  <Description>"Long Guns"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>83C</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4303</ID>
+					  <Description>"Heavy Weapons"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>840</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4304</ID>
+					  <Description>"Sneak"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>844</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4305</ID>
+					  <Description>"Lockpick"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>848</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4306</ID>
+					  <Description>"Engineering"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>84C</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4307</ID>
+					  <Description>"Hack"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>850</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4308</ID>
+					  <Description>"Medical"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>854</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4309</ID>
+					  <Description>"1-Handed Melee"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>858</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4310</ID>
+					  <Description>"2-Handed Melee"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>85C</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4311</ID>
+					  <Description>"Science"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>860</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4312</ID>
+					  <Description>"Persuade"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>864</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4313</ID>
+					  <Description>"Lie"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>868</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4314</ID>
+					  <Description>"Intimidate"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>86C</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4315</ID>
+					  <Description>"Dodge"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>870</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4316</ID>
+					  <Description>"Block"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>874</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4317</ID>
+					  <Description>"Inspiration"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>878</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4318</ID>
+					  <Description>"Determination"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>87C</Offset>
+						<Offset>C08</Offset>
+						<Offset>20</Offset>
+					  </Offsets>
+					</CheatEntry>
+				  </CheatEntries>
+				</CheatEntry>
+                <CheatEntry>
+                  <ID>4400</ID>
+                  <Description>"Player Positive Reputation (Found By Draxhax)"</Description>
+				  <Options moHideChildren="1"  moRecursiveSetValue="1"/>
+				  <GroupHeader>1</GroupHeader>
+				  <CheatEntries>
+					<CheatEntry>
+					  <ID>4401</ID>
+					  <Description>"Iconoclasts"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>190</Offset>
+						<Offset>8</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4402</ID>
+					  <Description>"The Board"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>190</Offset>
+						<Offset>20</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4403</ID>
+					  <Description>"SubLight Salvage &amp; Shipping"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>190</Offset>
+						<Offset>38</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4404</ID>
+					  <Description>"Auntie Cleo"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>190</Offset>
+						<Offset>50</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4405</ID>
+					  <Description>"Spacer's Choice"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>190</Offset>
+						<Offset>68</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4406</ID>
+					  <Description>"Deserters"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>190</Offset>
+						<Offset>80</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4407</ID>
+					  <Description>"Groundbreaker"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>190</Offset>
+						<Offset>98</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4408</ID>
+					  <Description>"Monarch Stellar Industries"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>190</Offset>
+						<Offset>B0</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+				  </CheatEntries>
+				</CheatEntry>
+                <CheatEntry>
+                  <ID>4410</ID>
+                  <Description>"Player Negative Reputation (Found By Draxhax)"</Description>
+				  <Options moHideChildren="1"  moRecursiveSetValue="1"/>
+				  <GroupHeader>1</GroupHeader>
+				  <CheatEntries>
+					<CheatEntry>
+					  <ID>4411</ID>
+					  <Description>"Iconoclasts"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>194</Offset>
+						<Offset>8</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4412</ID>
+					  <Description>"The Board"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>194</Offset>
+						<Offset>20</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4413</ID>
+					  <Description>"SubLight Salvage &amp; Shipping"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>194</Offset>
+						<Offset>38</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4414</ID>
+					  <Description>"Auntie Cleo"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>194</Offset>
+						<Offset>50</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4415</ID>
+					  <Description>"Spacer's Choice"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>194</Offset>
+						<Offset>68</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4416</ID>
+					  <Description>"Deserters"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>194</Offset>
+						<Offset>80</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4417</ID>
+					  <Description>"Groundbreaker"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>194</Offset>
+						<Offset>98</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4418</ID>
+					  <Description>"Monarch Stellar Industries"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>194</Offset>
+						<Offset>B0</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+				  </CheatEntries>
+				</CheatEntry>
+                <CheatEntry>
+                  <ID>4420</ID>
+                  <Description>"Player Max Reputation (Found By Draxhax)"</Description>
+				  <Options moHideChildren="1"  moRecursiveSetValue="1"/>
+				  <GroupHeader>1</GroupHeader>
+				  <CheatEntries>
+					<CheatEntry>
+					  <ID>4421</ID>
+					  <Description>"Iconoclasts"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>E4</Offset>
+						<Offset>8</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4422</ID>
+					  <Description>"The Board"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>E4</Offset>
+						<Offset>20</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4423</ID>
+					  <Description>"SubLight Salvage &amp; Shipping"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>E4</Offset>
+						<Offset>38</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4424</ID>
+					  <Description>"Auntie Cleo"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>E4</Offset>
+						<Offset>50</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4425</ID>
+					  <Description>"Spacer's Choice"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>E4</Offset>
+						<Offset>68</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4426</ID>
+					  <Description>"Deserters"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>E4</Offset>
+						<Offset>80</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4427</ID>
+					  <Description>"Groundbreaker"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>E4</Offset>
+						<Offset>98</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+					<CheatEntry>
+					  <ID>4428</ID>
+					  <Description>"Monarch Stellar Industries"</Description>
+					  <VariableType>4 Bytes</VariableType>
+					  <Address>PlayerPtr</Address>
+					  <Offsets>
+						<Offset>E4</Offset>
+						<Offset>B0</Offset>
+						<Offset>58</Offset>
+						<Offset>1C8</Offset>
+						<Offset>1F8</Offset>
+						<Offset>110</Offset>
+					  </Offsets>
+					</CheatEntry>
+				  </CheatEntries>
+				</CheatEntry>
+                <CheatEntry>
+                  <ID>4107</ID>
+                  <Description>"Companion Current Health"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>"IndianaEpicGameStore-Win64-Shipping.exe"+03F05748</Address>
+                  <Offsets>
+                    <Offset>1C8</Offset>
+					<Offset>1A0</Offset>
+                    <Offset>310</Offset>
+                    <Offset>108</Offset>
+					<Offset>20</Offset>
+                    <Offset>91B0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>4108</ID>
+                  <Description>"Companion Max Health"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>"IndianaEpicGameStore-Win64-Shipping.exe"+03F05748</Address>
+                  <Offsets>
+                    <Offset>1CC</Offset>
+					<Offset>1A0</Offset>
+                    <Offset>310</Offset>
+                    <Offset>108</Offset>
+					<Offset>20</Offset>
+                    <Offset>91B0</Offset>
+                  </Offsets>
+                </CheatEntry>
+			  </CheatEntries>
+			</CheatEntry>
+		</CheatEntries>
+		</CheatEntry>
+	   </CheatEntries>
+	</CheatEntry>
+	</CheatEntries>
+<LuaScript>
+function lua_aobscan(name,module,bytes,index)
+  index = index - 1
+  if(module == "") then
+    local resultSet = AOBScan(bytes)
+      if(resultSet == nil) then
+        unregisterSymbol(name)
+        print(name.." not found")
+      else
+        unregisterSymbol(name)
+        registerSymbol(name,resultSet[index])
+        resultSet.destroy()
+      end
+  else
+    if(getModuleSize(module) == nil) then
+      print("Module "..module.." not found")
+    else
+      local memScanner = createMemScan()
+      local memFoundList = createFoundList(memScanner)
+      memScanner.firstScan(
+        soExactValue,vtByteArray,rtRounded,bytes,nil,
+        getAddress(module),(getAddress(module)+getModuleSize(module)),"",
+        fsmNotAligned,"",true,false,false,false)
+      memScanner.waitTillDone()
+      memFoundList.initialize()
+        if(memFoundList.Count == 0) then
+          unregisterSymbol(name)
+          print(name.." in module "..module.." not found")
+        else
+          unregisterSymbol(name)
+          registerSymbol(name,memFoundList.Address[index])
+        end
+      memScanner.destroy()
+      memFoundList.destroy()
+    end
+  end
+end
+</LuaScript>
+</CheatTable>
+

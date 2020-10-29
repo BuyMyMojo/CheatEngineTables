@@ -1,0 +1,2102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>98</ID>
+      <Description>"Inf Health"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(infHealth,AVGame-Win64-Shipping.exe,40 55 53 56 41 54 48 8D AC 24 28)
+registersymbol(infHealth)
+alloc(newinfHealth,100,infHealth)
+label(codeinfHealth)
+label(returninfHealth)
+
+newinfHealth:
+  test rcx,rcx                   //Needed in case rcx does not contain an address
+  je  codeinfHealth
+  cmp byte ptr [rcx+8],48
+  jne codeinfHealth
+  push rax
+  mov  rax,[rcx+154]
+  mov  [rcx+158],rax
+  xor  rax,rax
+  mov  [rcx+15C],rax
+  pop  rax
+  ret
+codeinfHealth:
+  push rbp
+  push rbx
+  push rsi
+  push r12
+  jmp returninfHealth
+
+infHealth:
+  jmp newinfHealth
+  nop
+returninfHealth:
+
+[DISABLE]
+infHealth:
+  db 40 55 53 56 41 54
+
+unregistersymbol(infHealth)
+dealloc(newinfHealth)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+40B050
+
+"AVGame-Win64-Shipping.exe"+40B035: 74 12                       -  je AVGame-Win64-Shipping.exe+40B049
+"AVGame-Win64-Shipping.exe"+40B037: 48 8B 03                    -  mov rax,[rbx]
+"AVGame-Win64-Shipping.exe"+40B03A: 48 8B CB                    -  mov rcx,rbx
+"AVGame-Win64-Shipping.exe"+40B03D: 48 83 C4 20                 -  add rsp,20
+"AVGame-Win64-Shipping.exe"+40B041: 5B                          -  pop rbx
+"AVGame-Win64-Shipping.exe"+40B042: 48 FF A0 40 06 00 00        -  jmp qword ptr [rax+00000640]
+"AVGame-Win64-Shipping.exe"+40B049: 48 83 C4 20                 -  add rsp,20
+"AVGame-Win64-Shipping.exe"+40B04D: 5B                          -  pop rbx
+"AVGame-Win64-Shipping.exe"+40B04E: C3                          -  ret 
+"AVGame-Win64-Shipping.exe"+40B04F: CC                          -  int 3 
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+40B050: 40 55                       -  push rbp
+"AVGame-Win64-Shipping.exe"+40B052: 53                          -  push rbx
+"AVGame-Win64-Shipping.exe"+40B053: 56                          -  push rsi
+"AVGame-Win64-Shipping.exe"+40B054: 41 54                       -  push r12
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+40B056: 48 8D AC 24 28 FF FF FF     -  lea rbp,[rsp-000000D8]
+"AVGame-Win64-Shipping.exe"+40B05E: 48 81 EC F8 01 00 00        -  sub rsp,000001F8
+"AVGame-Win64-Shipping.exe"+40B065: 48 8B B1 78 02 00 00        -  mov rsi,[rcx+00000278]
+"AVGame-Win64-Shipping.exe"+40B06C: 4D 8B E1                    -  mov r12,r9
+"AVGame-Win64-Shipping.exe"+40B06F: 44 0F 29 84 24 C0 01 00 00  -  movaps [rsp+000001C0],xmm8
+"AVGame-Win64-Shipping.exe"+40B078: 48 8B D9                    -  mov rbx,rcx
+"AVGame-Win64-Shipping.exe"+40B07B: 44 0F 28 C2                 -  movaps xmm8,xmm2
+"AVGame-Win64-Shipping.exe"+40B07F: 80 BE 5C 08 00 00 00        -  cmp byte ptr [rsi+0000085C],00
+"AVGame-Win64-Shipping.exe"+40B086: 74 33                       -  je AVGame-Win64-Shipping.exe+40B0BB
+"AVGame-Win64-Shipping.exe"+40B088: 48 8B 8E A0 08 00 00        -  mov rcx,[rsi+000008A0]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"One Hit Kills"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(oneHitKills,AVGame-Win64-Shipping.exe,F3 0F 5C C7 F3 0F 11 83 58 01 00 00 80)
+registersymbol(oneHitKills)
+
+oneHitKills:
+  xorps xmm0,xmm0
+  nop
+
+[DISABLE]
+oneHitKills:
+  db F3 0F 5C C7 F3 0F 11 83 58 01 00 00
+
+unregistersymbol(oneHitKills)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+40C13C
+
+"AVGame-Win64-Shipping.exe"+40C109: 80 BB 64 01 00 00 01        -  cmp byte ptr [rbx+00000164],01
+"AVGame-Win64-Shipping.exe"+40C110: 73 07                       -  jae AVGame-Win64-Shipping.exe+40C119
+"AVGame-Win64-Shipping.exe"+40C112: C6 83 64 01 00 00 01        -  mov byte ptr [rbx+00000164],01
+"AVGame-Win64-Shipping.exe"+40C119: 49 8B 8E 68 0D 00 00        -  mov rcx,[r14+00000D68]
+"AVGame-Win64-Shipping.exe"+40C120: 83 B9 10 04 00 00 00        -  cmp dword ptr [rcx+00000410],00
+"AVGame-Win64-Shipping.exe"+40C127: 7F 1F                       -  jg AVGame-Win64-Shipping.exe+40C148
+"AVGame-Win64-Shipping.exe"+40C129: 48 8B 01                    -  mov rax,[rcx]
+"AVGame-Win64-Shipping.exe"+40C12C: FF 90 E8 04 00 00           -  call qword ptr [rax+000004E8]
+"AVGame-Win64-Shipping.exe"+40C132: EB 14                       -  jmp AVGame-Win64-Shipping.exe+40C148
+"AVGame-Win64-Shipping.exe"+40C134: F3 0F 10 83 58 01 00 00     -  movss xmm0,[rbx+00000158]
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+40C13C: F3 0F 5C C7                 -  subss xmm0,xmm7
+"AVGame-Win64-Shipping.exe"+40C140: F3 0F 11 83 58 01 00 00     -  movss [rbx+00000158],xmm0
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+40C148: 80 BD 00 01 00 00 00        -  cmp byte ptr [rbp+00000100],00
+"AVGame-Win64-Shipping.exe"+40C14F: 0F 28 C7                    -  movaps xmm0,xmm7
+"AVGame-Win64-Shipping.exe"+40C152: 44 0F 28 CF                 -  movaps xmm9,xmm7
+"AVGame-Win64-Shipping.exe"+40C156: F3 0F 58 83 68 01 00 00     -  addss xmm0,[rbx+00000168]
+"AVGame-Win64-Shipping.exe"+40C15E: F3 0F 11 83 68 01 00 00     -  movss [rbx+00000168],xmm0
+"AVGame-Win64-Shipping.exe"+40C166: 0F 28 C7                    -  movaps xmm0,xmm7
+"AVGame-Win64-Shipping.exe"+40C169: 74 12                       -  je AVGame-Win64-Shipping.exe+40C17D
+"AVGame-Win64-Shipping.exe"+40C16B: F3 0F 58 83 70 01 00 00     -  addss xmm0,[rbx+00000170]
+"AVGame-Win64-Shipping.exe"+40C173: F3 0F 11 83 70 01 00 00     -  movss [rbx+00000170],xmm0
+"AVGame-Win64-Shipping.exe"+40C17B: EB 10                       -  jmp AVGame-Win64-Shipping.exe+40C18D
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Inf Stamina"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(infStamina,AVGame-Win64-Shipping.exe,40 53 48 83 EC 40 0F 29 74 24 30 48 8B D9 0F 29 7C 24 20 0F 28 F1)
+registersymbol(infStamina)
+
+infStamina:
+  ret
+
+[DISABLE]
+infStamina:
+  db 40 53 48 83 EC 40
+
+unregistersymbol(infStamina)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+3FBC10
+
+"AVGame-Win64-Shipping.exe"+3FBC06: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3FBC07: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3FBC08: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3FBC09: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3FBC0A: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3FBC0B: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3FBC0C: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3FBC0D: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3FBC0E: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3FBC0F: CC                       -  int 3 
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+3FBC10: 40 53                    -  push rbx
+"AVGame-Win64-Shipping.exe"+3FBC12: 48 83 EC 40              -  sub rsp,40
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+3FBC16: 0F 29 74 24 30           -  movaps [rsp+30],xmm6
+"AVGame-Win64-Shipping.exe"+3FBC1B: 48 8B D9                 -  mov rbx,rcx
+"AVGame-Win64-Shipping.exe"+3FBC1E: 0F 29 7C 24 20           -  movaps [rsp+20],xmm7
+"AVGame-Win64-Shipping.exe"+3FBC23: 0F 28 F1                 -  movaps xmm6,xmm1
+"AVGame-Win64-Shipping.exe"+3FBC26: 0F 57 FF                 -  xorps xmm7,xmm7
+"AVGame-Win64-Shipping.exe"+3FBC29: 0F 2F F7                 -  comiss xmm6,xmm7
+"AVGame-Win64-Shipping.exe"+3FBC2C: 0F 86 BF 00 00 00        -  jbe AVGame-Win64-Shipping.exe+3FBCF1
+"AVGame-Win64-Shipping.exe"+3FBC32: 48 8B 81 E8 00 00 00     -  mov rax,[rcx+000000E8]
+"AVGame-Win64-Shipping.exe"+3FBC39: 48 85 C0                 -  test rax,rax
+"AVGame-Win64-Shipping.exe"+3FBC3C: 75 05                    -  jne AVGame-Win64-Shipping.exe+3FBC43
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>50</ID>
+      <Description>"Inf Blood"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(infBlood,AVGame-Win64-Shipping.exe,00 CC CC CC 40 53 48 83 EC 40 0F)
+registersymbol(infBlood)
+
+infBlood+04:
+  push  rax
+  mov rax,[rcx+FC]
+  mov [rcx+100],rax
+  pop rax
+  ret
+
+[DISABLE]
+infBlood+04:
+  db 40 53 48 83 EC 40 0F 29 74 24 30 48 8B D9 0F 29 7C 24 20 0F 57 F6
+
+unregistersymbol(infBlood)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+3FBB60
+
+"AVGame-Win64-Shipping.exe"+3FBB42: C6 83 48 07 00 00 00     -  mov byte ptr [rbx+00000748],00
+"AVGame-Win64-Shipping.exe"+3FBB49: 33 D2                    -  xor edx,edx
+"AVGame-Win64-Shipping.exe"+3FBB4B: E8 40 A4 C1 01           -  call AVGame-Win64-Shipping.exe+2015F90
+"AVGame-Win64-Shipping.exe"+3FBB50: 48 8B CB                 -  mov rcx,rbx
+"AVGame-Win64-Shipping.exe"+3FBB53: 48 83 C4 20              -  add rsp,20
+"AVGame-Win64-Shipping.exe"+3FBB57: 5B                       -  pop rbx
+"AVGame-Win64-Shipping.exe"+3FBB58: E9 B3 A6 1A 00           -  jmp AVGame-Win64-Shipping.exe+5A6210
+"AVGame-Win64-Shipping.exe"+3FBB5D: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3FBB5E: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3FBB5F: CC                       -  int 3 
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+3FBB60: 40 53                    -  push rbx
+"AVGame-Win64-Shipping.exe"+3FBB62: 48 83 EC 40              -  sub rsp,40
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+3FBB66: 0F 29 74 24 30           -  movaps [rsp+30],xmm6
+"AVGame-Win64-Shipping.exe"+3FBB6B: 48 8B D9                 -  mov rbx,rcx
+"AVGame-Win64-Shipping.exe"+3FBB6E: 0F 29 7C 24 20           -  movaps [rsp+20],xmm7
+"AVGame-Win64-Shipping.exe"+3FBB73: 0F 57 F6                 -  xorps xmm6,xmm6
+"AVGame-Win64-Shipping.exe"+3FBB76: 0F 28 F9                 -  movaps xmm7,xmm1
+"AVGame-Win64-Shipping.exe"+3FBB79: 0F 2F FE                 -  comiss xmm7,xmm6
+"AVGame-Win64-Shipping.exe"+3FBB7C: 76 77                    -  jna AVGame-Win64-Shipping.exe+3FBBF5
+"AVGame-Win64-Shipping.exe"+3FBB7E: 48 8B 81 E8 00 00 00     -  mov rax,[rcx+000000E8]
+"AVGame-Win64-Shipping.exe"+3FBB85: 48 85 C0                 -  test rax,rax
+"AVGame-Win64-Shipping.exe"+3FBB88: 75 05                    -  jne AVGame-Win64-Shipping.exe+3FBB8F
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>107</ID>
+      <Description>"Inf Ammo"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(infAmmo,AVGame-Win64-Shipping.exe,2B C1 85 C0 41 0F 4E C5)
+registersymbol(infAmmo)
+
+infAmmo:
+  nop 2
+
+[DISABLE]
+infAmmo:
+  db 2B C1 85 C0 41 0F 4E C5
+
+unregistersymbol(infAmmo)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+532307
+
+"AVGame-Win64-Shipping.exe"+5322E4: FF 81 64 08 00 00     -  inc [rcx+00000864]
+"AVGame-Win64-Shipping.exe"+5322EA: 48 8B D9              -  mov rbx,rcx
+"AVGame-Win64-Shipping.exe"+5322ED: 8B 89 7C 08 00 00     -  mov ecx,[rcx+0000087C]
+"AVGame-Win64-Shipping.exe"+5322F3: 45 33 ED              -  xor r13d,r13d
+"AVGame-Win64-Shipping.exe"+5322F6: 4C 8B E2              -  mov r12,rdx
+"AVGame-Win64-Shipping.exe"+5322F9: 85 C9                 -  test ecx,ecx
+"AVGame-Win64-Shipping.exe"+5322FB: 7E 18                 -  jle AVGame-Win64-Shipping.exe+532315
+"AVGame-Win64-Shipping.exe"+5322FD: 8B 83 78 08 00 00     -  mov eax,[rbx+00000878]
+"AVGame-Win64-Shipping.exe"+532303: 85 C0                 -  test eax,eax
+"AVGame-Win64-Shipping.exe"+532305: 7E 0E                 -  jle AVGame-Win64-Shipping.exe+532315
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+532307: 2B C1                 -  sub eax,ecx
+"AVGame-Win64-Shipping.exe"+532309: 85 C0                 -  test eax,eax
+"AVGame-Win64-Shipping.exe"+53230B: 41 0F 4E C5           -  cmovle eax,r13d
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+53230F: 89 83 78 08 00 00     -  mov [rbx+00000878],eax
+"AVGame-Win64-Shipping.exe"+532315: 48 8D 8B 78 04 00 00  -  lea rcx,[rbx+00000478]
+"AVGame-Win64-Shipping.exe"+53231C: E8 4F D5 63 00        -  call AVGame-Win64-Shipping.exe+B6F870
+"AVGame-Win64-Shipping.exe"+532321: 48 8B F8              -  mov rdi,rax
+"AVGame-Win64-Shipping.exe"+532324: 48 85 C0              -  test rax,rax
+"AVGame-Win64-Shipping.exe"+532327: 74 3D                 -  je AVGame-Win64-Shipping.exe+532366
+"AVGame-Win64-Shipping.exe"+532329: E8 32 D9 05 00        -  call AVGame-Win64-Shipping.exe+58FC60
+"AVGame-Win64-Shipping.exe"+53232E: 48 8B 4F 10           -  mov rcx,[rdi+10]
+"AVGame-Win64-Shipping.exe"+532332: 48 05 88 00 00 00     -  add rax,00000088
+"AVGame-Win64-Shipping.exe"+532338: 48 63 50 08           -  movsxd  rdx,dword ptr [rax+08]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>130</ID>
+      <Description>"Inf Items"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-25
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(craftCost,AVGame-Win64-Shipping.exe,2B C7 89 82 70 04 00 00)
+registersymbol(craftCost)
+
+craftCost:
+  nop 2
+
+[DISABLE]
+craftCost:
+  db 2B C7 89 82 70 04 00 00
+
+unregistersymbol(craftCost)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+40E67B
+
+"AVGame-Win64-Shipping.exe"+40E65A: 0F 29 74 24 30                 -  movaps [rsp+30],xmm6
+"AVGame-Win64-Shipping.exe"+40E65F: 85 FF                          -  test edi,edi
+"AVGame-Win64-Shipping.exe"+40E661: 79 0A                          -  jns AVGame-Win64-Shipping.exe+40E66D
+"AVGame-Win64-Shipping.exe"+40E663: 66 0F 6E B2 70 04 00 00        -  movd xmm6,[rdx+00000470]
+"AVGame-Win64-Shipping.exe"+40E66B: EB 52                          -  jmp AVGame-Win64-Shipping.exe+40E6BF
+"AVGame-Win64-Shipping.exe"+40E66D: 8B 82 70 04 00 00              -  mov eax,[rdx+00000470]
+"AVGame-Win64-Shipping.exe"+40E673: 85 C0                          -  test eax,eax
+"AVGame-Win64-Shipping.exe"+40E675: 78 40                          -  js AVGame-Win64-Shipping.exe+40E6B7
+"AVGame-Win64-Shipping.exe"+40E677: 3B F8                          -  cmp edi,eax
+"AVGame-Win64-Shipping.exe"+40E679: 7F 40                          -  jg AVGame-Win64-Shipping.exe+40E6BB
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+40E67B: 2B C7                          -  sub eax,edi
+"AVGame-Win64-Shipping.exe"+40E67D: 89 82 70 04 00 00              -  mov [rdx+00000470],eax
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+40E683: 45 84 F6                       -  test r14l,r14l
+"AVGame-Win64-Shipping.exe"+40E686: 74 2F                          -  je AVGame-Win64-Shipping.exe+40E6B7
+"AVGame-Win64-Shipping.exe"+40E688: C6 45 E6 00                    -  mov byte ptr [rbp-1A],00
+"AVGame-Win64-Shipping.exe"+40E68C: 48 8D 55 E0                    -  lea rdx,[rbp-20]
+"AVGame-Win64-Shipping.exe"+40E690: 48 89 5D E8                    -  mov [rbp-18],rbx
+"AVGame-Win64-Shipping.exe"+40E694: 8B C7                          -  mov eax,edi
+"AVGame-Win64-Shipping.exe"+40E696: F7 D8                          -  neg eax
+"AVGame-Win64-Shipping.exe"+40E698: 89 45 E0                       -  mov [rbp-20],eax
+"AVGame-Win64-Shipping.exe"+40E69B: 83 F8 01                       -  cmp eax,01
+"AVGame-Win64-Shipping.exe"+40E69E: 0F 9F 45 E5                    -  setg byte ptr [rbp-1B]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>56</ID>
+      <Description>"Modify Pickup Amount"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(itemPickup,AVGame-Win64-Shipping.exe,44 89 44 24 18 48 89 54 24 10 55 56 57 48 8D)
+registersymbol(itemPickup)
+registersymbol(pickupMultVal)
+alloc(newitemPickup,100,itemPickup)
+label(codeitemPickup)
+label(returnitemPickup)
+label(pickupMultVal)
+newitemPickup:
+  imul r8d,[pickupMultVal]
+codeitemPickup:
+  mov [rsp+18],r8d
+  jmp returnitemPickup
+pickupMultVal:
+  dd 1
+itemPickup:
+  jmp newitemPickup
+returnitemPickup:
+
+[DISABLE]
+itemPickup:
+  db 44 89 44 24 18
+
+unregistersymbol(itemPickup)
+unregistersymbol(pickupMultVal)
+dealloc(newitemPickup)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+3F6C60
+
+"AVGame-Win64-Shipping.exe"+3F6C56: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3F6C57: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3F6C58: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3F6C59: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3F6C5A: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3F6C5B: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3F6C5C: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3F6C5D: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3F6C5E: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+3F6C5F: CC                       -  int 3 
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+3F6C60: 44 89 44 24 18           -  mov [rsp+18],r8d
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+3F6C65: 48 89 54 24 10           -  mov [rsp+10],rdx
+"AVGame-Win64-Shipping.exe"+3F6C6A: 55                       -  push rbp
+"AVGame-Win64-Shipping.exe"+3F6C6B: 56                       -  push rsi
+"AVGame-Win64-Shipping.exe"+3F6C6C: 57                       -  push rdi
+"AVGame-Win64-Shipping.exe"+3F6C6D: 48 8D 6C 24 D9           -  lea rbp,[rsp-27]
+"AVGame-Win64-Shipping.exe"+3F6C72: 48 81 EC E0 00 00 00     -  sub rsp,000000E0
+"AVGame-Win64-Shipping.exe"+3F6C79: 49 8B F9                 -  mov rdi,r9
+"AVGame-Win64-Shipping.exe"+3F6C7C: 48 8B F1                 -  mov rsi,rcx
+"AVGame-Win64-Shipping.exe"+3F6C7F: 48 85 D2                 -  test rdx,rdx
+"AVGame-Win64-Shipping.exe"+3F6C82: 74 1F                    -  je AVGame-Win64-Shipping.exe+3F6CA3
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>57</ID>
+          <Description>"Multiplier"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>pickupMultVal</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>53</ID>
+      <Description>"No Cooldowns"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(noCooldowns,AVGame-Win64-Shipping.exe,CC CC CC CC CC CC CC CC CC 40 53 48 63 81 10 0D 00 00)
+registersymbol(noCooldowns)
+
+noCooldowns+09:
+  ret
+
+[DISABLE]
+noCooldowns+09:
+  db 40 53 48 63 81 10 0D 00 00
+
+unregistersymbol(noCooldowns)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+43B4E0
+
+"AVGame-Win64-Shipping.exe"+43B4D6: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+43B4D7: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+43B4D8: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+43B4D9: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+43B4DA: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+43B4DB: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+43B4DC: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+43B4DD: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+43B4DE: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+43B4DF: CC                    -  int 3 
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+43B4E0: 40 53                 -  push rbx
+"AVGame-Win64-Shipping.exe"+43B4E2: 48 63 81 10 0D 00 00  -  movsxd  rax,dword ptr [rcx+00000D10]
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+43B4E9: 45 33 D2              -  xor r10d,r10d
+"AVGame-Win64-Shipping.exe"+43B4EC: 48 8B D9              -  mov rbx,rcx
+"AVGame-Win64-Shipping.exe"+43B4EF: 85 C0                 -  test eax,eax
+"AVGame-Win64-Shipping.exe"+43B4F1: 78 52                 -  js AVGame-Win64-Shipping.exe+43B545
+"AVGame-Win64-Shipping.exe"+43B4F3: 48 89 7C 24 10        -  mov [rsp+10],rdi
+"AVGame-Win64-Shipping.exe"+43B4F8: 4C 8B D8              -  mov r11,rax
+"AVGame-Win64-Shipping.exe"+43B4FB: 48 8B B9 30 0D 00 00  -  mov rdi,[rcx+00000D30]
+"AVGame-Win64-Shipping.exe"+43B502: 45 8B CA              -  mov r9d,r10d
+"AVGame-Win64-Shipping.exe"+43B505: 4C 8B C7              -  mov r8,rdi
+"AVGame-Win64-Shipping.exe"+43B508: 41 0F B6 00           -  movzx eax,byte ptr [r8]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>86956</ID>
+      <Description>"Inf Trader Items"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-27
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(traderItems,AVGame-Win64-Shipping.exe,29 6C CA 08 44 38 AC 24 B0 00 00 00)
+registersymbol(traderItems)
+
+traderItems:
+  nop 4
+
+[DISABLE]
+traderItems:
+  db 29 6C CA 08
+
+unregistersymbol(traderItems)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+40ECBD
+
+"AVGame-Win64-Shipping.exe"+40EC93: 74 E5                    -  je AVGame-Win64-Shipping.exe+40EC7A
+"AVGame-Win64-Shipping.exe"+40EC95: 49 8B 16                 -  mov rdx,[r14]
+"AVGame-Win64-Shipping.exe"+40EC98: 48 63 CE                 -  movsxd  rcx,esi
+"AVGame-Win64-Shipping.exe"+40EC9B: 48 03 C9                 -  add rcx,rcx
+"AVGame-Win64-Shipping.exe"+40EC9E: 44 38 6C CA 0C           -  cmp [rdx+rcx*8+0C],r13l
+"AVGame-Win64-Shipping.exe"+40ECA3: 0F 85 10 FF FF FF        -  jne AVGame-Win64-Shipping.exe+40EBB9
+"AVGame-Win64-Shipping.exe"+40ECA9: 44 39 6C CA 08           -  cmp [rdx+rcx*8+08],r13d
+"AVGame-Win64-Shipping.exe"+40ECAE: 0F 8C 05 FF FF FF        -  jl AVGame-Win64-Shipping.exe+40EBB9
+"AVGame-Win64-Shipping.exe"+40ECB4: 39 6C CA 08              -  cmp [rdx+rcx*8+08],ebp
+"AVGame-Win64-Shipping.exe"+40ECB8: 0F 4E 6C CA 08           -  cmovle ebp,[rdx+rcx*8+08]
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+40ECBD: 29 6C CA 08              -  sub [rdx+rcx*8+08],ebp
+"AVGame-Win64-Shipping.exe"+40ECC1: 44 38 AC 24 B0 00 00 00  -  cmp [rsp+000000B0],r13l
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+40ECC9: 0F 84 EA FE FF FF        -  je AVGame-Win64-Shipping.exe+40EBB9
+"AVGame-Win64-Shipping.exe"+40ECCF: 49 8B 04 24              -  mov rax,[r12]
+"AVGame-Win64-Shipping.exe"+40ECD3: 49 8B CC                 -  mov rcx,r12
+"AVGame-Win64-Shipping.exe"+40ECD6: FF 90 38 01 00 00        -  call qword ptr [rax+00000138]
+"AVGame-Win64-Shipping.exe"+40ECDC: 48 8B 98 48 01 00 00     -  mov rbx,[rax+00000148]
+"AVGame-Win64-Shipping.exe"+40ECE3: 48 85 DB                 -  test rbx,rbx
+"AVGame-Win64-Shipping.exe"+40ECE6: 0F 84 CD FE FF FF        -  je AVGame-Win64-Shipping.exe+40EBB9
+"AVGame-Win64-Shipping.exe"+40ECEC: E8 3F 87 35 01           -  call AVGame-Win64-Shipping.exe+1767430
+"AVGame-Win64-Shipping.exe"+40ECF1: 48 8B 53 10              -  mov rdx,[rbx+10]
+"AVGame-Win64-Shipping.exe"+40ECF5: 4C 8D 80 88 00 00 00     -  lea r8,[rax+00000088]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>120</ID>
+      <Description>"No Trade Cost"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(noCostItems,AVGame-Win64-Shipping.exe,F3 0F 5C C1 F3 0F 2D C0 D1 F8 41)
+registersymbol(noCostItems)
+
+noCostItems:
+  xorps xmm0,xmm0
+  nop
+
+[DISABLE]
+noCostItems:
+  db F3 0F 5C C1 F3 0F 2D C0
+
+noCostItemCheck:
+  db F3 0F 59 CE 0F 2F D1
+
+unregistersymbol(noCostItems)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+3FAEAB
+
+"AVGame-Win64-Shipping.exe"+3FAE80: 7E 6B                    -  jle AVGame-Win64-Shipping.exe+3FAEED
+"AVGame-Win64-Shipping.exe"+3FAE82: F3 0F 10 05 C2 7F CA 02  -  movss xmm0,[AVGame-Win64-Shipping.exe+30A2E4C]
+"AVGame-Win64-Shipping.exe"+3FAE8A: 44 8B CE                 -  mov r9d,esi
+"AVGame-Win64-Shipping.exe"+3FAE8D: 66 0F 6E CE              -  movd xmm1,esi
+"AVGame-Win64-Shipping.exe"+3FAE91: 4C 8B C5                 -  mov r8,rbp
+"AVGame-Win64-Shipping.exe"+3FAE94: 0F 5B C9                 -  cvtdq2ps xmm1,xmm1
+"AVGame-Win64-Shipping.exe"+3FAE97: 48 8B CB                 -  mov rcx,rbx
+"AVGame-Win64-Shipping.exe"+3FAE9A: C6 44 24 20 01           -  mov byte ptr [rsp+20],01
+"AVGame-Win64-Shipping.exe"+3FAE9F: F3 0F 59 CE              -  mulss xmm1,xmm6
+"AVGame-Win64-Shipping.exe"+3FAEA3: F3 0F 59 0D 65 01 C7 02  -  mulss xmm1,[AVGame-Win64-Shipping.exe+306B010]
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+3FAEAB: F3 0F 5C C1              -  subss xmm0,xmm1
+"AVGame-Win64-Shipping.exe"+3FAEAF: F3 0F 2D C0              -  cvtss2si eax,xmm0
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+3FAEB3: D1 F8                    -  sar eax,1
+"AVGame-Win64-Shipping.exe"+3FAEB5: 41 01 84 24 4C 04 00 00  -  add [r12+0000044C],eax
+"AVGame-Win64-Shipping.exe"+3FAEBD: 49 8B 56 10              -  mov rdx,[r14+10]
+"AVGame-Win64-Shipping.exe"+3FAEC1: E8 5A 3A 01 00           -  call AVGame-Win64-Shipping.exe+40E920
+"AVGame-Win64-Shipping.exe"+3FAEC6: B0 01                    -  mov al,01
+"AVGame-Win64-Shipping.exe"+3FAEC8: 48 8B 9C 24 98 00 00 00  -  mov rbx,[rsp+00000098]
+"AVGame-Win64-Shipping.exe"+3FAED0: 0F 28 74 24 50           -  movaps xmm6,[rsp+50]
+"AVGame-Win64-Shipping.exe"+3FAED5: 4C 8B A4 24 A8 00 00 00  -  mov r12,[rsp+000000A8]
+"AVGame-Win64-Shipping.exe"+3FAEDD: 4C 8B 7C 24 60           -  mov r15,[rsp+60]
+"AVGame-Win64-Shipping.exe"+3FAEE2: 48 83 C4 68              -  add rsp,68
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>87179</ID>
+      <Description>"Inventory and Weapon Pointers (Enable the one you want and enter your inventory to populate)"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript Async="1">{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-28
+	Author	: aSwedishMagyar
+}
+{$lua}
+weapNum = 0
+weaponAddList = {}
+weaponTypeNames = {'One Handed','Two Handed','Off-Hand','Firearm'}
+weaponStatNames = {'Damage Multiplier','Base Fire Rate/Weapon Speed','Base Clip Size','Base Reload Speed'}
+weaponStatOffsets = {0x510,0x780,0x870,0x910}
+weaponStatTypes = {4,4,2,4}
+headerList = {'?','Ammo','Serums','Ingredients','Quest Items','?','Treatments','Junk'}
+baseOffsets = {0,4,6,8,10,12,14,16}
+function debugger_onBreakpoint()
+	local bytes = RIP
+	if bytes == getAddress('weaponUpdate') then
+        local index = 1
+        local duplicate = false
+        while index &lt;= weapNum do
+            if RDX == weaponAddList[index] then
+               return 1
+            end
+            index = index + 1
+        end
+        if weapNum &lt; 1 then createWeaponHeaders() end
+		weapNum = weapNum + 1
+        weaponAddList[weapNum] = RDX
+		createWeaponList(RDX,weapNum)
+	elseif bytes == getAddress('getBaseInventory') then
+        createInventoryList(RAX)
+        debug_removeBreakpoint(bytes)
+    end
+	return 1
+end
+
+function createWeaponHeaders()
+    local i = 1
+    local addList = getAddressList()
+    local topRec = addList.getMemoryRecordByDescription("Populate Weapon Pointers")
+    while i &lt;= 4 do
+		local newHeader = addList.createMemoryRecord()
+		newHeader.isGroupHeader = true
+		newHeader.Options = '[moHideChildren]'
+		newHeader.setDescription(weaponTypeNames[i])
+		newHeader.appendToEntry(topRec)
+		i = i + 1
+	end
+end
+
+function createWeaponList(bAddress,count)
+    local i = 1
+	local j = 1
+    local addList = getAddressList()
+    local weapCheck1 = readInteger(bAddress+0x2E0)
+    local weapCheck2 = readInteger(bAddress+0x6B8)
+    --local weapCheck3 = readInteger(bAddress+0x79C)
+    if weapCheck1 == 1 then weapType = 4
+    elseif weapCheck2 == 2 then weapType = 3
+    elseif weapCheck2 == 6 then weapType = 1
+    elseif weapCheck2 == 8 then weapType = 2 end
+    local topRec = addList.getMemoryRecordByDescription(weaponTypeNames[weapType])
+	newRecWeap = addList.createMemoryRecord()
+	newRecWeap.isGroupHeader = true
+	newRecWeap.Options = '[moHideChildren]'
+	newRecWeap.setDescription('Weapon '..tostring(count))
+    newRecWeap.appendToEntry(topRec)
+	while j &lt;= 4 do
+        if j &gt; 2 and weapType ~= 4 then
+            return
+        end
+		newRec1 = addList.createMemoryRecord()
+		newRec1.Type = weaponStatTypes[j]
+		newRec1.appendToEntry(newRecWeap)
+		newRec1.setDescription(weaponStatNames[j])
+		newRec1.setAddress(bAddress + weaponStatOffsets[j])
+		j = j + 1
+	end
+end
+function createInventoryList(bAddress)
+   local i = 1
+   local newHeaders = {}
+   local baseAddLua = {}
+   local nAddress = {}
+   local addList = getAddressList()
+   local topRec = addList.getMemoryRecordByDescription("Populate Inventory Pointers")
+   while i &lt;= 8 do
+      newHeaders[i] = addList.createMemoryRecord()
+      newHeaders[i].isGroupHeader = true
+      newHeaders[i].Options = '[moHideChildren]'
+      newHeaders[i].setDescription(headerList[i])
+      newHeaders[i].appendToEntry(topRec)
+      baseAddLua[i] = readQword(bAddress+baseOffsets[i]*8)
+      nAddress[i] = readInteger(bAddress+baseOffsets[i]*8+8)
+      i = i + 1
+   end
+
+   i = 1
+   while i &lt;= 8 do
+      local j = 1
+      while j &lt;= nAddress[i] do
+         --Current Quantity
+         newRec1 = addList.createMemoryRecord()
+         newRec1.appendToEntry(newHeaders[i])
+         newRec1.setDescription('Item ' .. tostring(j) .. ' Quantity')
+         newRec1.setAddress(baseAddLua[i]+(j-1)*8)
+         newRec1.setOffsetCount(1)
+         newRec1.setOffset(0,0x470)
+         --Max Quantity
+         newRec2 = addList.createMemoryRecord()
+         newRec2.appendToEntry(newHeaders[i])
+         newRec2.setDescription('Item ' .. tostring(j) .. ' Max Quantity')
+         newRec2.setAddress(baseAddLua[i]+(j-1)*8)
+         newRec2.setOffsetCount(1)
+         newRec2.setOffset(0,0x46C)
+         j = j + 1
+      end
+      i = i + 1
+   end
+end
+{$asm}
+[ENABLE]
+aobscanmodule(weaponUpdate,AVGame-Win64-Shipping.exe,48 8B 02 4C 8B C2 48 8B D1 49 8B C8 48 FF A0 00)
+registersymbol(weaponUpdate)
+aobscanmodule(getBaseInventory,AVGame-Win64-Shipping.exe,48 8B 04 D0 48 8B 04 C8 E9)
+registersymbol(getBaseInventory)
+
+[DISABLE]
+
+unregistersymbol(weaponUpdate)
+unregistersymbol(getBaseInventory)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>87127</ID>
+          <Description>"Populate Weapon Pointers"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$lua}
+[ENABLE]
+weaponGet = getAddressSafe('weaponUpdate')
+if weaponGet ~= nil then
+    weapNum = 0
+    debug_setBreakpoint(weaponGet)
+else
+    GetLuaEngine().MenuItem5.doClick()
+    print('weaponUpdate has not been Registered')
+    local unCheckMe=createTimer()
+    unCheckMe.Interval=100
+    unCheckMe.OnTimer=function()
+       memrec.Active=false
+       unCheckMe.destroy()
+    end
+end
+[Disable]
+addList = getAddressList()
+local topRec = addList.getMemoryRecordByDescription("Populate Weapon Pointers")
+if topRec ~= nil then
+	while topRec.Count &gt; 0 do
+		topRec.Child[0]:Delete()
+	end
+end
+debug_removeBreakpoint(getAddressSafe('weaponUpdate'))
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>87187</ID>
+          <Description>"Populate Inventory Pointers"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">{$lua}
+[ENABLE]
+local inventoryAddr = getAddressSafe('getBaseInventory')
+if inventoryAddr ~= nil then
+    weapNum = 0
+    debug_setBreakpoint(inventoryAddr)
+else
+    GetLuaEngine().MenuItem5.doClick()
+    print('getBaseInventory has not been Registered')
+    local unCheckMe=createTimer()
+    unCheckMe.Interval=100
+    unCheckMe.OnTimer=function()
+       memrec.Active=false
+       unCheckMe.destroy()
+    end
+end
+[Disable]
+local me = addList.getMemoryRecordByDescription("Populate Inventory Pointers")
+if me ~= nil then
+	while me.Count &gt; 0 do
+		me.Child[0]:Delete()
+	end
+end
+debug_removeBreakpoint(getAddressSafe('getBaseInventory'))
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>86938</ID>
+      <Description>"No Xp Cost"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-25
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(noXpCost,AVGame-Win64-Shipping.exe,41 29 95 B4 04 00 00)
+aobscanmodule(xpReturn,AVGame-Win64-Shipping.exe,45 01 85 B4 04 00 00)
+registersymbol(noXpCost)
+registersymbol(xpReturn)
+
+noXpCost:
+  add [r13+000004B0],edx
+
+xpReturn:
+  sub [r13+000004B0],r8d
+
+[DISABLE]
+noXpCost:
+  db 41 29 95 B4 04 00 00
+
+xpReturn:
+  db 45 01 85 B4 04 00 00
+
+unregistersymbol(noXpCost)
+unregistersymbol(xpReturn)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+43DEB8
+
+"AVGame-Win64-Shipping.exe"+43DE95: 44 8B 04 06              -  mov r8d,[rsi+rax]
+"AVGame-Win64-Shipping.exe"+43DE99: 48 8B 41 38              -  mov rax,[rcx+38]
+"AVGame-Win64-Shipping.exe"+43DE9D: 44 8B 3C 06              -  mov r15d,[rsi+rax]
+"AVGame-Win64-Shipping.exe"+43DEA1: 8B 44 24 24              -  mov eax,[rsp+24]
+"AVGame-Win64-Shipping.exe"+43DEA5: 85 C0                    -  test eax,eax
+"AVGame-Win64-Shipping.exe"+43DEA7: 0F 8E C5 00 00 00        -  jng AVGame-Win64-Shipping.exe+43DF72
+"AVGame-Win64-Shipping.exe"+43DEAD: 41 8B D7                 -  mov edx,r15d
+"AVGame-Win64-Shipping.exe"+43DEB0: 41 2B D0                 -  sub edx,r8d
+"AVGame-Win64-Shipping.exe"+43DEB3: 3B C2                    -  cmp eax,edx
+"AVGame-Win64-Shipping.exe"+43DEB5: 0F 4C D0                 -  cmovl edx,eax
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+43DEB8: 41 29 95 B4 04 00 00     -  sub [r13+000004B4],edx
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+43DEBF: 49 8B 86 20 0D 00 00     -  mov rax,[r14+00000D20]
+"AVGame-Win64-Shipping.exe"+43DEC6: 48 8B 8C 07 90 00 00 00  -  mov rcx,[rdi+rax+00000090]
+"AVGame-Win64-Shipping.exe"+43DECE: 01 14 31                 -  add [rcx+rsi],edx
+"AVGame-Win64-Shipping.exe"+43DED1: 49 8B 86 20 0D 00 00     -  mov rax,[r14+00000D20]
+"AVGame-Win64-Shipping.exe"+43DED8: 48 8B 8C 07 90 00 00 00  -  mov rcx,[rdi+rax+00000090]
+"AVGame-Win64-Shipping.exe"+43DEE0: 44 39 3C 0E              -  cmp [rsi+rcx],r15d
+"AVGame-Win64-Shipping.exe"+43DEE4: 0F 85 80 00 00 00        -  jne AVGame-Win64-Shipping.exe+43DF6A
+"AVGame-Win64-Shipping.exe"+43DEEA: 49 8B CD                 -  mov rcx,r13
+"AVGame-Win64-Shipping.exe"+43DEED: E8 FE 5E 03 00           -  call AVGame-Win64-Shipping.exe+473DF0
+"AVGame-Win64-Shipping.exe"+43DEF2: 49 8B 86 20 0D 00 00     -  mov rax,[r14+00000D20]
+}
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+43DF77
+
+"AVGame-Win64-Shipping.exe"+43DF51: 2B 51 34                 -  sub edx,[rcx+34]
+"AVGame-Win64-Shipping.exe"+43DF54: E8 07 70 E1 00           -  call AVGame-Win64-Shipping.exe+1254F60
+"AVGame-Win64-Shipping.exe"+43DF59: 48 8D 4D C0              -  lea rcx,[rbp-40]
+"AVGame-Win64-Shipping.exe"+43DF5D: E8 AE E0 63 00           -  call AVGame-Win64-Shipping.exe+A7C010
+"AVGame-Win64-Shipping.exe"+43DF62: 41 8B C4                 -  mov eax,r12d
+"AVGame-Win64-Shipping.exe"+43DF65: E9 F6 FD FF FF           -  jmp AVGame-Win64-Shipping.exe+43DD60
+"AVGame-Win64-Shipping.exe"+43DF6A: 41 BB 01 00 00 00        -  mov r11d,00000001
+"AVGame-Win64-Shipping.exe"+43DF70: EB BB                    -  jmp AVGame-Win64-Shipping.exe+43DF2D
+"AVGame-Win64-Shipping.exe"+43DF72: 45 85 C0                 -  test r8d,r8d
+"AVGame-Win64-Shipping.exe"+43DF75: 7E B9                    -  jle AVGame-Win64-Shipping.exe+43DF30
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+43DF77: 45 01 85 B4 04 00 00     -  add [r13+000004B4],r8d
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+43DF7E: 49 8B 86 20 0D 00 00     -  mov rax,[r14+00000D20]
+"AVGame-Win64-Shipping.exe"+43DF85: 48 8B 8C 07 90 00 00 00  -  mov rcx,[rdi+rax+00000090]
+"AVGame-Win64-Shipping.exe"+43DF8D: 44 89 24 0E              -  mov [rsi+rcx],r12d
+"AVGame-Win64-Shipping.exe"+43DF91: EB 9D                    -  jmp AVGame-Win64-Shipping.exe+43DF30
+"AVGame-Win64-Shipping.exe"+43DF93: CC                       -  int 3
+"AVGame-Win64-Shipping.exe"+43DF94: CC                       -  int 3
+"AVGame-Win64-Shipping.exe"+43DF95: CC                       -  int 3
+"AVGame-Win64-Shipping.exe"+43DF96: CC                       -  int 3
+"AVGame-Win64-Shipping.exe"+43DF97: CC                       -  int 3
+"AVGame-Win64-Shipping.exe"+43DF98: CC                       -  int 3
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>42</ID>
+      <Description>"Modify EXP Gain"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(expGain,AVGame-Win64-Shipping.exe,01 91 B0 04 00 00)
+registersymbol(expGain)
+registersymbol(xpMultVal)
+alloc(newexpGain,100,expGain)
+label(codeexpGain)
+label(returnexpGain)
+label(xpMultVal)
+newexpGain:
+  imul edx,[xpMultVal]
+codeexpGain:
+  add [rcx+000004B0],edx
+  jmp returnexpGain
+xpMultVal:
+  dd 1
+expGain:
+  jmp newexpGain
+  nop
+returnexpGain:
+
+[DISABLE]
+expGain:
+  db 01 91 B0 04 00 00
+
+unregistersymbol(expGain)
+unregistersymbol(xpMultVal)
+dealloc(newexpGain)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+456E98
+
+"AVGame-Win64-Shipping.exe"+456E89: C3                    -  ret 
+"AVGame-Win64-Shipping.exe"+456E8A: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+456E8B: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+456E8C: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+456E8D: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+456E8E: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+456E8F: CC                    -  int 3 
+"AVGame-Win64-Shipping.exe"+456E90: 48 83 EC 28           -  sub rsp,28
+"AVGame-Win64-Shipping.exe"+456E94: 85 D2                 -  test edx,edx
+"AVGame-Win64-Shipping.exe"+456E96: 74 34                 -  je AVGame-Win64-Shipping.exe+456ECC
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+456E98: 01 91 B0 04 00 00     -  add [rcx+000004B0],edx
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+456E9E: 01 91 B4 04 00 00     -  add [rcx+000004B4],edx
+"AVGame-Win64-Shipping.exe"+456EA4: 89 91 DC 04 00 00     -  mov [rcx+000004DC],edx
+"AVGame-Win64-Shipping.exe"+456EAA: 48 8B 89 40 04 00 00  -  mov rcx,[rcx+00000440]
+"AVGame-Win64-Shipping.exe"+456EB1: 48 85 C9              -  test rcx,rcx
+"AVGame-Win64-Shipping.exe"+456EB4: 74 16                 -  je AVGame-Win64-Shipping.exe+456ECC
+"AVGame-Win64-Shipping.exe"+456EB6: 48 81 C1 08 01 00 00  -  add rcx,00000108
+"AVGame-Win64-Shipping.exe"+456EBD: C6 44 24 38 03        -  mov byte ptr [rsp+38],03
+"AVGame-Win64-Shipping.exe"+456EC2: 48 8D 54 24 38        -  lea rdx,[rsp+38]
+"AVGame-Win64-Shipping.exe"+456EC7: E8 D4 6C F1 FF        -  call AVGame-Win64-Shipping.exe+36DBA0
+"AVGame-Win64-Shipping.exe"+456ECC: 48 83 C4 28           -  add rsp,28
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>43</ID>
+          <Description>"Multiplier"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>xpMultVal</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>47</ID>
+      <Description>"Get Base Xp (Enter Inventory to Populate)"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(getXpBase,AVGame-Win64-Shipping.exe,8B 83 B0 04 00 00 89 87)
+registersymbol(getXpBase)
+registersymbol(baseXpAddr)
+registersymbol(xpAddAmount)
+alloc(newgetXpBase,100,getXpBase)
+label(codegetXpBase)
+label(returngetXpBase)
+label(baseXpAddr)
+label(xpAddAmount)
+newgetXpBase:
+  mov [baseXpAddr],rbx
+codegetXpBase:
+  mov eax,[rbx+000004B0]
+  jmp returngetXpBase
+baseXpAddr:
+  dq 0
+xpAddAmount:
+  dd (int)1000
+getXpBase:
+  jmp newgetXpBase
+  nop
+returngetXpBase:
+
+[DISABLE]
+getXpBase:
+  db 8B 83 B0 04 00 00
+
+unregistersymbol(getXpBase)
+unregistersymbol(baseXpAddr)
+unregistersymbol(xpAddAmount)
+dealloc(newgetXpBase)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+501B76
+
+"AVGame-Win64-Shipping.exe"+501B49: 48 89 74 24 50              -  mov [rsp+50],rsi
+"AVGame-Win64-Shipping.exe"+501B4E: 33 F6                       -  xor esi,esi
+"AVGame-Win64-Shipping.exe"+501B50: 83 B8 AC 04 00 00 01        -  cmp dword ptr [rax+000004AC],01
+"AVGame-Win64-Shipping.exe"+501B57: 7F 11                       -  jg AVGame-Win64-Shipping.exe+501B6A
+"AVGame-Win64-Shipping.exe"+501B59: 39 B0 9C 05 00 00           -  cmp [rax+0000059C],esi
+"AVGame-Win64-Shipping.exe"+501B5F: 7F 09                       -  jg AVGame-Win64-Shipping.exe+501B6A
+"AVGame-Win64-Shipping.exe"+501B61: 48 89 B7 38 04 00 00        -  mov [rdi+00000438],rsi
+"AVGame-Win64-Shipping.exe"+501B68: EB 18                       -  jmp AVGame-Win64-Shipping.exe+501B82
+"AVGame-Win64-Shipping.exe"+501B6A: 8B 80 B4 04 00 00           -  mov eax,[rax+000004B4]
+"AVGame-Win64-Shipping.exe"+501B70: 89 87 38 04 00 00           -  mov [rdi+00000438],eax
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+501B76: 8B 83 B0 04 00 00           -  mov eax,[rbx+000004B0]
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+501B7C: 89 87 3C 04 00 00           -  mov [rdi+0000043C],eax
+"AVGame-Win64-Shipping.exe"+501B82: 48 39 B3 40 04 00 00        -  cmp [rbx+00000440],rsi
+"AVGame-Win64-Shipping.exe"+501B89: 0F 84 8E 00 00 00           -  je AVGame-Win64-Shipping.exe+501C1D
+"AVGame-Win64-Shipping.exe"+501B8F: 48 8D 05 EA 59 00 00        -  lea rax,[AVGame-Win64-Shipping.exe+507580]
+"AVGame-Win64-Shipping.exe"+501B96: 89 74 24 28                 -  mov [rsp+28],esi
+"AVGame-Win64-Shipping.exe"+501B9A: 48 89 44 24 20              -  mov [rsp+20],rax
+"AVGame-Win64-Shipping.exe"+501B9F: 48 8D 15 D2 2D B6 02        -  lea rdx,[AVGame-Win64-Shipping.exe+3064978]
+"AVGame-Win64-Shipping.exe"+501BA6: 0F 28 44 24 20              -  movaps xmm0,[rsp+20]
+"AVGame-Win64-Shipping.exe"+501BAB: 48 8D 0D EE 1F BE 02        -  lea rcx,[AVGame-Win64-Shipping.exe+30E3BA0]
+"AVGame-Win64-Shipping.exe"+501BB2: 66 0F 7F 44 24 20           -  movdqa [rsp+20],xmm0
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>45</ID>
+          <Description>"Add XP"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$lua}
+function addXP(amount,baseXp)
+   --baseAddress = getAddressSafe('[baseXpAddr]')
+   if baseXp ~= nil then
+     TotalXp = readInteger(baseXp+0x4B0)
+     CurrentXp = readInteger(baseXp+0x4B4)
+     TotalXp = TotalXp + amount
+     CurrentXp = CurrentXp + amount
+     writeInteger(baseXp+0x4B0,TotalXp)
+     writeInteger(baseXp+0x4B4,CurrentXp)
+   end
+end
+
+[ENABLE]
+local xpAmount = readInteger('xpAddAmount')
+local baseAddr = readQword('baseXpAddr')
+if baseAddr ~= 0 then
+   addXP(xpAmount,baseAddr)
+else
+   GetLuaEngine().MenuItem5.doClick()
+   print('Enter Inventory to Populate Base Address!')
+end
+local unCheckMe=createTimer()
+unCheckMe.Interval=100
+unCheckMe.OnTimer=function()
+   memrec.Active=false
+   unCheckMe.destroy()
+end
+[DISABLE]
+
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>48</ID>
+              <Description>"Xp Amount"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>xpAddAmount</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>44</ID>
+      <Description>"Debug/Do Not Use"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>40</ID>
+          <Description>"Auto Assemble script"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(noLevelReq,AVGame-Win64-Shipping.exe,8B 0C 06 41 39 8D AC 04 00 00)
+registersymbol(noLevelReq)
+
+noLevelReq:
+  xor ecx,ecx
+  nop
+
+[DISABLE]
+noLevelReq:
+  db 8B 0C 06 41 39 8D AC 04 00 00
+
+unregistersymbol(noLevelReq)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+43DDC7
+
+"AVGame-Win64-Shipping.exe"+43DD99: 48 8D 3C 80              -  lea rdi,[rax+rax*4]
+"AVGame-Win64-Shipping.exe"+43DD9D: 48 C1 E7 05              -  shl rdi,05
+"AVGame-Win64-Shipping.exe"+43DDA1: 48 03 D7                 -  add rdx,rdi
+"AVGame-Win64-Shipping.exe"+43DDA4: 44 3B 7A 30              -  cmp r15d,[rdx+30]
+"AVGame-Win64-Shipping.exe"+43DDA8: 0F 8D 7C 01 00 00        -  jnl AVGame-Win64-Shipping.exe+43DF2A
+"AVGame-Win64-Shipping.exe"+43DDAE: 44 3B 7A 40              -  cmp r15d,[rdx+40]
+"AVGame-Win64-Shipping.exe"+43DDB2: 0F 8D 72 01 00 00        -  jnl AVGame-Win64-Shipping.exe+43DF2A
+"AVGame-Win64-Shipping.exe"+43DDB8: 49 63 C7                 -  movsxd  rax,r15d
+"AVGame-Win64-Shipping.exe"+43DDBB: 48 8D 34 85 00 00 00 00  -  lea rsi,[rax*4+00000000]
+"AVGame-Win64-Shipping.exe"+43DDC3: 48 8B 42 28              -  mov rax,[rdx+28]
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+43DDC7: 8B 0C 06                 -  mov ecx,[rsi+rax]
+"AVGame-Win64-Shipping.exe"+43DDCA: 41 39 8D AC 04 00 00     -  cmp [r13+000004AC],ecx
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+43DDD1: 0F 8C 53 01 00 00        -  jl AVGame-Win64-Shipping.exe+43DF2A
+"AVGame-Win64-Shipping.exe"+43DDD7: 44 8B 44 24 74           -  mov r8d,[rsp+74]
+"AVGame-Win64-Shipping.exe"+43DDDC: 41 8B 85 B4 04 00 00     -  mov eax,[r13+000004B4]
+"AVGame-Win64-Shipping.exe"+43DDE3: 41 83 F8 FF              -  cmp r8d,-01
+"AVGame-Win64-Shipping.exe"+43DDE7: 7C 15                    -  jl AVGame-Win64-Shipping.exe+43DDFE
+"AVGame-Win64-Shipping.exe"+43DDE9: 44 3B C0                 -  cmp r8d,eax
+"AVGame-Win64-Shipping.exe"+43DDEC: 8B C8                    -  mov ecx,eax
+"AVGame-Win64-Shipping.exe"+43DDEE: 41 0F 4C C8              -  cmovl ecx,r8d
+"AVGame-Win64-Shipping.exe"+43DDF2: 89 4C 24 24              -  mov [rsp+24],ecx
+"AVGame-Win64-Shipping.exe"+43DDF6: 85 C9                    -  test ecx,ecx
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>60</ID>
+          <Description>"Auto Assemble script"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(pickupItem,AVGame-Win64-Shipping.exe,01 88 4C 04 00 00)
+registersymbol(pickupItem)
+alloc(newpickupItem,100,pickupItem)
+label(codepickupItem)
+label(returnpickupItem)
+
+newpickupItem:
+
+codepickupItem:
+  add [rax+0000044C],ecx
+  jmp returnpickupItem
+
+pickupItem:
+  jmp newpickupItem
+  nop
+returnpickupItem:
+
+[DISABLE]
+pickupItem:
+  db 01 88 4C 04 00 00
+
+unregistersymbol(pickupItem)
+dealloc(newpickupItem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+3F6FF3
+
+"AVGame-Win64-Shipping.exe"+3F6FD5: 48 8B 49 30              -  mov rcx,[rcx+30]
+"AVGame-Win64-Shipping.exe"+3F6FD9: 48 85 C9                 -  test rcx,rcx
+"AVGame-Win64-Shipping.exe"+3F6FDC: 75 F2                    -  jne AVGame-Win64-Shipping.exe+3F6FD0
+"AVGame-Win64-Shipping.exe"+3F6FDE: 49 8B C7                 -  mov rax,r15
+"AVGame-Win64-Shipping.exe"+3F6FE1: 48 3B D8                 -  cmp rbx,rax
+"AVGame-Win64-Shipping.exe"+3F6FE4: 75 5E                    -  jne AVGame-Win64-Shipping.exe+3F7044
+"AVGame-Win64-Shipping.exe"+3F6FE6: 48 8B D6                 -  mov rdx,rsi
+"AVGame-Win64-Shipping.exe"+3F6FE9: 33 C9                    -  xor ecx,ecx
+"AVGame-Win64-Shipping.exe"+3F6FEB: E8 F0 83 00 00           -  call AVGame-Win64-Shipping.exe+3FF3E0
+"AVGame-Win64-Shipping.exe"+3F6FF0: 8B 4D 57                 -  mov ecx,[rbp+57]
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+3F6FF3: 01 88 4C 04 00 00        -  add [rax+0000044C],ecx
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+3F6FF9: 44 89 3F                 -  mov [rdi],r15d
+"AVGame-Win64-Shipping.exe"+3F6FFC: 44 38 7D 67              -  cmp [rbp+67],r15l
+"AVGame-Win64-Shipping.exe"+3F7000: 74 14                    -  je AVGame-Win64-Shipping.exe+3F7016
+"AVGame-Win64-Shipping.exe"+3F7002: 44 0F B6 4D 7F           -  movzx r9d,byte ptr [rbp+7F]
+"AVGame-Win64-Shipping.exe"+3F7007: 48 8D 4D 8F              -  lea rcx,[rbp-71]
+"AVGame-Win64-Shipping.exe"+3F700B: 8B 55 57                 -  mov edx,[rbp+57]
+"AVGame-Win64-Shipping.exe"+3F700E: 41 B0 01                 -  mov r8l,01
+"AVGame-Win64-Shipping.exe"+3F7011: E8 6A E0 FF FF           -  call AVGame-Win64-Shipping.exe+3F5080
+"AVGame-Win64-Shipping.exe"+3F7016: 33 C0                    -  xor eax,eax
+"AVGame-Win64-Shipping.exe"+3F7018: 4C 8B B4 24 D8 00 00 00  -  mov r14,[rsp+000000D8]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>76</ID>
+          <Description>"Auto Assemble script"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(getItemCounts,AVGame-Win64-Shipping.exe,8B 80 70 04 00 00 48 83 C4 20)
+registersymbol(getItemCounts)
+alloc(newgetItemCounts,100,getItemCounts)
+label(codegetItemCounts)
+label(returngetItemCounts)
+
+newgetItemCounts:
+
+codegetItemCounts:
+  mov eax,[rax+00000470]
+  jmp returngetItemCounts
+getItemCounts:
+  jmp newgetItemCounts
+  nop
+returngetItemCounts:
+
+[DISABLE]
+getItemCounts:
+  db 8B 80 70 04 00 00
+
+unregistersymbol(getItemCounts)
+unregistersymbol(baseInventory)
+dealloc(newgetItemCounts)
+dealloc(baseInventory)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+402EF7
+
+"AVGame-Win64-Shipping.exe"+402EDD: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+402EDE: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+402EDF: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+402EE0: 48 89 54 24 10           -  mov [rsp+10],rdx
+"AVGame-Win64-Shipping.exe"+402EE5: 57                       -  push rdi
+"AVGame-Win64-Shipping.exe"+402EE6: 48 83 EC 20              -  sub rsp,20
+"AVGame-Win64-Shipping.exe"+402EEA: 48 8B F9                 -  mov rdi,rcx
+"AVGame-Win64-Shipping.exe"+402EED: E8 9E A0 FF FF           -  call AVGame-Win64-Shipping.exe+3FCF90
+"AVGame-Win64-Shipping.exe"+402EF2: 48 85 C0                 -  test rax,rax
+"AVGame-Win64-Shipping.exe"+402EF5: 74 0C                    -  je AVGame-Win64-Shipping.exe+402F03
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+402EF7: 8B 80 70 04 00 00        -  mov eax,[rax+00000470]
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+402EFD: 48 83 C4 20              -  add rsp,20
+"AVGame-Win64-Shipping.exe"+402F01: 5F                       -  pop rdi
+"AVGame-Win64-Shipping.exe"+402F02: C3                       -  ret 
+"AVGame-Win64-Shipping.exe"+402F03: 48 8B CF                 -  mov rcx,rdi
+"AVGame-Win64-Shipping.exe"+402F06: 48 89 5C 24 30           -  mov [rsp+30],rbx
+"AVGame-Win64-Shipping.exe"+402F0B: E8 A0 72 8D 01           -  call AVGame-Win64-Shipping.exe+1CDA1B0
+"AVGame-Win64-Shipping.exe"+402F10: 48 8B D8                 -  mov rbx,rax
+"AVGame-Win64-Shipping.exe"+402F13: 48 85 C0                 -  test rax,rax
+"AVGame-Win64-Shipping.exe"+402F16: 0F 84 B4 00 00 00        -  je AVGame-Win64-Shipping.exe+402FD0
+"AVGame-Win64-Shipping.exe"+402F1C: E8 1F C0 18 00           -  call AVGame-Win64-Shipping.exe+58EF40
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104</ID>
+          <Description>"Craft Check"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(craftCheck,AVGame-Win64-Shipping.exe,48 89 54 24 10 57 48 83 EC 20 48 8B F9 E8 9E)
+registersymbol(craftCheck)
+alloc(newcraftCheck,100,craftCheck)
+label(codecraftCheck)
+label(returncraftCheck)
+
+newcraftCheck:
+  cmp rsi,(int)1000
+  ja  codecraftCheck
+  mov rax,rsi
+  ret
+codecraftCheck:
+  mov [rsp+10],rdx
+  jmp returncraftCheck
+
+craftCheck:
+  jmp newcraftCheck
+returncraftCheck:
+
+[DISABLE]
+craftCheck:
+  db 48 89 54 24 10
+
+unregistersymbol(craftCheck)
+dealloc(newcraftCheck)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+402EE0
+
+"AVGame-Win64-Shipping.exe"+402EC6: 48 8B 83 00 01 00 00     -  mov rax,[rbx+00000100]
+"AVGame-Win64-Shipping.exe"+402ECD: 8B 88 6C 04 00 00        -  mov ecx,[rax+0000046C]
+"AVGame-Win64-Shipping.exe"+402ED3: 89 0E                    -  mov [rsi],ecx
+"AVGame-Win64-Shipping.exe"+402ED5: E9 8A FE FF FF           -  jmp AVGame-Win64-Shipping.exe+402D64
+"AVGame-Win64-Shipping.exe"+402EDA: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+402EDB: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+402EDC: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+402EDD: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+402EDE: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+402EDF: CC                       -  int 3 
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+402EE0: 48 89 54 24 10           -  mov [rsp+10],rdx
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+402EE5: 57                       -  push rdi
+"AVGame-Win64-Shipping.exe"+402EE6: 48 83 EC 20              -  sub rsp,20
+"AVGame-Win64-Shipping.exe"+402EEA: 48 8B F9                 -  mov rdi,rcx
+"AVGame-Win64-Shipping.exe"+402EED: E8 9E A0 FF FF           -  call AVGame-Win64-Shipping.exe+3FCF90
+"AVGame-Win64-Shipping.exe"+402EF2: 48 85 C0                 -  test rax,rax
+"AVGame-Win64-Shipping.exe"+402EF5: 74 0C                    -  je AVGame-Win64-Shipping.exe+402F03
+"AVGame-Win64-Shipping.exe"+402EF7: 8B 80 70 04 00 00        -  mov eax,[rax+00000470]
+"AVGame-Win64-Shipping.exe"+402EFD: 48 83 C4 20              -  add rsp,20
+"AVGame-Win64-Shipping.exe"+402F01: 5F                       -  pop rdi
+"AVGame-Win64-Shipping.exe"+402F02: C3                       -  ret 
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>34</ID>
+          <Description>"Inf Health (turn off other inf health if you want to use this instead)"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+////////////////////////////////////////////////////////////////////////////////
+//Damage Section
+////////////////////////////////////////////////////////////////////////////////
+aobscanmodule(infHealth,AVGame-Win64-Shipping.exe,F3 0F 10 83 58 01 00 00 84)
+registersymbol(infHealth)
+infHealth:
+  db F3 0F 10 83 54 01 00 00
+infHealth+A:
+  nop 4
+////////////////////////////////////////////////////////////////////////////////
+//Health Burn Section
+////////////////////////////////////////////////////////////////////////////////
+aobscanmodule(noHealthBurn,AVGame-Win64-Shipping.exe,0F 28 CE F3 0F 58 8B 5C 01 00 00)
+registersymbol(noHealthBurn)
+noHealthBurn:
+  xorps xmm1,xmm1
+  nop 8
+////////////////////////////////////////////////////////////////////////////////
+//Health Regen Section
+////////////////////////////////////////////////////////////////////////////////
+aobscanmodule(healthRegen,AVGame-Win64-Shipping.exe,28 C3 CC CC CC CC CC CC CC CC CC 48 8B C4 48 89 58 08)
+registersymbol(healthRegen)
+alloc(newhealthRegen,100,healthRegen)
+label(codehealthRegen)
+label(returnhealthRegen)
+newhealthRegen:
+  test r12d,r12d
+  jns   codehealthRegen
+  ret
+codehealthRegen:
+  mov rax,rsp
+  mov [rax+08],rbx
+  jmp returnhealthRegen
+healthRegen+0B:
+  jmp newhealthRegen
+  nop 2
+returnhealthRegen:
+[DISABLE]
+////////////////////////////////////////////////////////////////////////////////
+//Damage Section
+////////////////////////////////////////////////////////////////////////////////
+infHealth:
+  db F3 0F 10 83 58 01 00 00
+infHealth+A:
+  db F3 0F 5C C7
+unregistersymbol(infHealth)
+dealloc(newinfHealth)
+////////////////////////////////////////////////////////////////////////////////
+//Health Burn Section
+////////////////////////////////////////////////////////////////////////////////
+noHealthBurn:
+  db 0F 28 CE F3 0F 58 8B 5C 01 00 00
+unregistersymbol(noHealthBurn)
+////////////////////////////////////////////////////////////////////////////////
+//Health Regen Section
+////////////////////////////////////////////////////////////////////////////////
+healthRegen+0B:
+  db 48 8B C4 48 89 58 08
+unregistersymbol(healthRegen)
+dealloc(newhealthRegen)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+40C040
+
+"AVGame-Win64-Shipping.exe"+40C009: F3 0F 58 83 5C 01 00 00     -  addss xmm0,[rbx+0000015C]
+"AVGame-Win64-Shipping.exe"+40C011: 0F 2F C6                    -  comiss xmm0,xmm6
+"AVGame-Win64-Shipping.exe"+40C014: F3 0F 11 83 5C 01 00 00     -  movss [rbx+0000015C],xmm0
+"AVGame-Win64-Shipping.exe"+40C01C: F3 41 0F 5C 8E EC 0C 00 00  -  subss xmm1,[r14+00000CEC]
+"AVGame-Win64-Shipping.exe"+40C025: F3 0F 59 8B 54 01 00 00     -  mulss xmm1,[rbx+00000154]
+"AVGame-Win64-Shipping.exe"+40C02D: 73 05                       -  jae AVGame-Win64-Shipping.exe+40C034
+"AVGame-Win64-Shipping.exe"+40C02F: 0F 28 C6                    -  movaps xmm0,xmm6
+"AVGame-Win64-Shipping.exe"+40C032: EB 04                       -  jmp AVGame-Win64-Shipping.exe+40C038
+"AVGame-Win64-Shipping.exe"+40C034: F3 0F 5D C1                 -  minss xmm0,xmm1
+"AVGame-Win64-Shipping.exe"+40C038: F3 0F 11 83 5C 01 00 00     -  movss [rbx+0000015C],xmm0
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+40C040: F3 0F 10 83 58 01 00 00     -  movss xmm0,[rbx+00000158]
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+40C048: 84 C0                       -  test al,al
+"AVGame-Win64-Shipping.exe"+40C04A: F3 0F 5C C7                 -  subss xmm0,xmm7
+"AVGame-Win64-Shipping.exe"+40C04E: F3 0F 11 83 58 01 00 00     -  movss [rbx+00000158],xmm0
+"AVGame-Win64-Shipping.exe"+40C056: E9 F4 00 00 00              -  jmp AVGame-Win64-Shipping.exe+40C14F
+"AVGame-Win64-Shipping.exe"+40C05B: 80 BD 00 01 00 00 00        -  cmp byte ptr [rbp+00000100],00
+"AVGame-Win64-Shipping.exe"+40C062: 74 46                       -  je AVGame-Win64-Shipping.exe+40C0AA
+"AVGame-Win64-Shipping.exe"+40C064: 80 BB 64 01 00 00 03        -  cmp byte ptr [rbx+00000164],03
+"AVGame-Win64-Shipping.exe"+40C06B: 73 07                       -  jae AVGame-Win64-Shipping.exe+40C074
+"AVGame-Win64-Shipping.exe"+40C06D: C6 83 64 01 00 00 03        -  mov byte ptr [rbx+00000164],03
+"AVGame-Win64-Shipping.exe"+40C074: F3 0F 10 8B 54 01 00 00     -  movss xmm1,[rbx+00000154]
+}
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+4136A7
+
+"AVGame-Win64-Shipping.exe"+413679: F3 41 0F 58 F5           -  addss xmm6,xmm13
+"AVGame-Win64-Shipping.exe"+41367E: EB 12                    -  jmp AVGame-Win64-Shipping.exe+413692
+"AVGame-Win64-Shipping.exe"+413680: 0F 28 C6                 -  movaps xmm0,xmm6
+"AVGame-Win64-Shipping.exe"+413683: 45 32 E4                 -  xor r12l,r12l
+"AVGame-Win64-Shipping.exe"+413686: F3 0F 58 44 39 14        -  addss xmm0,[rcx+rdi+14]
+"AVGame-Win64-Shipping.exe"+41368C: F3 0F 11 44 39 14        -  movss [rcx+rdi+14],xmm0
+"AVGame-Win64-Shipping.exe"+413692: 48 8B 06                 -  mov rax,[rsi]
+"AVGame-Win64-Shipping.exe"+413695: 80 7C 07 08 00           -  cmp byte ptr [rdi+rax+08],00
+"AVGame-Win64-Shipping.exe"+41369A: 0F 84 86 00 00 00        -  je AVGame-Win64-Shipping.exe+413726
+"AVGame-Win64-Shipping.exe"+4136A0: 48 8B 85 C0 00 00 00     -  mov rax,[rbp+000000C0]
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+4136A7: 0F 28 CE                 -  movaps xmm1,xmm6
+"AVGame-Win64-Shipping.exe"+4136AA: F3 0F 58 8B 5C 01 00 00  -  addss xmm1,[rbx+0000015C]
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+4136B2: F3 0F 11 8B 5C 01 00 00  -  movss [rbx+0000015C],xmm1
+"AVGame-Win64-Shipping.exe"+4136BA: 48 85 C0                 -  test rax,rax
+"AVGame-Win64-Shipping.exe"+4136BD: 74 1E                    -  je AVGame-Win64-Shipping.exe+4136DD
+"AVGame-Win64-Shipping.exe"+4136BF: 0F 2F CF                 -  comiss xmm1,xmm7
+"AVGame-Win64-Shipping.exe"+4136C2: 41 0F 28 C2              -  movaps xmm0,xmm10
+"AVGame-Win64-Shipping.exe"+4136C6: F3 0F 5C 80 EC 0C 00 00  -  subss xmm0,[rax+00000CEC]
+"AVGame-Win64-Shipping.exe"+4136CE: F3 0F 59 83 54 01 00 00  -  mulss xmm0,[rbx+00000154]
+"AVGame-Win64-Shipping.exe"+4136D6: 73 1C                    -  jae AVGame-Win64-Shipping.exe+4136F4
+"AVGame-Win64-Shipping.exe"+4136D8: 0F 28 C7                 -  movaps xmm0,xmm7
+"AVGame-Win64-Shipping.exe"+4136DB: EB 1B                    -  jmp AVGame-Win64-Shipping.exe+4136F8
+}
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+406220
+
+"AVGame-Win64-Shipping.exe"+406216: C3                    -  ret
+"AVGame-Win64-Shipping.exe"+406217: CC                    -  int 3
+"AVGame-Win64-Shipping.exe"+406218: CC                    -  int 3
+"AVGame-Win64-Shipping.exe"+406219: CC                    -  int 3
+"AVGame-Win64-Shipping.exe"+40621A: CC                    -  int 3
+"AVGame-Win64-Shipping.exe"+40621B: CC                    -  int 3
+"AVGame-Win64-Shipping.exe"+40621C: CC                    -  int 3
+"AVGame-Win64-Shipping.exe"+40621D: CC                    -  int 3
+"AVGame-Win64-Shipping.exe"+40621E: CC                    -  int 3
+"AVGame-Win64-Shipping.exe"+40621F: CC                    -  int 3
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+406220: 48 8B C4              -  mov rax,rsp
+"AVGame-Win64-Shipping.exe"+406223: 48 89 58 08           -  mov [rax+08],rbx
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+406227: 48 89 70 10           -  mov [rax+10],rsi
+"AVGame-Win64-Shipping.exe"+40622B: 48 89 78 18           -  mov [rax+18],rdi
+"AVGame-Win64-Shipping.exe"+40622F: 4C 89 70 20           -  mov [rax+20],r14
+"AVGame-Win64-Shipping.exe"+406233: 55                    -  push rbp
+"AVGame-Win64-Shipping.exe"+406234: 48 8D 68 A9           -  lea rbp,[rax-57]
+"AVGame-Win64-Shipping.exe"+406238: 48 81 EC A0 00 00 00  -  sub rsp,000000A0
+"AVGame-Win64-Shipping.exe"+40623F: 48 8B 75 7F           -  mov rsi,[rbp+7F]
+"AVGame-Win64-Shipping.exe"+406243: 45 0F B6 F1           -  movzx r14d,r9l
+"AVGame-Win64-Shipping.exe"+406247: 0F 29 70 E8           -  movaps [rax-18],xmm6
+"AVGame-Win64-Shipping.exe"+40624B: 48 8B F9              -  mov rdi,rcx
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>102</ID>
+          <Description>"Auto Assemble script"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-24
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(craftCheck,AVGame-Win64-Shipping.exe,3B C6 89 44 24 34)
+registersymbol(craftCheck)
+alloc(newcraftCheck,100,craftCheck)
+label(codecraftCheck)
+label(returncraftCheck)
+
+newcraftCheck:
+  xor esi,esi
+codecraftCheck:
+  cmp eax,esi
+  mov [rsp+34],eax
+  jmp returncraftCheck
+
+craftCheck:
+  jmp newcraftCheck
+  nop
+returncraftCheck:
+
+[DISABLE]
+craftCheck:
+  db 3B C6 89 44 24 34
+
+unregistersymbol(craftCheck)
+dealloc(newcraftCheck)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+4F3FD2
+
+"AVGame-Win64-Shipping.exe"+4F3FB0: 48 3B C8                 -  cmp rcx,rax
+"AVGame-Win64-Shipping.exe"+4F3FB3: 74 0B                    -  je AVGame-Win64-Shipping.exe+4F3FC0
+"AVGame-Win64-Shipping.exe"+4F3FB5: 48 8B 49 30              -  mov rcx,[rcx+30]
+"AVGame-Win64-Shipping.exe"+4F3FB9: 48 85 C9                 -  test rcx,rcx
+"AVGame-Win64-Shipping.exe"+4F3FBC: 75 F2                    -  jne AVGame-Win64-Shipping.exe+4F3FB0
+"AVGame-Win64-Shipping.exe"+4F3FBE: EB 5E                    -  jmp AVGame-Win64-Shipping.exe+4F401E
+"AVGame-Win64-Shipping.exe"+4F3FC0: 49 8B 8D 88 08 00 00     -  mov rcx,[r13+00000888]
+"AVGame-Win64-Shipping.exe"+4F3FC7: 45 33 C0                 -  xor r8d,r8d
+"AVGame-Win64-Shipping.exe"+4F3FCA: 48 8B D3                 -  mov rdx,rbx
+"AVGame-Win64-Shipping.exe"+4F3FCD: E8 0E EF F0 FF           -  call AVGame-Win64-Shipping.exe+402EE0
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+4F3FD2: 3B C6                    -  cmp eax,esi
+"AVGame-Win64-Shipping.exe"+4F3FD4: 89 44 24 34              -  mov [rsp+34],eax
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+4F3FD8: 0F 9D 44 24 30           -  setge byte ptr [rsp+30]
+"AVGame-Win64-Shipping.exe"+4F3FDD: E8 3E BE 09 00           -  call AVGame-Win64-Shipping.exe+58FE20
+"AVGame-Win64-Shipping.exe"+4F3FE2: 48 8B CB                 -  mov rcx,rbx
+"AVGame-Win64-Shipping.exe"+4F3FE5: 48 3B C8                 -  cmp rcx,rax
+"AVGame-Win64-Shipping.exe"+4F3FE8: 74 0C                    -  je AVGame-Win64-Shipping.exe+4F3FF6
+"AVGame-Win64-Shipping.exe"+4F3FEA: 48 8B 49 30              -  mov rcx,[rcx+30]
+"AVGame-Win64-Shipping.exe"+4F3FEE: 48 85 C9                 -  test rcx,rcx
+"AVGame-Win64-Shipping.exe"+4F3FF1: 75 F2                    -  jne AVGame-Win64-Shipping.exe+4F3FE5
+"AVGame-Win64-Shipping.exe"+4F3FF3: 49 8B DC                 -  mov rbx,r12
+"AVGame-Win64-Shipping.exe"+4F3FF6: 4C 39 A3 00 01 00 00     -  cmp [rbx+00000100],r12
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>132</ID>
+          <Description>"Auto Assemble script"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-25
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(craftCheck,AVGame-Win64-Shipping.exe,0F 85 B2 00 00 00 E8 96 F8)
+registersymbol(craftCheck)
+alloc(newcraftCheck,100,craftCheck)
+label(codecraftCheck)
+label(returncraftCheck)
+
+newcraftCheck:
+
+codecraftCheck:
+  jne AVGame-Win64-Shipping.exe+58FEE7
+  jmp returncraftCheck
+
+craftCheck:
+  jmp newcraftCheck
+  nop
+returncraftCheck:
+
+[DISABLE]
+craftCheck:
+  db 0F 85 B2 00 00 00
+
+unregistersymbol(craftCheck)
+dealloc(newcraftCheck)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+58FE2F
+
+"AVGame-Win64-Shipping.exe"+58FE18: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+58FE19: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+58FE1A: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+58FE1B: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+58FE1C: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+58FE1D: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+58FE1E: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+58FE1F: CC                       -  int 3 
+"AVGame-Win64-Shipping.exe"+58FE20: 48 81 EC 98 00 00 00     -  sub rsp,00000098
+"AVGame-Win64-Shipping.exe"+58FE27: 48 83 3D E9 01 91 03 00  -  cmp qword ptr [AVGame-Win64-Shipping.exe+3EA0018],00
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+58FE2F: 0F 85 B2 00 00 00        -  jne AVGame-Win64-Shipping.exe+58FEE7
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+58FE35: E8 96 F8 3D 01           -  call AVGame-Win64-Shipping.exe+196F6D0
+"AVGame-Win64-Shipping.exe"+58FE3A: 48 89 44 24 70           -  mov [rsp+70],rax
+"AVGame-Win64-Shipping.exe"+58FE3F: E8 BC 9D B3 FF           -  call AVGame-Win64-Shipping.exe+C9C00
+"AVGame-Win64-Shipping.exe"+58FE44: 48 89 44 24 78           -  mov [rsp+78],rax
+"AVGame-Win64-Shipping.exe"+58FE49: 48 8D 0D 48 3D BB 02     -  lea rcx,[AVGame-Win64-Shipping.exe+3143B98]
+"AVGame-Win64-Shipping.exe"+58FE50: 48 83 C1 02              -  add rcx,02
+"AVGame-Win64-Shipping.exe"+58FE54: 48 89 8C 24 80 00 00 00  -  mov [rsp+00000080],rcx
+"AVGame-Win64-Shipping.exe"+58FE5C: E8 0F D1 01 00           -  call AVGame-Win64-Shipping.exe+5ACF70
+"AVGame-Win64-Shipping.exe"+58FE61: C6 44 24 68 00           -  mov byte ptr [rsp+68],00
+"AVGame-Win64-Shipping.exe"+58FE66: 48 8D 0D 63 D0 01 00     -  lea rcx,[AVGame-Win64-Shipping.exe+5ACED0]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>86940</ID>
+          <Description>"Auto Assemble script"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-25
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(levelCheck,AVGame-Win64-Shipping.exe,8B 0C 06 41 39 8D AC 04 00 00)
+registersymbol(levelCheck)
+
+levelCheck:
+  xor ecx,ecx
+
+[DISABLE]
+levelCheck:
+  db 8B 0C 06 41 39 8D AC 04 00 00
+
+unregistersymbol(levelCheck)
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+43DDC7
+
+"AVGame-Win64-Shipping.exe"+43DD99: 48 8D 3C 80              -  lea rdi,[rax+rax*4]
+"AVGame-Win64-Shipping.exe"+43DD9D: 48 C1 E7 05              -  shl rdi,05
+"AVGame-Win64-Shipping.exe"+43DDA1: 48 03 D7                 -  add rdx,rdi
+"AVGame-Win64-Shipping.exe"+43DDA4: 44 3B 7A 30              -  cmp r15d,[rdx+30]
+"AVGame-Win64-Shipping.exe"+43DDA8: 0F 8D 7C 01 00 00        -  jnl AVGame-Win64-Shipping.exe+43DF2A
+"AVGame-Win64-Shipping.exe"+43DDAE: 44 3B 7A 40              -  cmp r15d,[rdx+40]
+"AVGame-Win64-Shipping.exe"+43DDB2: 0F 8D 72 01 00 00        -  jnl AVGame-Win64-Shipping.exe+43DF2A
+"AVGame-Win64-Shipping.exe"+43DDB8: 49 63 C7                 -  movsxd  rax,r15d
+"AVGame-Win64-Shipping.exe"+43DDBB: 48 8D 34 85 00 00 00 00  -  lea rsi,[rax*4+00000000]
+"AVGame-Win64-Shipping.exe"+43DDC3: 48 8B 42 28              -  mov rax,[rdx+28]
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+43DDC7: 8B 0C 06                 -  mov ecx,[rsi+rax]
+"AVGame-Win64-Shipping.exe"+43DDCA: 41 39 8D AC 04 00 00     -  cmp [r13+000004AC],ecx
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+43DDD1: 0F 8C 53 01 00 00        -  jl AVGame-Win64-Shipping.exe+43DF2A
+"AVGame-Win64-Shipping.exe"+43DDD7: 44 8B 44 24 74           -  mov r8d,[rsp+74]
+"AVGame-Win64-Shipping.exe"+43DDDC: 41 8B 85 B4 04 00 00     -  mov eax,[r13+000004B4]
+"AVGame-Win64-Shipping.exe"+43DDE3: 41 83 F8 FF              -  cmp r8d,-01
+"AVGame-Win64-Shipping.exe"+43DDE7: 7C 15                    -  jl AVGame-Win64-Shipping.exe+43DDFE
+"AVGame-Win64-Shipping.exe"+43DDE9: 44 3B C0                 -  cmp r8d,eax
+"AVGame-Win64-Shipping.exe"+43DDEC: 8B C8                    -  mov ecx,eax
+"AVGame-Win64-Shipping.exe"+43DDEE: 41 0F 4C C8              -  cmovl ecx,r8d
+"AVGame-Win64-Shipping.exe"+43DDF2: 89 4C 24 24              -  mov [rsp+24],ecx
+"AVGame-Win64-Shipping.exe"+43DDF6: 85 C9                    -  test ecx,ecx
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>86936</ID>
+          <Description>"No Craft Cost"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-25
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(craftCost,AVGame-Win64-Shipping.exe,44 8B 43 08 45 33 C9 48 8B 13)
+registersymbol(craftCost)
+alloc(newcraftCost,100,craftCost)
+label(codecraftCost)
+label(returncraftCost)
+
+newcraftCost:
+  xor r8d,r8d
+  not r8d
+codecraftCost:
+  mov [rbx+08],r8d
+  xor r9d,r9d
+  jmp returncraftCost
+
+craftCost:
+  jmp newcraftCost
+  nop 2
+returncraftCost:
+
+[DISABLE]
+craftCost:
+  db 44 8B 43 08 45 33 C9
+
+unregistersymbol(craftCost)
+dealloc(newcraftCost)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+451940
+
+"AVGame-Win64-Shipping.exe"+451911: 0F 84 C6 00 00 00                 -  je AVGame-Win64-Shipping.exe+4519DD
+"AVGame-Win64-Shipping.exe"+451917: 48 89 5C 24 50                    -  mov [rsp+50],rbx
+"AVGame-Win64-Shipping.exe"+45191C: 48 8B 5F 60                       -  mov rbx,[rdi+60]
+"AVGame-Win64-Shipping.exe"+451920: 48 89 74 24 30                    -  mov [rsp+30],rsi
+"AVGame-Win64-Shipping.exe"+451925: 48 63 77 68                       -  movsxd  rsi,dword ptr [rdi+68]
+"AVGame-Win64-Shipping.exe"+451929: 48 C1 E6 04                       -  shl rsi,04
+"AVGame-Win64-Shipping.exe"+45192D: 48 03 F3                          -  add rsi,rbx
+"AVGame-Win64-Shipping.exe"+451930: 48 3B DE                          -  cmp rbx,rsi
+"AVGame-Win64-Shipping.exe"+451933: 74 2A                             -  je AVGame-Win64-Shipping.exe+45195F
+"AVGame-Win64-Shipping.exe"+451935: 66 66 66 0F 1F 84 00 00 00 00 00  -  nop word ptr [rax+rax+00000000]
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+451940: 44 8B 43 08                       -  mov r8d,[rbx+08]
+"AVGame-Win64-Shipping.exe"+451944: 45 33 C9                          -  xor r9d,r9d
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+451947: 48 8B 13                          -  mov rdx,[rbx]
+"AVGame-Win64-Shipping.exe"+45194A: 49 8B CE                          -  mov rcx,r14
+"AVGame-Win64-Shipping.exe"+45194D: E8 0E 48 FB FF                    -  call AVGame-Win64-Shipping.exe+406160
+"AVGame-Win64-Shipping.exe"+451952: 84 C0                             -  test al,al
+"AVGame-Win64-Shipping.exe"+451954: 74 7B                             -  je AVGame-Win64-Shipping.exe+4519D1
+"AVGame-Win64-Shipping.exe"+451956: 48 83 C3 10                       -  add rbx,10
+"AVGame-Win64-Shipping.exe"+45195A: 48 3B DE                          -  cmp rbx,rsi
+"AVGame-Win64-Shipping.exe"+45195D: 75 E1                             -  jne AVGame-Win64-Shipping.exe+451940
+"AVGame-Win64-Shipping.exe"+45195F: 48 8B 57 70                       -  mov rdx,[rdi+70]
+"AVGame-Win64-Shipping.exe"+451963: 4C 8D 4C 24 58                    -  lea r9,[rsp+58]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>86942</ID>
+          <Description>"No Craft Cost"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-25
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(craftCost,AVGame-Win64-Shipping.exe,42 8B 74 30 08 48)
+registersymbol(craftCost)
+alloc(newcraftCost,100,craftCost)
+label(codecraftCost)
+label(returncraftCost)
+
+newcraftCost:
+  xor esi,esi
+  inc esi
+codecraftCost:
+  mov [rax+r14+08],esi
+  jmp returncraftCost
+
+craftCost:
+  jmp newcraftCost
+returncraftCost:
+
+[DISABLE]
+craftCost:
+  db 42 8B 74 30 08
+
+unregistersymbol(craftCost)
+dealloc(newcraftCost)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+4F3F8A
+
+"AVGame-Win64-Shipping.exe"+4F3F55: 0F 8E 1B 01 00 00        -  jng AVGame-Win64-Shipping.exe+4F4076
+"AVGame-Win64-Shipping.exe"+4F3F5B: 48 89 5C 24 70           -  mov [rsp+70],rbx
+"AVGame-Win64-Shipping.exe"+4F3F60: 48 89 B4 24 80 00 00 00  -  mov [rsp+00000080],rsi
+"AVGame-Win64-Shipping.exe"+4F3F68: 4C 89 74 24 40           -  mov [rsp+40],r14
+"AVGame-Win64-Shipping.exe"+4F3F6D: 45 8B F4                 -  mov r14d,r12d
+"AVGame-Win64-Shipping.exe"+4F3F70: 49 8B 47 60              -  mov rax,[r15+60]
+"AVGame-Win64-Shipping.exe"+4F3F74: 4C 89 64 24 28           -  mov [rsp+28],r12
+"AVGame-Win64-Shipping.exe"+4F3F79: 44 88 64 24 30           -  mov [rsp+30],r12l
+"AVGame-Win64-Shipping.exe"+4F3F7E: C7 44 24 34 FF FF FF FF  -  mov [rsp+34],FFFFFFFF
+"AVGame-Win64-Shipping.exe"+4F3F86: 4A 8B 1C 30              -  mov rbx,[rax+r14]
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+4F3F8A: 42 8B 74 30 08           -  mov esi,[rax+r14+08]
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+4F3F8F: 48 89 5C 24 20           -  mov [rsp+20],rbx
+"AVGame-Win64-Shipping.exe"+4F3F94: 89 74 24 38              -  mov [rsp+38],esi
+"AVGame-Win64-Shipping.exe"+4F3F98: 48 85 DB                 -  test rbx,rbx
+"AVGame-Win64-Shipping.exe"+4F3F9B: 0F 84 7D 00 00 00        -  je AVGame-Win64-Shipping.exe+4F401E
+"AVGame-Win64-Shipping.exe"+4F3FA1: E8 7A BE 09 00           -  call AVGame-Win64-Shipping.exe+58FE20
+"AVGame-Win64-Shipping.exe"+4F3FA6: 48 8B CB                 -  mov rcx,rbx
+"AVGame-Win64-Shipping.exe"+4F3FA9: 0F 1F 80 00 00 00 00     -  nop dword ptr [rax+00000000]
+"AVGame-Win64-Shipping.exe"+4F3FB0: 48 3B C8                 -  cmp rcx,rax
+"AVGame-Win64-Shipping.exe"+4F3FB3: 74 0B                    -  je AVGame-Win64-Shipping.exe+4F3FC0
+"AVGame-Win64-Shipping.exe"+4F3FB5: 48 8B 49 30              -  mov rcx,[rcx+30]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>86945</ID>
+          <Description>"Auto Assemble script"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-25
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(invisible,AVGame-Win64-Shipping.exe,F3 0F 11 70 08 48 8B CE)
+registersymbol(invisible)
+alloc(newinvisible,100,invisible)
+label(codeinvisible)
+label(returninvisible)
+
+newinvisible:
+  xorps xmm6,xmm6
+codeinvisible:
+  movss [rax+08],xmm6
+  jmp returninvisible
+
+invisible:
+  jmp newinvisible
+returninvisible:
+
+[DISABLE]
+invisible:
+  db F3 0F 11 70 08
+
+unregistersymbol(invisible)
+dealloc(newinvisible)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+1DABDAB
+
+"AVGame-Win64-Shipping.exe"+1DABD80: 0F 28 C6                 -  movaps xmm0,xmm6
+"AVGame-Win64-Shipping.exe"+1DABD83: F3 0F 5C 05 D5 26 2B 01  -  subss xmm0,[AVGame-Win64-Shipping.exe+305E460]
+"AVGame-Win64-Shipping.exe"+1DABD8B: 48 89 68 14              -  mov [rax+14],rbp
+"AVGame-Win64-Shipping.exe"+1DABD8F: 48 89 68 0C              -  mov [rax+0C],rbp
+"AVGame-Win64-Shipping.exe"+1DABD93: F3 0F 11 40 08           -  movss [rax+08],xmm0
+"AVGame-Win64-Shipping.exe"+1DABD98: 0F 2E 70 08              -  ucomiss xmm6,[rax+08]
+"AVGame-Win64-Shipping.exe"+1DABD9C: 48 8B 6C 24 50           -  mov rbp,[rsp+50]
+"AVGame-Win64-Shipping.exe"+1DABDA1: 48 8B 5C 24 40           -  mov rbx,[rsp+40]
+"AVGame-Win64-Shipping.exe"+1DABDA6: 74 21                    -  je AVGame-Win64-Shipping.exe+1DABDC9
+"AVGame-Win64-Shipping.exe"+1DABDA8: 48 8B D0                 -  mov rdx,rax
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+1DABDAB: F3 0F 11 70 08           -  movss [rax+08],xmm6
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+1DABDB0: 48 8B CE                 -  mov rcx,rsi
+"AVGame-Win64-Shipping.exe"+1DABDB3: E8 68 67 FE FF           -  call AVGame-Win64-Shipping.exe+1D92520
+"AVGame-Win64-Shipping.exe"+1DABDB8: 48 8B 8E 18 01 00 00     -  mov rcx,[rsi+00000118]
+"AVGame-Win64-Shipping.exe"+1DABDBF: 48 85 C9                 -  test rcx,rcx
+"AVGame-Win64-Shipping.exe"+1DABDC2: 74 05                    -  je AVGame-Win64-Shipping.exe+1DABDC9
+"AVGame-Win64-Shipping.exe"+1DABDC4: E8 F7 CE 00 00           -  call AVGame-Win64-Shipping.exe+1DB8CC0
+"AVGame-Win64-Shipping.exe"+1DABDC9: 0F 28 74 24 20           -  movaps xmm6,[rsp+20]
+"AVGame-Win64-Shipping.exe"+1DABDCE: 48 83 C4 30              -  add rsp,30
+"AVGame-Win64-Shipping.exe"+1DABDD2: 5E                       -  pop rsi
+"AVGame-Win64-Shipping.exe"+1DABDD3: C3                       -  ret 
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>86948</ID>
+          <Description>"Get Current Region Health"</Description>
+          <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-26
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(getRegionHealth,AVGame-Win64-Shipping.exe,8B 88 80 00 00 00 89 8F)
+registersymbol(getRegionHealth)
+registersymbol(regionBase)
+registersymbol(setMaxHealth)
+alloc(newgetRegionHealth,100,getRegionHealth)
+label(codegetRegionHealth)
+label(returngetRegionHealth)
+label(regionBase)
+label(setMaxHealth)
+newgetRegionHealth:
+  mov [regionBase],rax
+  cmp byte ptr [setMaxHealth],0
+  je  codegetRegionHealth
+  mov ecx,(int)100
+  mov [rax+80],ecx
+  jmp returngetRegionHealth
+codegetRegionHealth:
+  mov ecx,[rax+00000080]
+  jmp returngetRegionHealth
+regionBase:
+  dq 0
+setMaxHealth:
+  db 0
+getRegionHealth:
+  jmp newgetRegionHealth
+  nop
+returngetRegionHealth:
+
+[DISABLE]
+getRegionHealth:
+  db 8B 88 80 00 00 00
+
+unregistersymbol(getRegionHealth)
+unregistersymbol(regionBase)
+unregistersymbol(setMaxHealth)
+dealloc(newgetRegionHealth)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+4FDAF9
+
+"AVGame-Win64-Shipping.exe"+4FDAD3: 74 0E                          -  je AVGame-Win64-Shipping.exe+4FDAE3
+"AVGame-Win64-Shipping.exe"+4FDAD5: 48 8B 49 30                    -  mov rcx,[rcx+30]
+"AVGame-Win64-Shipping.exe"+4FDAD9: 48 85 C9                       -  test rcx,rcx
+"AVGame-Win64-Shipping.exe"+4FDADC: 75 F2                          -  jne AVGame-Win64-Shipping.exe+4FDAD0
+"AVGame-Win64-Shipping.exe"+4FDADE: E9 BB 00 00 00                 -  jmp AVGame-Win64-Shipping.exe+4FDB9E
+"AVGame-Win64-Shipping.exe"+4FDAE3: 48 8B 54 24 38                 -  mov rdx,[rsp+38]
+"AVGame-Win64-Shipping.exe"+4FDAE8: 48 8B CE                       -  mov rcx,rsi
+"AVGame-Win64-Shipping.exe"+4FDAEB: E8 D0 DA ED FF                 -  call AVGame-Win64-Shipping.exe+3DB5C0
+"AVGame-Win64-Shipping.exe"+4FDAF0: 48 85 C0                       -  test rax,rax
+"AVGame-Win64-Shipping.exe"+4FDAF3: 0F 84 A5 00 00 00              -  je AVGame-Win64-Shipping.exe+4FDB9E
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+4FDAF9: 8B 88 80 00 00 00              -  mov ecx,[rax+00000080]
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+4FDAFF: 89 8F 50 04 00 00              -  mov [rdi+00000450],ecx
+"AVGame-Win64-Shipping.exe"+4FDB05: 8B 90 8C 00 00 00              -  mov edx,[rax+0000008C]
+"AVGame-Win64-Shipping.exe"+4FDB0B: 0F B6 87 99 04 00 00           -  movzx eax,byte ptr [rdi+00000499]
+"AVGame-Win64-Shipping.exe"+4FDB12: 89 97 54 04 00 00              -  mov [rdi+00000454],edx
+"AVGame-Win64-Shipping.exe"+4FDB18: 84 C0                          -  test al,al
+"AVGame-Win64-Shipping.exe"+4FDB1A: 75 1C                          -  jne AVGame-Win64-Shipping.exe+4FDB38
+"AVGame-Win64-Shipping.exe"+4FDB1C: 3B CA                          -  cmp ecx,edx
+"AVGame-Win64-Shipping.exe"+4FDB1E: 74 14                          -  je AVGame-Win64-Shipping.exe+4FDB34
+"AVGame-Win64-Shipping.exe"+4FDB20: 38 9F 98 04 00 00              -  cmp [rdi+00000498],bl
+"AVGame-Win64-Shipping.exe"+4FDB26: 75 0C                          -  jne AVGame-Win64-Shipping.exe+4FDB34
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>86950</ID>
+              <Description>"Region Health"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>regionBase</Address>
+              <Offsets>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>86951</ID>
+              <Description>"Set Region Health to 100?"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+setMaxHealth:
+  db 1
+
+ 
+ 
+[DISABLE]
+setMaxHealth:
+  db 0
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>87174</ID>
+          <Description>"Auto Assemble script"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: AVGame-Win64-Shipping.exe
+	Version	: 4.15.1.0
+	Date	: 2020-10-28
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+aobscanmodule(weaponStatUpdate,AVGame-Win64-Shipping.exe,F3 0F 10 83 10 09 00 00)
+registersymbol(weaponStatUpdate)
+alloc(newweaponStatUpdate,100,weaponStatUpdate)
+label(codeweaponStatUpdate)
+label(returnweaponStatUpdate)
+
+newweaponStatUpdate:
+
+codeweaponStatUpdate:
+  movss xmm0,[rbx+00000910]
+  jmp returnweaponStatUpdate
+
+weaponStatUpdate:
+  jmp newweaponStatUpdate
+  nop 3
+returnweaponStatUpdate:
+
+[DISABLE]
+weaponStatUpdate:
+  db F3 0F 10 83 10 09 00 00
+
+unregistersymbol(weaponStatUpdate)
+dealloc(newweaponStatUpdate)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "AVGame-Win64-Shipping.exe"+543690
+
+"AVGame-Win64-Shipping.exe"+543654: 3B AB C0 04 00 00        -  cmp ebp,[rbx+000004C0]
+"AVGame-Win64-Shipping.exe"+54365A: 0F 8C 10 FF FF FF        -  jl AVGame-Win64-Shipping.exe+543570
+"AVGame-Win64-Shipping.exe"+543660: 48 8B 74 24 50           -  mov rsi,[rsp+50]
+"AVGame-Win64-Shipping.exe"+543665: 48 8B 6C 24 60           -  mov rbp,[rsp+60]
+"AVGame-Win64-Shipping.exe"+54366A: 0F 28 C7                 -  movaps xmm0,xmm7
+"AVGame-Win64-Shipping.exe"+54366D: F3 0F 59 83 9C 08 00 00  -  mulss xmm0,[rbx+0000089C]
+"AVGame-Win64-Shipping.exe"+543675: 0F 28 CE                 -  movaps xmm1,xmm6
+"AVGame-Win64-Shipping.exe"+543678: F3 0F 59 8B 98 08 00 00  -  mulss xmm1,[rbx+00000898]
+"AVGame-Win64-Shipping.exe"+543680: F3 0F 59 B3 80 07 00 00  -  mulss xmm6,[rbx+00000780]
+"AVGame-Win64-Shipping.exe"+543688: F3 0F 11 83 9C 08 00 00  -  movss [rbx+0000089C],xmm0
+// ---------- INJECTING HERE ----------
+"AVGame-Win64-Shipping.exe"+543690: F3 0F 10 83 10 09 00 00  -  movss xmm0,[rbx+00000910]
+// ---------- DONE INJECTING  ----------
+"AVGame-Win64-Shipping.exe"+543698: F3 0F 5E C7              -  divss xmm0,xmm7
+"AVGame-Win64-Shipping.exe"+54369C: 0F 28 7C 24 20           -  movaps xmm7,[rsp+20]
+"AVGame-Win64-Shipping.exe"+5436A1: F3 0F 11 B3 84 07 00 00  -  movss [rbx+00000784],xmm6
+"AVGame-Win64-Shipping.exe"+5436A9: 0F 28 74 24 30           -  movaps xmm6,[rsp+30]
+"AVGame-Win64-Shipping.exe"+5436AE: F3 0F 11 83 14 09 00 00  -  movss [rbx+00000914],xmm0
+"AVGame-Win64-Shipping.exe"+5436B6: F3 0F 11 8B 98 08 00 00  -  movss [rbx+00000898],xmm1
+"AVGame-Win64-Shipping.exe"+5436BE: F3 0F 11 8B 84 06 00 00  -  movss [rbx+00000684],xmm1
+"AVGame-Win64-Shipping.exe"+5436C6: 48 8B 5C 24 58           -  mov rbx,[rsp+58]
+"AVGame-Win64-Shipping.exe"+5436CB: 48 83 C4 40              -  add rsp,40
+"AVGame-Win64-Shipping.exe"+5436CF: 5F                       -  pop rdi
+}
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="20000000">
+      <Description>Change of sub [rdx+rcx*8+08],ebp</Description>
+      <AddressString>AVGame-Win64-Shipping.exe+40ECBD</AddressString>
+      <Before>
+        <Byte>0F</Byte>
+        <Byte>4E</Byte>
+        <Byte>6C</Byte>
+        <Byte>CA</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>29</Byte>
+        <Byte>6C</Byte>
+        <Byte>CA</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>44</Byte>
+        <Byte>38</Byte>
+        <Byte>AC</Byte>
+        <Byte>24</Byte>
+        <Byte>B0</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+  <LuaScript>
+</LuaScript>
+</CheatTable>

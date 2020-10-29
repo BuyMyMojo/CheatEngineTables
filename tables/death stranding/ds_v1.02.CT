@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Zero Weight Items"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ds.exe
+  Version: 
+  Date   : 2020-10-18
+  Author : ctl3d
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(realItemWeight,ds.exe,C5 FA 10 79 50 ?? ?? C5 F8 29 74 24 30) // should be unique
+alloc(newmem,$1000,realItemWeight)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword [rcx+50],0 //item weight
+code:
+  vmovss xmm7,[rcx+50]
+  jmp return
+
+realItemWeight:
+  jmp newmem
+return:
+registersymbol(realItemWeight)
+
+[DISABLE]
+
+realItemWeight:
+  db C5 FA 10 79 50
+
+unregistersymbol(realItemWeight)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ds.exe"+2971B5A
+
+"ds.exe"+2971B3C: CC                       -  int 3 
+"ds.exe"+2971B3D: CC                       -  int 3 
+"ds.exe"+2971B3E: CC                       -  int 3 
+"ds.exe"+2971B3F: CC                       -  int 3 
+"ds.exe"+2971B40: 40 53                    -  push rbx
+"ds.exe"+2971B42: 48 83 EC 40              -  sub rsp,40
+"ds.exe"+2971B46: 48 8B D9                 -  mov rbx,rcx
+"ds.exe"+2971B49: C5 F8 29 7C 24 20        -  vmovaps [rsp+20],xmm7
+"ds.exe"+2971B4F: 48 8B 49 28              -  mov rcx,[rcx+28]
+"ds.exe"+2971B53: F6 83 04 02 00 00 80     -  test byte ptr [rbx+00000204],-80
+// ---------- INJECTING HERE ----------
+"ds.exe"+2971B5A: C5 FA 10 79 50           -  vmovss xmm7,[rcx+50]
+// ---------- DONE INJECTING  ----------
+"ds.exe"+2971B5F: 74 39                    -  je ds.exe+2971B9A
+"ds.exe"+2971B61: C5 F8 29 74 24 30        -  vmovaps [rsp+30],xmm6
+"ds.exe"+2971B67: E8 64 8C 6F 00           -  call ds.exe+306A7D0
+"ds.exe"+2971B6C: 48 8B CB                 -  mov rcx,rbx
+"ds.exe"+2971B6F: C5 F8 28 F0              -  vmovaps xmm6,xmm0
+"ds.exe"+2971B73: E8 48 5F FF FF           -  call ds.exe+2967AC0
+"ds.exe"+2971B78: C5 F8 28 C8              -  vmovaps xmm1,xmm0
+"ds.exe"+2971B7C: C5 C2 5C C6              -  vsubss xmm0,xmm7,xmm6
+"ds.exe"+2971B80: C5 F2 59 C8              -  vmulss xmm1,xmm1,xmm0
+"ds.exe"+2971B84: C5 F2 58 C6              -  vaddss xmm0,xmm1,xmm6
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"Structure Mods"</Description>
+      <Options moHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ds.exe
+  Version: 
+  Date   : 2020-10-18
+  Author : ctl3d
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(structureIntegrity,ds.exe,C5 F8 2F 81 D8 00 00 00 76) // should be unique
+alloc(newmem,$1000,"ds.exe"+297AE4C)
+
+label(code)
+label(return)
+label(cheapUpgrade)
+label(cheapBuild)
+
+newmem:
+  push rax
+  mov  rax,[rcx+90]
+  test rax,rax
+  je   @f
+  push rbx
+  xor  rbx,rbx
+  mov  ebx,dword[rcx+84]
+  sub  rbx,1
+  mov  eax,[rax+90+rbx*4] //Max Integrity
+  mov  dword [rcx+D8],eax //Set current structure integrity
+  pop  rbx
+@@:
+  pop  rax
+cheapUpgrade:
+  push rax
+  mov  rax,[rcx+90]
+  test rax,rax
+  je   @f
+  mov  rax,[rax+148]
+  test rax,rax
+  je   @f
+  mov  [rax+8],0 //Upgrade Material 1 Level 1
+  mov  [rax+C],1 //Upgrade Cost Material 1 Level 1
+  mov  [rax+18],0 //Upgrade Material 2 Level 1
+  mov  [rax+1C],1 //Upgrade Cost Material 2 Level 1
+  mov  [rax+28],0 //Upgrade Material 1 Level 2
+  mov  [rax+2C],1 //Upgrade Cost Material 1 Level 2
+  mov  [rax+38],0 //Upgrade Material 2 Level 2
+  mov  [rax+3C],1 //Upgrade Cost Material 2 Level 2
+@@:
+  pop  rax
+cheapBuild:
+  push rax
+  mov  rax,[rcx+90]
+  test rax,rax
+  je   @f
+  mov  dword [rax+8C],0 //No chiral bandwidth consumption
+  mov  rax,[rax+110]
+  test rax,rax
+  je   @f
+  mov  [rax+8],0 //Build Material 1
+  mov  [rax+C],1 //Build Cost Material 1
+  mov  [rax+28],0 //Build Material 2
+  mov  [rax+2C],1 //Build Cost Material 2
+@@:
+  pop  rax
+  mov  dword [rcx+D0],0 //Time to Build or Upgrade
+code:
+  //vcomiss xmm0,xmm0,[rcx+000000D8]
+  db C5 F8 2F 81 D8 00 00 00
+  jmp return
+
+structureIntegrity:
+  jmp newmem
+  nop 3
+return:
+registersymbol(structureIntegrity)
+
+[DISABLE]
+
+structureIntegrity:
+  db C5 F8 2F 81 D8 00 00 00
+
+unregistersymbol(structureIntegrity)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ds.exe"+297AE4C
+
+"ds.exe"+297AE22: 3B C2                          -  cmp eax,edx
+"ds.exe"+297AE24: C5 F8 57 C0                    -  vxorps xmm0,xmm0,xmm0
+"ds.exe"+297AE28: 0F 47 D0                       -  cmova edx,eax
+"ds.exe"+297AE2B: B8 04 00 00 00                 -  mov eax,00000004
+"ds.exe"+297AE30: FF CA                          -  dec edx
+"ds.exe"+297AE32: 3B D0                          -  cmp edx,eax
+"ds.exe"+297AE34: 0F 47 D0                       -  cmova edx,eax
+"ds.exe"+297AE37: C4 C1 78 2F 84 90 90 00 00 00  -  vcomiss xmm0,xmm0,[r8+rdx*4+00000090]
+"ds.exe"+297AE41: 77 16                          -  ja ds.exe+297AE59
+"ds.exe"+297AE43: C4 C1 7A 10 80 A4 00 00 00     -  vmovss xmm0,[r8+000000A4]
+// ---------- INJECTING HERE ----------
+"ds.exe"+297AE4C: C5 F8 2F 81 D8 00 00 00        -  vcomiss xmm0,xmm0,[rcx+000000D8]
+// ---------- DONE INJECTING  ----------
+"ds.exe"+297AE54: 76 03                          -  jna ds.exe+297AE59
+"ds.exe"+297AE56: B0 01                          -  mov al,01
+"ds.exe"+297AE58: C3                             -  ret 
+"ds.exe"+297AE59: 32 C0                          -  xor al,al
+"ds.exe"+297AE5B: C3                             -  ret 
+"ds.exe"+297AE5C: CC                             -  int 3 
+"ds.exe"+297AE5D: CC                             -  int 3 
+"ds.exe"+297AE5E: CC                             -  int 3 
+"ds.exe"+297AE5F: CC                             -  int 3 
+"ds.exe"+297AE60: CC                             -  int 3 
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"Max Durability"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"Cheap Construction/Upgrade"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"Instant Construction/Upgrade"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"No Chiral Bandwidth Consumption"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"Cheap Roads"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ds.exe
+  Version: 
+  Date   : 2020-10-20
+  Author : ctl3d
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(Road,ds.exe,44 8B 89 10 02 00 00) // should be unique
+alloc(newmem,$1000,"ds.exe"+296BB20)
+
+label(code)
+label(return)
+label(roadBase)
+registersymbol(roadBase)
+
+newmem:
+  mov [roadBase],rcx
+  push rax
+  push rbx
+  mov rax, [ds.exe+74B8370]
+  mov ebx,[rax+24] //needed crystals
+  dec ebx
+  cmp dword [rcx+00000210],ebx
+  jge @f
+  mov dword [rcx+00000210],ebx //Crystals
+@@:
+  mov ebx,[rax+2C] //needed metals
+  cmp dword [rcx+00000218],ebx
+  jge  @f
+  mov dword [rcx+00000218],ebx  //Metals
+@@:
+  mov ebx,[rax+30] //needed ceramics
+  cmp dword [rcx+0000021C],ebx
+  jge  @f
+  mov dword [rcx+0000021C],ebx  //Ceramics
+@@:
+  pop rbx
+  pop rax
+
+  //cmp dword [rcx+00000210],(int)149
+  //jge @f
+  //mov dword [rcx+00000210],(int)149  //Crystals
+//@@:
+  //mov dword [rcx+00000214],(int)0
+  //mov dword [rcx+00000218],(int)800  //Metals
+  //mov dword [rcx+0000021C],(int)600  //Ceramics
+  //mov dword [rcx+00000220],(int)0
+  //mov dword [rcx+00000224],(int)0
+code:
+  mov r9d,[rcx+00000210]
+  jmp return
+
+roadBase:
+  dq 0
+
+Road:
+  jmp newmem
+  nop 2
+return:
+registersymbol(Road)
+
+[DISABLE]
+
+Road:
+  db 44 8B 89 10 02 00 00
+
+unregistersymbol(Road)
+dealloc(newmem)
+unregistersymbol(roadBase)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ds.exe"+296BB20
+
+"ds.exe"+296BAFE: CC                    -  int 3 
+"ds.exe"+296BAFF: CC                    -  int 3 
+"ds.exe"+296BB00: 48 89 5C 24 08        -  mov [rsp+08],rbx
+"ds.exe"+296BB05: 48 89 74 24 10        -  mov [rsp+10],rsi
+"ds.exe"+296BB0A: 48 89 7C 24 18        -  mov [rsp+18],rdi
+"ds.exe"+296BB0F: 33 C0                 -  xor eax,eax
+"ds.exe"+296BB11: 48 8B F1              -  mov rsi,rcx
+"ds.exe"+296BB14: C5 F9 EF C0           -  vpxor xmm0,xmm0,xmm0
+"ds.exe"+296BB18: C5 F8 11 02           -  vmovups [rdx],xmm0
+"ds.exe"+296BB1C: 48 89 42 10           -  mov [rdx+10],rax
+// ---------- INJECTING HERE ----------
+"ds.exe"+296BB20: 44 8B 89 10 02 00 00  -  mov r9d,[rcx+00000210]
+// ---------- DONE INJECTING  ----------
+"ds.exe"+296BB27: 44 89 0A              -  mov [rdx],r9d
+"ds.exe"+296BB2A: 44 8B 91 14 02 00 00  -  mov r10d,[rcx+00000214]
+"ds.exe"+296BB31: 44 03 52 04           -  add r10d,[rdx+04]
+"ds.exe"+296BB35: 44 89 52 04           -  mov [rdx+04],r10d
+"ds.exe"+296BB39: 44 8B 81 18 02 00 00  -  mov r8d,[rcx+00000218]
+"ds.exe"+296BB40: 44 03 42 08           -  add r8d,[rdx+08]
+"ds.exe"+296BB44: 44 89 42 08           -  mov [rdx+08],r8d
+"ds.exe"+296BB48: 44 8B 99 1C 02 00 00  -  mov r11d,[rcx+0000021C]
+"ds.exe"+296BB4F: 44 03 5A 0C           -  add r11d,[rdx+0C]
+"ds.exe"+296BB53: 44 89 5A 0C           -  mov [rdx+0C],r11d
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"Max Road Durability"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ds.exe
+  Version: 
+  Date   : 2020-10-21
+  Author : ctl3d
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(RoadDurability,ds.exe,C5 FA 10 41 0C * * * * 07) // should be unique
+alloc(newmem,$1000,RoadDurability)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword [rcx+0C],(float)100.0
+code:
+  vmovss xmm0,[rcx+0C]
+  jmp return
+
+RoadDurability:
+  jmp newmem
+return:
+registersymbol(RoadDurability)
+
+[DISABLE]
+
+RoadDurability:
+  db C5 FA 10 41 0C
+
+unregistersymbol(RoadDurability)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ds.exe"+2B522D0
+
+"ds.exe"+2B522B0: 74 08                    -  je ds.exe+2B522BA
+"ds.exe"+2B522B2: 48 8B CB                 -  mov rcx,rbx
+"ds.exe"+2B522B5: E8 B6 45 B9 FE           -  call ds.exe+16E6870
+"ds.exe"+2B522BA: C5 F8 28 C6              -  vmovaps xmm0,xmm6
+"ds.exe"+2B522BE: C5 F8 28 74 24 20        -  vmovaps xmm6,[rsp+20]
+"ds.exe"+2B522C4: 48 83 C4 30              -  add rsp,30
+"ds.exe"+2B522C8: 5B                       -  pop rbx
+"ds.exe"+2B522C9: C3                       -  ret 
+"ds.exe"+2B522CA: 80 79 15 00              -  cmp byte ptr [rcx+15],00
+"ds.exe"+2B522CE: 74 D4                    -  je ds.exe+2B522A4
+// ---------- INJECTING HERE ----------
+"ds.exe"+2B522D0: C5 FA 10 41 0C           -  vmovss xmm0,[rcx+0C]
+// ---------- DONE INJECTING  ----------
+"ds.exe"+2B522D5: C5 FA 5E 35 07 C6 C1 00  -  vdivss xmm6,xmm0,[ds.exe+376E8E4]
+"ds.exe"+2B522DD: EB C9                    -  jmp ds.exe+2B522A8
+"ds.exe"+2B522DF: CC                       -  int 3 
+"ds.exe"+2B522E0: CC                       -  int 3 
+"ds.exe"+2B522E1: CC                       -  int 3 
+"ds.exe"+2B522E2: CC                       -  int 3 
+"ds.exe"+2B522E3: CC                       -  int 3 
+"ds.exe"+2B522E4: CC                       -  int 3 
+"ds.exe"+2B522E5: CC                       -  int 3 
+"ds.exe"+2B522E6: CC                       -  int 3 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>29</ID>
+      <Description>"Unlimited Hematic Grenades &amp; Repair Kit &amp; Other Usable Items"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ds.exe
+  Version: 
+  Date   : 2020-10-24
+  Author : ctl3d
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(Unlimited_Items,ds.exe,43 80 BC B7 8D 1C 00 00 00 74 12) // should be unique
+alloc(newmem,$1000,"ds.exe"+264B8ED)
+
+label(code)
+label(return)
+
+newmem:
+  mov byte ptr [r15+r14*4+00001C8D],00
+code:
+  cmp byte ptr [r15+r14*4+00001C8D],00
+  jmp return
+
+Unlimited_Items:
+  jmp newmem
+  nop 4
+return:
+registersymbol(Unlimited_Items)
+
+[DISABLE]
+
+Unlimited_Items:
+  db 43 80 BC B7 8D 1C 00 00 00
+
+unregistersymbol(Unlimited_Items)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ds.exe"+264B8ED
+
+"ds.exe"+264B8B5: 88 84 33 F8 00 00 00                 -  mov [rbx+rsi+000000F8],al
+"ds.exe"+264B8BC: 43 80 BC B7 8D 1C 00 00 00           -  cmp byte ptr [r15+r14*4+00001C8D],00
+"ds.exe"+264B8C5: 74 17                                -  je ds.exe+264B8DE
+"ds.exe"+264B8C7: 4B 8B 8C 3C D8 00 00 00              -  mov rcx,[r12+r15+000000D8]
+"ds.exe"+264B8CF: E8 AC C1 31 00                       -  call ds.exe+2967A80
+"ds.exe"+264B8D4: 0F B6 54 24 20                       -  movzx edx,byte ptr [rsp+20]
+"ds.exe"+264B8D9: 0F BF C8                             -  movsx ecx,ax
+"ds.exe"+264B8DC: EB 08                                -  jmp ds.exe+264B8E6
+"ds.exe"+264B8DE: 43 8B 8C B7 7C 1C 00 00              -  mov ecx,[r15+r14*4+00001C7C]
+"ds.exe"+264B8E6: 89 8C 33 DC 00 00 00                 -  mov [rbx+rsi+000000DC],ecx
+// ---------- INJECTING HERE ----------
+"ds.exe"+264B8ED: 43 80 BC B7 8D 1C 00 00 00           -  cmp byte ptr [r15+r14*4+00001C8D],00
+// ---------- DONE INJECTING  ----------
+"ds.exe"+264B8F6: 74 12                                -  je ds.exe+264B90A
+"ds.exe"+264B8F8: 4B 8B 8C 3C D8 00 00 00              -  mov rcx,[r12+r15+000000D8]
+"ds.exe"+264B900: E8 7B C1 31 00                       -  call ds.exe+2967A80
+"ds.exe"+264B905: 0F BF C8                             -  movsx ecx,ax
+"ds.exe"+264B908: EB 08                                -  jmp ds.exe+264B912
+"ds.exe"+264B90A: 43 8B 8C B7 7C 1C 00 00              -  mov ecx,[r15+r14*4+00001C7C]
+"ds.exe"+264B912: 89 8C 33 D8 00 00 00                 -  mov [rbx+rsi+000000D8],ecx
+"ds.exe"+264B919: 41 0F B6 85 B8 02 00 00              -  movzx eax,byte ptr [r13+000002B8]
+"ds.exe"+264B921: 48 C1 E0 06                          -  shl rax,06
+"ds.exe"+264B925: 4A 8B 44 28 28                       -  mov rax,[rax+r13+28]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>31</ID>
+      <Description>"Inf. Blood"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ds.exe
+  Version: 
+  Date   : 2020-10-24
+  Author : ctl3d
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(Blood,ds.exe,8B 88 C0 00 00 00 89 4F 24) // should be unique
+alloc(newmem,$1000,"ds.exe"+248F664)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword [rax+000000C0],(float)1000.0
+code:
+  mov ecx,[rax+000000C0]
+  jmp return
+
+Blood:
+  jmp newmem
+  nop
+return:
+registersymbol(Blood)
+
+[DISABLE]
+
+Blood:
+  db 8B 88 C0 00 00 00
+
+unregistersymbol(Blood)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ds.exe"+248F664
+
+"ds.exe"+248F626: C5 D8 56 F1              -  vorps xmm6,xmm4,xmm1
+"ds.exe"+248F62A: C4 41 78 10 CA           -  vmovups xmm9,xmm10
+"ds.exe"+248F62F: E8 49 85 28 01           -  call ds.exe+3717B7D
+"ds.exe"+248F634: C5 FA 11 47 7C           -  vmovss [rdi+7C],xmm0
+"ds.exe"+248F639: C5 FA 7F B7 80 00 00 00  -  vmovdqu [rdi+00000080],xmm6
+"ds.exe"+248F641: 8B 86 A8 3F 00 00        -  mov eax,[rsi+00003FA8]
+"ds.exe"+248F647: 89 87 B0 00 00 00        -  mov [rdi+000000B0],eax
+"ds.exe"+248F64D: C5 F8 10 86 30 07 00 00  -  vmovups xmm0,[rsi+00000730]
+"ds.exe"+248F655: C5 FA 7F 87 A0 00 00 00  -  vmovdqu [rdi+000000A0],xmm0
+"ds.exe"+248F65D: 48 8B 86 A0 02 00 00     -  mov rax,[rsi+000002A0]
+// ---------- INJECTING HERE ----------
+"ds.exe"+248F664: 8B 88 C0 00 00 00        -  mov ecx,[rax+000000C0]
+// ---------- DONE INJECTING  ----------
+"ds.exe"+248F66A: 89 4F 24                 -  mov [rdi+24],ecx
+"ds.exe"+248F66D: 48 8B 86 A0 02 00 00     -  mov rax,[rsi+000002A0]
+"ds.exe"+248F674: 8B 88 C4 00 00 00        -  mov ecx,[rax+000000C4]
+"ds.exe"+248F67A: 89 4F 28                 -  mov [rdi+28],ecx
+"ds.exe"+248F67D: 48 8B 86 A0 02 00 00     -  mov rax,[rsi+000002A0]
+"ds.exe"+248F684: 8B 88 08 01 00 00        -  mov ecx,[rax+00000108]
+"ds.exe"+248F68A: 89 4F 2C                 -  mov [rdi+2C],ecx
+"ds.exe"+248F68D: 48 8B 86 A0 02 00 00     -  mov rax,[rsi+000002A0]
+"ds.exe"+248F694: 8B 88 00 01 00 00        -  mov ecx,[rax+00000100]
+"ds.exe"+248F69A: 89 4F 30                 -  mov [rdi+30],ecx
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

@@ -1,0 +1,1714 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>87445</ID>
+      <Description>"Created by Idlehands88"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" Activated="1" RealAddress="00000000"/>
+      <Color>FF8000</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>87456</ID>
+          <Description>"Highlighted Equip Edit"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <Color>808000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Dungeons-Win64-Shipping.exe
+  Version: 1.4.6.0_4745939
+  Date   : 2020-10-02
+  Author : Idlehands88
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT_EquipmentEdit,Dungeons-Win64-Shipping.exe,9F 0D 00 4C 8B 03 48 8D 54 24 30) // should be unique
+alloc(newmem,$1000,"Dungeons-Win64-Shipping.exe"+8699FB)
+alloc(newmem2,$2000,1100000000)
+
+registersymbol(p_equip)
+label(p_equip)
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [p_equip],rbx
+  mov r8,[rbx]
+  lea rdx,[rsp+30]
+  jmp return
+
+p_equip:
+dq
+
+INJECT_EquipmentEdit+03:
+  jmp newmem
+  nop 3
+return:
+registersymbol(INJECT_EquipmentEdit)
+
+[DISABLE]
+
+INJECT_EquipmentEdit+03:
+  db 4C 8B 03 48 8D 54 24 30
+
+unregistersymbol(p_equip)
+unregistersymbol(INJECT_EquipmentEdit)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Dungeons-Win64-Shipping.exe"+8699FB
+
+"Dungeons-Win64-Shipping.exe"+8699DD: CC              -  int 3 
+"Dungeons-Win64-Shipping.exe"+8699DE: CC              -  int 3 
+"Dungeons-Win64-Shipping.exe"+8699DF: CC              -  int 3 
+"Dungeons-Win64-Shipping.exe"+8699E0: 48 89 5C 24 10  -  mov [rsp+10],rbx
+"Dungeons-Win64-Shipping.exe"+8699E5: 57              -  push rdi
+"Dungeons-Win64-Shipping.exe"+8699E6: 48 83 EC 20     -  sub rsp,20
+"Dungeons-Win64-Shipping.exe"+8699EA: 48 83 C1 28     -  add rcx,28
+"Dungeons-Win64-Shipping.exe"+8699EE: E8 3D 1B 10 00  -  call Dungeons-Win64-Shipping.exe+96B530
+"Dungeons-Win64-Shipping.exe"+8699F3: 48 8B D8        -  mov rbx,rax
+"Dungeons-Win64-Shipping.exe"+8699F6: E8 45 34 0D 00  -  call Dungeons-Win64-Shipping.exe+93CE40
+// ---------- INJECTING HERE ----------
+"Dungeons-Win64-Shipping.exe"+8699FB: 4C 8B 03        -  mov r8,[rbx]
+"Dungeons-Win64-Shipping.exe"+8699FE: 48 8D 54 24 30  -  lea rdx,[rsp+30]
+// ---------- DONE INJECTING  ----------
+"Dungeons-Win64-Shipping.exe"+869A03: 48 8B C8        -  mov rcx,rax
+"Dungeons-Win64-Shipping.exe"+869A06: 48 8B F8        -  mov rdi,rax
+"Dungeons-Win64-Shipping.exe"+869A09: E8 32 6A AF FF  -  call Dungeons-Win64-Shipping.exe+360440
+"Dungeons-Win64-Shipping.exe"+869A0E: 48 63 4C 24 30  -  movsxd  rcx,dword ptr [rsp+30]
+"Dungeons-Win64-Shipping.exe"+869A13: 83 F9 FF        -  cmp ecx,-01
+"Dungeons-Win64-Shipping.exe"+869A16: 74 0D           -  je Dungeons-Win64-Shipping.exe+869A25
+"Dungeons-Win64-Shipping.exe"+869A18: 48 8B 07        -  mov rax,[rdi]
+"Dungeons-Win64-Shipping.exe"+869A1B: 48 8D 0C 49     -  lea rcx,[rcx+rcx*2]
+"Dungeons-Win64-Shipping.exe"+869A1F: 48 8D 0C C8     -  lea rcx,[rax+rcx*8]
+"Dungeons-Win64-Shipping.exe"+869A23: EB 02           -  jmp Dungeons-Win64-Shipping.exe+869A27
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>149</ID>
+              <Description>"BASE"</Description>
+              <LastState Value="00007FF6FCA30C18" RealAddress="14D06B05A00"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>FF0000</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>p_equip</Address>
+              <Offsets>
+                <Offset>-28</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>150</ID>
+              <Description>"Item ID (List by: TsumikiMiniwa)"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">2750:Sword
+2757:Diamond Sword - Extra Damage
+2764:Hawkbrand - Increases critical hit chance
+2771:Katana
+2778:Master's Katana - Increases critical hit chance
+2785:Dark Katana - Extra damage to undead
+2792:Spear - Long Melee Reach
+2799:Whispering Spear - Sometimes Strikes Twice
+2806:Fortune Spear - Drop More Consumables
+2813:Rapier - Fast Thrusts
+2820:Bee Stinger - Chance to Summon a Bee
+2827:Freezing Foil - Slows mobs
+2834:Claymore - Powerful Pushback
+2841:Heartstealer - Leeches Health from Mobs
+2848:Broadsword - Extra Damage
+2855:Sickles - Dual Wield
+2862:Nightmare's Bite - Spawns Poison Clouds
+2869:The Last Laugh - Mobs Drop More Emeralds
+2876:Gauntlets - Relentless Combo
+2883:Soul Fists - Souls Critical Boost/+2 Soul Gathering
+2890:Maulers - Increases attack speed
+2897:Fighter's Bindings - Boosts attack speed/Turbo Punches
+2904:Battlestaff - Stylish Combo
+2911:Growing Staff - Increased damage to wounded mobs
+2918:Battlestaff of Terror - Defated mobs explode
+2925:Glaive - Longer melee reach
+2932:Grave Bane - Extra Damage to Undead
+2939:Venom Glaive - Spawns poison clouds
+2946:Double Axe - Spin attack
+2953:Whirlwind - Casts Shockwaves
+2960:Cursed Axe - Defeated Mobs Explode
+2967:Whip - Longer Melee Reach
+2974:Vine Whip - Inflicts Poison
+2981:Daggers - Dual Wield
+2988:Fangs of Frost - Slows Mobs
+2995:Moon Daggers - Souls Critical Boost
+3002:Cutlass - Reliable Combo
+3009:Nameless Blade - Weakens Enemy Attacks
+3016:Dancer's Sword - Increase attack speed
+3023:Mace
+3030:Sun's Grace - Heals Allies in the Area
+3037:Flail
+3044:Pickaxe
+3051:Diamond Pickaxe - Finds More Emeralds
+3065:Axe - Spin attack move
+3072:Firebrand - Burns Mobs
+3079:Highland Axe - Stuns Mobs
+3086:Great Hammer - Great Splash
+3093:Stormlander - Fires Lightning Bolts
+3100:Hammer of Gravity - Pulls in enemies
+3107:Soul Scythe
+3114:Jailor's Scythe - Binds and Chains Enemies
+3121:Frost Scythe - Slows mobs
+3128:Soul Knife
+3135:Truthseeker - Increased damage to wounded mobs
+3142:Eternal Knife - Chance to Gain Souls
+3149:Bow
+3156:Bonebow - Arrows grow size
+3163:Twin Bow - Shoots Two Enemies At Once
+3170:Trickbow - Hits Multiple Targets
+3177:The Green Menace - Spawns Poison Clouds
+3184:The Green Menace - Spawns Poison Clouds
+3191:Shortbow
+3198:Purple Storm - Increased Fire Rate
+3205:Mechanical Shortbow - Accelerated Fire Rate
+3212:Longbow - Strong Charged Attacks
+3219:Guardian Bow - Super Charged Arrows
+3226:Red Snake - Chance for Arrows to Explode
+3233:Hunting Bow - Pets Attack Targeted Mobs
+3240:Hunter's Promise - Chance to Regain Arrows
+3247:Master's Bow - Extra Damage Dealt
+3254:Soul Bow - +1 Soul Gathering
+3261:Nocturnal Bow - Steals Speed
+3268:Bow of Lost Souls - Chance for Multishot
+3275:Power Bow - Strong Charged Attacks
+3282:Elite Power Bow - Greater damage
+3289:Sabrewing - Heals Allies in the Area
+3296:Crossbow - Faster Projectiles
+3303:The Slicer - Chance to fire piercing bolts
+3310:Azure Seeker - Increased Fire Rate
+3324:Heavy Crossbow - Powerful Shots
+3331:Doom Crossbow - Additional Knockback
+3338:Slayer Crossbow - Chance to ricochet
+3345:Rapid Crossbow - High Firerate
+3352:Butterfly Crossbow - Shoots Two Enemies At Once
+3359:Auto Crossbow - Firerate increases upon firing
+3366:Scatter Crossbow - Multiple projectiles
+3373:Harp Crossbow - Even More Projectiles
+3380:Lightning Harp Crossbow - Chance to ricochet
+3387:Burst Crossbow - Fast Multiple Projectiles
+3394:Soul Hunter Crossbow - Souls Critical Boost
+3401:Corrupted Crossbow - Boosts Next Attack On Roll
+3408:Dual Crossbows - Double Projectiles
+3415:Spellbound Crossbows - Strong vs Enchanted Mobs
+3422:Baby Crossbows - Arrows grow size
+3429:Soul Crossbow - +1 Soul Gathering
+3436:Feral Soul Crossbow - Souls Critical Boost/+2 Soul Gathering
+3443:Voidcaller - Pulls enemies in/+1 Soul Gathering
+3450:Exploding Crossbow - Explodes on Impact
+3457:Imploding Crossbow - Pulls in enemies/Explodes on Impact
+3464:Firebolt Thrower - Chance to Chain Reaction
+3471:Snow Bow - Freezes on Impact
+3478:Winter's Touch - Fires 3 arrows when charged
+3485:Guard's Armor
+3499:Reinforced Mail
+3506:Stalwart Armor - Potion Use Boosts Defense
+3513:Beenest Armor
+3520:Beehive Armor
+3527:Scale Mail
+3534:Highland Armor - Gains Speed after Doge
+3541:Ghostly Armor
+3548:Ghost Kindler - Spawns fire on roll
+3555:Evocation Robe
+3562:Ember Robe - Burns Nearby Enemies
+3569:Hunter's Armor
+3576:Archer's Armor
+3583:Thief Armor
+3590:Spider Armor
+3597:Battle Robe
+3604:Splendid Robe
+3611:Dark Armor
+3618:Titan's Shroud
+3625:Wolf Armor
+3632:Fox Armor
+3639:Champion's Armor
+3646:Hero's Armor
+3653:Mercenary Armor
+3660:Renegade Armor
+3667:Grim Armor
+3674:Wither Armor
+3681:Phantom Armor
+3688:Frost Bite - Spawns a Snowy Companion
+3695:Plate Armor
+3702:Full Metal Armor
+3709:Spelunker Armor
+3716:Cave Crawler
+3723:Soul Robe
+3730:Souldancer Robe
+3737:Mystery Armor
+3751:Ocelot Armor
+3758:Shadow Walker
+3765:Snow Armor
+3772:Frost Armor - Emits a Chilling Aura
+3807:Fireworks Arrow
+3814:Harvester
+3828:Corrupted Seeds
+3835:Ice Wand
+3842:Gong of Weakening
+3849:Light Feather
+3856:Wind Horn
+3863:Boots of Swiftness
+3870:Ghost Cloak
+3877:Fishing Rod
+3884:Death Cap Mushroom
+3891:Shock Powder
+3898:Iron Hide Amulet
+3905:Tasty Bone
+3912:Wonderful Wheat
+3919:Golem Kit
+3926:Love Medallion
+3933:Corrupted Beacon
+3940:Lightning Rod
+3947:Soul Healer
+3954:Totem of Shielding
+3975:Totem of Regeneration
+3982:Flaming Quiver
+3989:Torment Quiver
+3996:Soul Lantern
+4003:Buzzy Nest
+4010:Enchanted Grass
+</DropDownList>
+              <LastState Value="3149" RealAddress="14D06B05A28"/>
+              <Color>000000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>p_equip</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>152</ID>
+              <Description>"Power Level"</Description>
+              <LastState Value="999" RealAddress="14D06B05A3C"/>
+              <Color>000000</Color>
+              <VariableType>Float</VariableType>
+              <Address>p_equip</Address>
+              <Offsets>
+                <Offset>14</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>151</ID>
+              <Description>"Rarity"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Common
+1:Rare
+2:Unique
+</DropDownList>
+              <LastState Value="2" RealAddress="14D06B05A60"/>
+              <Color>000000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>p_equip</Address>
+              <Offsets>
+                <Offset>38</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>153</ID>
+              <Description>"SKILLS"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>154</ID>
+                  <Description>"Empty Offset"</Description>
+                  <LastState Value="" RealAddress="1100000000"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <Color>FF0000</Color>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>0</ByteLength>
+                  <Address>1100000000</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>187</ID>
+                  <Description>"Skills Offset"</Description>
+                  <LastState Value="0000014D42B8B0C0" RealAddress="14D06B05A40"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <Color>FF0000</Color>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>155</ID>
+                  <Description>"Number of Skills"</Description>
+                  <LastState Value="3" RealAddress="14D06B05A48"/>
+                  <Color>000000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>20</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>156</ID>
+                  <Description>"Max Number of Skills"</Description>
+                  <LastState Value="4" RealAddress="14D06B05A4C"/>
+                  <Color>000000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>24</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>157</ID>
+                  <Description>"Skill 1 ID"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Sharpness
+2:Knockback
+3:Looting
+4:Prospector
+5:Fire Aspect
+6:Rampaging
+7:Exploding
+8:Critical Hit
+9:Freezing
+10:Poison Cloud
+11:Poison
+12:Leeching
+14:Gravity
+15:Enigma Resonator
+16:Anima Conduit
+17:Stunning
+19:Swirling
+20:Smiting
+21:Committed
+22:Soul Siphon
+23:Radiance
+24:Chains
+25:Thundering
+26:Echo
+27:Shockwave
+28:Weakening
+29:Busy Bee
+30:Dynamo
+31:Tempo Theft
+34:Ricochet
+35:Power (Bow)
+36:Punch
+37:Infinity
+38:Multishot
+39:Piercing
+40:Chain Reaction
+41:Gravity
+43:Enigma Resonator
+44:Anima Conduit
+45:Poison Cloud
+46:Poison
+48:Rapid Fire
+49:Supercharge
+50:Bonus Shot
+51:Unchanting
+52:Fuse Shot
+53:Radiance Shot
+54:Accelerate
+55:Growing
+56:Wild Rage
+58:Dynamo (Bow)
+59:Burst Bowstring
+61:Protection
+62:Cool Down
+63:Final Shout
+64:Deflect
+65:Regeneration
+66:Thorns
+67:Heals Allies
+68:Shielding
+69:Barrier
+71:Recycler
+72:Chilling
+73:Cowardice
+74:Electrified
+75:Burning
+76:Snowball
+77:Gravity Pulse
+78:Fire Trail
+79:Frenzied
+80:Swiftfooted
+81:Soul Speed
+82:Potion Barrier
+83:Food Reserves
+84:Surprise Gift
+88:Health Synergy
+89:Speed Synergy
+90:Explorer
+94:Tumble Bee
+95:Bag Of Souls
+96:Acrobat
+</DropDownList>
+                  <LastState Value="0" RealAddress="14D42B8B0C0"/>
+                  <Color>008000</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>158</ID>
+                  <Description>"Skill 1 ID"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Sharpness
+2:Knockback
+3:Looting
+4:Prospector
+5:Fire Aspect
+6:Rampaging
+7:Exploding
+8:Critical Hit
+9:Freezing
+10:Poison Cloud
+11:Poison
+12:Leeching
+14:Gravity
+15:Enigma Resonator
+16:Anima Conduit
+17:Stunning
+19:Swirling
+20:Smiting
+21:Committed
+22:Soul Siphon
+23:Radiance
+24:Chains
+25:Thundering
+26:Echo
+27:Shockwave
+28:Weakening
+29:Busy Bee
+30:Dynamo
+31:Tempo Theft
+34:Ricochet
+35:Power (Bow)
+36:Punch
+37:Infinity
+38:Multishot
+39:Piercing
+40:Chain Reaction
+41:Gravity
+43:Enigma Resonator
+44:Anima Conduit
+45:Poison Cloud
+46:Poison
+48:Rapid Fire
+49:Supercharge
+50:Bonus Shot
+51:Unchanting
+52:Fuse Shot
+53:Radiance Shot
+54:Accelerate
+55:Growing
+56:Wild Rage
+58:Dynamo (Bow)
+59:Burst Bowstring
+61:Protection
+62:Cool Down
+63:Final Shout
+64:Deflect
+65:Regeneration
+66:Thorns
+67:Heals Allies
+68:Shielding
+69:Barrier
+71:Recycler
+72:Chilling
+73:Cowardice
+74:Electrified
+75:Burning
+76:Snowball
+77:Gravity Pulse
+78:Fire Trail
+79:Frenzied
+80:Swiftfooted
+81:Soul Speed
+82:Potion Barrier
+83:Food Reserves
+84:Surprise Gift
+88:Health Synergy
+89:Speed Synergy
+90:Explorer
+94:Tumble Bee
+95:Bag Of Souls
+96:Acrobat
+</DropDownList>
+                  <LastState Value="38" RealAddress="14D42B8B0C8"/>
+                  <Color>008000</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>8</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>159</ID>
+                  <Description>"Skill 1 ID"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Sharpness
+2:Knockback
+3:Looting
+4:Prospector
+5:Fire Aspect
+6:Rampaging
+7:Exploding
+8:Critical Hit
+9:Freezing
+10:Poison Cloud
+11:Poison
+12:Leeching
+14:Gravity
+15:Enigma Resonator
+16:Anima Conduit
+17:Stunning
+19:Swirling
+20:Smiting
+21:Committed
+22:Soul Siphon
+23:Radiance
+24:Chains
+25:Thundering
+26:Echo
+27:Shockwave
+28:Weakening
+29:Busy Bee
+30:Dynamo
+31:Tempo Theft
+34:Ricochet
+35:Power (Bow)
+36:Punch
+37:Infinity
+38:Multishot
+39:Piercing
+40:Chain Reaction
+41:Gravity
+43:Enigma Resonator
+44:Anima Conduit
+45:Poison Cloud
+46:Poison
+48:Rapid Fire
+49:Supercharge
+50:Bonus Shot
+51:Unchanting
+52:Fuse Shot
+53:Radiance Shot
+54:Accelerate
+55:Growing
+56:Wild Rage
+58:Dynamo (Bow)
+59:Burst Bowstring
+61:Protection
+62:Cool Down
+63:Final Shout
+64:Deflect
+65:Regeneration
+66:Thorns
+67:Heals Allies
+68:Shielding
+69:Barrier
+71:Recycler
+72:Chilling
+73:Cowardice
+74:Electrified
+75:Burning
+76:Snowball
+77:Gravity Pulse
+78:Fire Trail
+79:Frenzied
+80:Swiftfooted
+81:Soul Speed
+82:Potion Barrier
+83:Food Reserves
+84:Surprise Gift
+88:Health Synergy
+89:Speed Synergy
+90:Explorer
+94:Tumble Bee
+95:Bag Of Souls
+96:Acrobat
+</DropDownList>
+                  <LastState Value="36" RealAddress="14D42B8B0D0"/>
+                  <Color>008000</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>160</ID>
+                  <Description>"Skill 2 ID"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Sharpness
+2:Knockback
+3:Looting
+4:Prospector
+5:Fire Aspect
+6:Rampaging
+7:Exploding
+8:Critical Hit
+9:Freezing
+10:Poison Cloud
+11:Poison
+12:Leeching
+14:Gravity
+15:Enigma Resonator
+16:Anima Conduit
+17:Stunning
+19:Swirling
+20:Smiting
+21:Committed
+22:Soul Siphon
+23:Radiance
+24:Chains
+25:Thundering
+26:Echo
+27:Shockwave
+28:Weakening
+29:Busy Bee
+30:Dynamo
+31:Tempo Theft
+34:Ricochet
+35:Power (Bow)
+36:Punch
+37:Infinity
+38:Multishot
+39:Piercing
+40:Chain Reaction
+41:Gravity
+43:Enigma Resonator
+44:Anima Conduit
+45:Poison Cloud
+46:Poison
+48:Rapid Fire
+49:Supercharge
+50:Bonus Shot
+51:Unchanting
+52:Fuse Shot
+53:Radiance Shot
+54:Accelerate
+55:Growing
+56:Wild Rage
+58:Dynamo (Bow)
+59:Burst Bowstring
+61:Protection
+62:Cool Down
+63:Final Shout
+64:Deflect
+65:Regeneration
+66:Thorns
+67:Heals Allies
+68:Shielding
+69:Barrier
+71:Recycler
+72:Chilling
+73:Cowardice
+74:Electrified
+75:Burning
+76:Snowball
+77:Gravity Pulse
+78:Fire Trail
+79:Frenzied
+80:Swiftfooted
+81:Soul Speed
+82:Potion Barrier
+83:Food Reserves
+84:Surprise Gift
+88:Health Synergy
+89:Speed Synergy
+90:Explorer
+94:Tumble Bee
+95:Bag Of Souls
+96:Acrobat
+</DropDownList>
+                  <LastState Value="64" RealAddress="14D42B8B0D8"/>
+                  <Color>804000</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>18</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>161</ID>
+                  <Description>"Skill 2 ID"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Sharpness
+2:Knockback
+3:Looting
+4:Prospector
+5:Fire Aspect
+6:Rampaging
+7:Exploding
+8:Critical Hit
+9:Freezing
+10:Poison Cloud
+11:Poison
+12:Leeching
+14:Gravity
+15:Enigma Resonator
+16:Anima Conduit
+17:Stunning
+19:Swirling
+20:Smiting
+21:Committed
+22:Soul Siphon
+23:Radiance
+24:Chains
+25:Thundering
+26:Echo
+27:Shockwave
+28:Weakening
+29:Busy Bee
+30:Dynamo
+31:Tempo Theft
+34:Ricochet
+35:Power (Bow)
+36:Punch
+37:Infinity
+38:Multishot
+39:Piercing
+40:Chain Reaction
+41:Gravity
+43:Enigma Resonator
+44:Anima Conduit
+45:Poison Cloud
+46:Poison
+48:Rapid Fire
+49:Supercharge
+50:Bonus Shot
+51:Unchanting
+52:Fuse Shot
+53:Radiance Shot
+54:Accelerate
+55:Growing
+56:Wild Rage
+58:Dynamo (Bow)
+59:Burst Bowstring
+61:Protection
+62:Cool Down
+63:Final Shout
+64:Deflect
+65:Regeneration
+66:Thorns
+67:Heals Allies
+68:Shielding
+69:Barrier
+71:Recycler
+72:Chilling
+73:Cowardice
+74:Electrified
+75:Burning
+76:Snowball
+77:Gravity Pulse
+78:Fire Trail
+79:Frenzied
+80:Swiftfooted
+81:Soul Speed
+82:Potion Barrier
+83:Food Reserves
+84:Surprise Gift
+88:Health Synergy
+89:Speed Synergy
+90:Explorer
+94:Tumble Bee
+95:Bag Of Souls
+96:Acrobat
+</DropDownList>
+                  <LastState Value="163" RealAddress="14D42B8B0E0"/>
+                  <Color>804000</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>20</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>162</ID>
+                  <Description>"Skill 2 ID"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Sharpness
+2:Knockback
+3:Looting
+4:Prospector
+5:Fire Aspect
+6:Rampaging
+7:Exploding
+8:Critical Hit
+9:Freezing
+10:Poison Cloud
+11:Poison
+12:Leeching
+14:Gravity
+15:Enigma Resonator
+16:Anima Conduit
+17:Stunning
+19:Swirling
+20:Smiting
+21:Committed
+22:Soul Siphon
+23:Radiance
+24:Chains
+25:Thundering
+26:Echo
+27:Shockwave
+28:Weakening
+29:Busy Bee
+30:Dynamo
+31:Tempo Theft
+34:Ricochet
+35:Power (Bow)
+36:Punch
+37:Infinity
+38:Multishot
+39:Piercing
+40:Chain Reaction
+41:Gravity
+43:Enigma Resonator
+44:Anima Conduit
+45:Poison Cloud
+46:Poison
+48:Rapid Fire
+49:Supercharge
+50:Bonus Shot
+51:Unchanting
+52:Fuse Shot
+53:Radiance Shot
+54:Accelerate
+55:Growing
+56:Wild Rage
+58:Dynamo (Bow)
+59:Burst Bowstring
+61:Protection
+62:Cool Down
+63:Final Shout
+64:Deflect
+65:Regeneration
+66:Thorns
+67:Heals Allies
+68:Shielding
+69:Barrier
+71:Recycler
+72:Chilling
+73:Cowardice
+74:Electrified
+75:Burning
+76:Snowball
+77:Gravity Pulse
+78:Fire Trail
+79:Frenzied
+80:Swiftfooted
+81:Soul Speed
+82:Potion Barrier
+83:Food Reserves
+84:Surprise Gift
+88:Health Synergy
+89:Speed Synergy
+90:Explorer
+94:Tumble Bee
+95:Bag Of Souls
+96:Acrobat
+</DropDownList>
+                  <LastState Value="176" RealAddress="14D42B8B0E8"/>
+                  <Color>804000</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>28</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>163</ID>
+                  <Description>"Skill 3 ID"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Sharpness
+2:Knockback
+3:Looting
+4:Prospector
+5:Fire Aspect
+6:Rampaging
+7:Exploding
+8:Critical Hit
+9:Freezing
+10:Poison Cloud
+11:Poison
+12:Leeching
+14:Gravity
+15:Enigma Resonator
+16:Anima Conduit
+17:Stunning
+19:Swirling
+20:Smiting
+21:Committed
+22:Soul Siphon
+23:Radiance
+24:Chains
+25:Thundering
+26:Echo
+27:Shockwave
+28:Weakening
+29:Busy Bee
+30:Dynamo
+31:Tempo Theft
+34:Ricochet
+35:Power (Bow)
+36:Punch
+37:Infinity
+38:Multishot
+39:Piercing
+40:Chain Reaction
+41:Gravity
+43:Enigma Resonator
+44:Anima Conduit
+45:Poison Cloud
+46:Poison
+48:Rapid Fire
+49:Supercharge
+50:Bonus Shot
+51:Unchanting
+52:Fuse Shot
+53:Radiance Shot
+54:Accelerate
+55:Growing
+56:Wild Rage
+58:Dynamo (Bow)
+59:Burst Bowstring
+61:Protection
+62:Cool Down
+63:Final Shout
+64:Deflect
+65:Regeneration
+66:Thorns
+67:Heals Allies
+68:Shielding
+69:Barrier
+71:Recycler
+72:Chilling
+73:Cowardice
+74:Electrified
+75:Burning
+76:Snowball
+77:Gravity Pulse
+78:Fire Trail
+79:Frenzied
+80:Swiftfooted
+81:Soul Speed
+82:Potion Barrier
+83:Food Reserves
+84:Surprise Gift
+88:Health Synergy
+89:Speed Synergy
+90:Explorer
+94:Tumble Bee
+95:Bag Of Souls
+96:Acrobat
+</DropDownList>
+                  <LastState Value="2" RealAddress="14D42B8B0F0"/>
+                  <Color>400080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>30</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>164</ID>
+                  <Description>"Skill 3 ID"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Sharpness
+2:Knockback
+3:Looting
+4:Prospector
+5:Fire Aspect
+6:Rampaging
+7:Exploding
+8:Critical Hit
+9:Freezing
+10:Poison Cloud
+11:Poison
+12:Leeching
+14:Gravity
+15:Enigma Resonator
+16:Anima Conduit
+17:Stunning
+19:Swirling
+20:Smiting
+21:Committed
+22:Soul Siphon
+23:Radiance
+24:Chains
+25:Thundering
+26:Echo
+27:Shockwave
+28:Weakening
+29:Busy Bee
+30:Dynamo
+31:Tempo Theft
+34:Ricochet
+35:Power (Bow)
+36:Punch
+37:Infinity
+38:Multishot
+39:Piercing
+40:Chain Reaction
+41:Gravity
+43:Enigma Resonator
+44:Anima Conduit
+45:Poison Cloud
+46:Poison
+48:Rapid Fire
+49:Supercharge
+50:Bonus Shot
+51:Unchanting
+52:Fuse Shot
+53:Radiance Shot
+54:Accelerate
+55:Growing
+56:Wild Rage
+58:Dynamo (Bow)
+59:Burst Bowstring
+61:Protection
+62:Cool Down
+63:Final Shout
+64:Deflect
+65:Regeneration
+66:Thorns
+67:Heals Allies
+68:Shielding
+69:Barrier
+71:Recycler
+72:Chilling
+73:Cowardice
+74:Electrified
+75:Burning
+76:Snowball
+77:Gravity Pulse
+78:Fire Trail
+79:Frenzied
+80:Swiftfooted
+81:Soul Speed
+82:Potion Barrier
+83:Food Reserves
+84:Surprise Gift
+88:Health Synergy
+89:Speed Synergy
+90:Explorer
+94:Tumble Bee
+95:Bag Of Souls
+96:Acrobat
+</DropDownList>
+                  <LastState Value="128" RealAddress="14D42B8B0F8"/>
+                  <Color>400080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>38</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>165</ID>
+                  <Description>"Skill 3 ID"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Sharpness
+2:Knockback
+3:Looting
+4:Prospector
+5:Fire Aspect
+6:Rampaging
+7:Exploding
+8:Critical Hit
+9:Freezing
+10:Poison Cloud
+11:Poison
+12:Leeching
+14:Gravity
+15:Enigma Resonator
+16:Anima Conduit
+17:Stunning
+19:Swirling
+20:Smiting
+21:Committed
+22:Soul Siphon
+23:Radiance
+24:Chains
+25:Thundering
+26:Echo
+27:Shockwave
+28:Weakening
+29:Busy Bee
+30:Dynamo
+31:Tempo Theft
+34:Ricochet
+35:Power (Bow)
+36:Punch
+37:Infinity
+38:Multishot
+39:Piercing
+40:Chain Reaction
+41:Gravity
+43:Enigma Resonator
+44:Anima Conduit
+45:Poison Cloud
+46:Poison
+48:Rapid Fire
+49:Supercharge
+50:Bonus Shot
+51:Unchanting
+52:Fuse Shot
+53:Radiance Shot
+54:Accelerate
+55:Growing
+56:Wild Rage
+58:Dynamo (Bow)
+59:Burst Bowstring
+61:Protection
+62:Cool Down
+63:Final Shout
+64:Deflect
+65:Regeneration
+66:Thorns
+67:Heals Allies
+68:Shielding
+69:Barrier
+71:Recycler
+72:Chilling
+73:Cowardice
+74:Electrified
+75:Burning
+76:Snowball
+77:Gravity Pulse
+78:Fire Trail
+79:Frenzied
+80:Swiftfooted
+81:Soul Speed
+82:Potion Barrier
+83:Food Reserves
+84:Surprise Gift
+88:Health Synergy
+89:Speed Synergy
+90:Explorer
+94:Tumble Bee
+95:Bag Of Souls
+96:Acrobat
+</DropDownList>
+                  <LastState Value="16" RealAddress="14D42B8B100"/>
+                  <Color>400080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>40</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>166</ID>
+                  <Description>"Skill 1 Level"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Level 1
+2:Level 2
+3:Level 3
+</DropDownList>
+                  <LastState Value="0" RealAddress="14D42B8B0C4"/>
+                  <Color>008000</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>4</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>167</ID>
+                  <Description>"Skill 1 Level"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Level 1
+2:Level 2
+3:Level 3
+</DropDownList>
+                  <LastState Value="3" RealAddress="14D42B8B0CC"/>
+                  <Color>008000</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>C</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>168</ID>
+                  <Description>"Skill 1 Level"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Level 1
+2:Level 2
+3:Level 3
+</DropDownList>
+                  <LastState Value="0" RealAddress="14D42B8B0D4"/>
+                  <Color>008000</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>169</ID>
+                  <Description>"Skill 2 Level"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Level 1
+2:Level 2
+3:Level 3
+</DropDownList>
+                  <LastState Value="77" RealAddress="14D42B8B0DC"/>
+                  <Color>804000</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>1C</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>170</ID>
+                  <Description>"Skill 2 Level"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Level 1
+2:Level 2
+3:Level 3
+</DropDownList>
+                  <LastState Value="0" RealAddress="14D42B8B0E4"/>
+                  <Color>804000</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>24</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>171</ID>
+                  <Description>"Skill 2 Level"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Level 1
+2:Level 2
+3:Level 3
+</DropDownList>
+                  <LastState Value="77" RealAddress="14D42B8B0EC"/>
+                  <Color>804000</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>2C</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>172</ID>
+                  <Description>"Skill 3 Level"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Level 1
+2:Level 2
+3:Level 3
+</DropDownList>
+                  <LastState Value="2" RealAddress="14D42B8B0F4"/>
+                  <Color>400080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>34</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>173</ID>
+                  <Description>"Skill 3 Level"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Level 1
+2:Level 2
+3:Level 3
+</DropDownList>
+                  <LastState Value="0" RealAddress="14D42B8B0FC"/>
+                  <Color>400080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>3C</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>174</ID>
+                  <Description>"Skill 3 Level"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Level 1
+2:Level 2
+3:Level 3
+</DropDownList>
+                  <LastState Value="246" RealAddress="14D42B8B104"/>
+                  <Color>400080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>44</Offset>
+                    <Offset>18</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>175</ID>
+              <Description>"ARMOR STATS"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>808000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>188</ID>
+                  <Description>"Empty Offset"</Description>
+                  <LastState Value="" RealAddress="1100001000"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <Color>FF0000</Color>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>0</ByteLength>
+                  <Address>1100001000</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>176</ID>
+                  <Description>"Stats Offset"</Description>
+                  <LastState Value="0000000000000000" RealAddress="14D06B05A50"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <Color>FF0000</Color>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>28</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>177</ID>
+                  <Description>"Number of Stats"</Description>
+                  <LastState Value="0" RealAddress="14D06B05A58"/>
+                  <Color>000000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>30</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>178</ID>
+                  <Description>"Max Number of Stats"</Description>
+                  <LastState Value="0" RealAddress="14D06B05A5C"/>
+                  <Color>000000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>34</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>179</ID>
+                  <Description>"Stat 1"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:+50% Souls Gathered
+2:35% Damage Reduction
+3:30% Chance to Negate Hits
+4:5% Chance to Teleport Away When Hit
+5:+50% Artifact Damage
+6:-25% Artifact Cooldown
+7:+20% Weapon Damage Boost Aura
+8:+10 Arrows per Bundle
+9:+30% Melee Damage
+10:+25% Melee Attack Speed
+11:+30% Ranged Damage
+12:6% Life Steal Aura
+13:+15% Movespeed Aura
+14:Gives you a Pet Bat
+15:Health Potions Heal Nearby Allies
+16:-10% Movespeed
+17:Mobs Target You More
+18:-40% Potion Cooldown
+19:100% Longer Roll Cooldown
+20:50% Faster Roll
+21:Brief Invulnerability when Rolling
+22:10% Damage Reduction
+23:50% Freezing Resistance
+24:Briefly gain Ghost Form when rolling
+25:30% chance to summon a bee when hit (max 3)
+</DropDownList>
+                  <Color>000000</Color>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                    <Offset>28</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>180</ID>
+                  <Description>"Stat 2"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:+50% Souls Gathered
+2:35% Damage Reduction
+3:30% Chance to Negate Hits
+4:5% Chance to Teleport Away When Hit
+5:+50% Artifact Damage
+6:-25% Artifact Cooldown
+7:+20% Weapon Damage Boost Aura
+8:+10 Arrows per Bundle
+9:+30% Melee Damage
+10:+25% Melee Attack Speed
+11:+30% Ranged Damage
+12:6% Life Steal Aura
+13:+15% Movespeed Aura
+14:Gives you a Pet Bat
+15:Health Potions Heal Nearby Allies
+16:-10% Movespeed
+17:Mobs Target You More
+18:-40% Potion Cooldown
+19:100% Longer Roll Cooldown
+20:50% Faster Roll
+21:Brief Invulnerability when Rolling
+22:10% Damage Reduction
+23:50% Freezing Resistance
+24:Briefly gain Ghost Form when rolling
+25:30% chance to summon a bee when hit (max 3)
+</DropDownList>
+                  <Color>000000</Color>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>2</Offset>
+                    <Offset>28</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>181</ID>
+                  <Description>"Stat 3"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:+50% Souls Gathered
+2:35% Damage Reduction
+3:30% Chance to Negate Hits
+4:5% Chance to Teleport Away When Hit
+5:+50% Artifact Damage
+6:-25% Artifact Cooldown
+7:+20% Weapon Damage Boost Aura
+8:+10 Arrows per Bundle
+9:+30% Melee Damage
+10:+25% Melee Attack Speed
+11:+30% Ranged Damage
+12:6% Life Steal Aura
+13:+15% Movespeed Aura
+14:Gives you a Pet Bat
+15:Health Potions Heal Nearby Allies
+16:-10% Movespeed
+17:Mobs Target You More
+18:-40% Potion Cooldown
+19:100% Longer Roll Cooldown
+20:50% Faster Roll
+21:Brief Invulnerability when Rolling
+22:10% Damage Reduction
+23:50% Freezing Resistance
+24:Briefly gain Ghost Form when rolling
+25:30% chance to summon a bee when hit (max 3)
+</DropDownList>
+                  <Color>000000</Color>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>4</Offset>
+                    <Offset>28</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>182</ID>
+                  <Description>"Stat 4"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:+50% Souls Gathered
+2:35% Damage Reduction
+3:30% Chance to Negate Hits
+4:5% Chance to Teleport Away When Hit
+5:+50% Artifact Damage
+6:-25% Artifact Cooldown
+7:+20% Weapon Damage Boost Aura
+8:+10 Arrows per Bundle
+9:+30% Melee Damage
+10:+25% Melee Attack Speed
+11:+30% Ranged Damage
+12:6% Life Steal Aura
+13:+15% Movespeed Aura
+14:Gives you a Pet Bat
+15:Health Potions Heal Nearby Allies
+16:-10% Movespeed
+17:Mobs Target You More
+18:-40% Potion Cooldown
+19:100% Longer Roll Cooldown
+20:50% Faster Roll
+21:Brief Invulnerability when Rolling
+22:10% Damage Reduction
+23:50% Freezing Resistance
+24:Briefly gain Ghost Form when rolling
+25:30% chance to summon a bee when hit (max 3)
+</DropDownList>
+                  <Color>000000</Color>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>6</Offset>
+                    <Offset>28</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>183</ID>
+                  <Description>"Stat 5"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:+50% Souls Gathered
+2:35% Damage Reduction
+3:30% Chance to Negate Hits
+4:5% Chance to Teleport Away When Hit
+5:+50% Artifact Damage
+6:-25% Artifact Cooldown
+7:+20% Weapon Damage Boost Aura
+8:+10 Arrows per Bundle
+9:+30% Melee Damage
+10:+25% Melee Attack Speed
+11:+30% Ranged Damage
+12:6% Life Steal Aura
+13:+15% Movespeed Aura
+14:Gives you a Pet Bat
+15:Health Potions Heal Nearby Allies
+16:-10% Movespeed
+17:Mobs Target You More
+18:-40% Potion Cooldown
+19:100% Longer Roll Cooldown
+20:50% Faster Roll
+21:Brief Invulnerability when Rolling
+22:10% Damage Reduction
+23:50% Freezing Resistance
+24:Briefly gain Ghost Form when rolling
+25:30% chance to summon a bee when hit (max 3)
+</DropDownList>
+                  <Color>000000</Color>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>8</Offset>
+                    <Offset>28</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>184</ID>
+                  <Description>"Stat 6"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:+50% Souls Gathered
+2:35% Damage Reduction
+3:30% Chance to Negate Hits
+4:5% Chance to Teleport Away When Hit
+5:+50% Artifact Damage
+6:-25% Artifact Cooldown
+7:+20% Weapon Damage Boost Aura
+8:+10 Arrows per Bundle
+9:+30% Melee Damage
+10:+25% Melee Attack Speed
+11:+30% Ranged Damage
+12:6% Life Steal Aura
+13:+15% Movespeed Aura
+14:Gives you a Pet Bat
+15:Health Potions Heal Nearby Allies
+16:-10% Movespeed
+17:Mobs Target You More
+18:-40% Potion Cooldown
+19:100% Longer Roll Cooldown
+20:50% Faster Roll
+21:Brief Invulnerability when Rolling
+22:10% Damage Reduction
+23:50% Freezing Resistance
+24:Briefly gain Ghost Form when rolling
+25:30% chance to summon a bee when hit (max 3)
+</DropDownList>
+                  <Color>000000</Color>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>A</Offset>
+                    <Offset>28</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>185</ID>
+                  <Description>"Stat 7"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:+50% Souls Gathered
+2:35% Damage Reduction
+3:30% Chance to Negate Hits
+4:5% Chance to Teleport Away When Hit
+5:+50% Artifact Damage
+6:-25% Artifact Cooldown
+7:+20% Weapon Damage Boost Aura
+8:+10 Arrows per Bundle
+9:+30% Melee Damage
+10:+25% Melee Attack Speed
+11:+30% Ranged Damage
+12:6% Life Steal Aura
+13:+15% Movespeed Aura
+14:Gives you a Pet Bat
+15:Health Potions Heal Nearby Allies
+16:-10% Movespeed
+17:Mobs Target You More
+18:-40% Potion Cooldown
+19:100% Longer Roll Cooldown
+20:50% Faster Roll
+21:Brief Invulnerability when Rolling
+22:10% Damage Reduction
+23:50% Freezing Resistance
+24:Briefly gain Ghost Form when rolling
+25:30% chance to summon a bee when hit (max 3)
+</DropDownList>
+                  <Color>000000</Color>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>C</Offset>
+                    <Offset>28</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>186</ID>
+                  <Description>"Stat 8"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:+50% Souls Gathered
+2:35% Damage Reduction
+3:30% Chance to Negate Hits
+4:5% Chance to Teleport Away When Hit
+5:+50% Artifact Damage
+6:-25% Artifact Cooldown
+7:+20% Weapon Damage Boost Aura
+8:+10 Arrows per Bundle
+9:+30% Melee Damage
+10:+25% Melee Attack Speed
+11:+30% Ranged Damage
+12:6% Life Steal Aura
+13:+15% Movespeed Aura
+14:Gives you a Pet Bat
+15:Health Potions Heal Nearby Allies
+16:-10% Movespeed
+17:Mobs Target You More
+18:-40% Potion Cooldown
+19:100% Longer Roll Cooldown
+20:50% Faster Roll
+21:Brief Invulnerability when Rolling
+22:10% Damage Reduction
+23:50% Freezing Resistance
+24:Briefly gain Ghost Form when rolling
+25:30% chance to summon a bee when hit (max 3)
+</DropDownList>
+                  <Color>000000</Color>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>p_equip</Address>
+                  <Offsets>
+                    <Offset>E</Offset>
+                    <Offset>28</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
